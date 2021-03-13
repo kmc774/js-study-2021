@@ -9,7 +9,7 @@
 <body>
   <script>
     /*
-        [ 별 찍기 01 ]
+        [ 별 찍기 02 ]
         *
         **
         ***
@@ -20,6 +20,15 @@
         ********
         *********
         **********
+        *********
+        ********
+        *******
+        ******
+        *****
+        ****
+        ***
+        **
+        *
     */
 
     for(let starRow=1; starRow<=10; starRow++) {
@@ -28,6 +37,14 @@
       }
       document.write("<br>");
     }
+
+    for(let starRow=1; starRow<=10; starRow++) {
+      for(let starCol=10; starCol>starRow; starCol--) {
+        document.write("*");
+      }
+      document.write("<br>");
+    }
+
   </script>
 </body>
 </html>
