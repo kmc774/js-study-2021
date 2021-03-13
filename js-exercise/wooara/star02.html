@@ -31,7 +31,21 @@
         *
     */
 
-    for(let starRow=1; starRow<=10; starRow++) {
+    for(let starRow=1; starRow<=20; starRow++) {
+      if(starRow <= 10) {
+        for(let starCol=0; starCol<starRow; starCol++) {
+          document.write("*");
+        }
+      } else {
+        for(let starCol=10; starRow-starCol<10; starCol--) {
+          document.write("*");
+        }
+      }
+      
+      document.write("<br>");
+    }
+
+    /* for(let starRow=1; starRow<=10; starRow++) {
       for(let starCol=0; starCol<starRow; starCol++) {
         document.write("*");
       }
@@ -43,7 +57,7 @@
         document.write("*");
       }
       document.write("<br>");
-    }
+    } */
 
   </script>
 </body>
