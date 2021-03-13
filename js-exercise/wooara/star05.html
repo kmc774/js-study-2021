@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Star Print</title>
+  <style>
+    body { letter-spacing: 15px; }
+  </style>
+</head>
+<body>
+  <script>
+    /*
+        [ 별 찍기 05 ]
+        * * * *
+         * * *
+        * * * *
+         * * *
+    */
+
+    for(let starRow=1; starRow<=4; starRow++) {
+      for(let starCol=1; starCol<=7; starCol++) {
+        if((starRow%2!==0 && starCol%2===0) || starRow%2===0 && starCol%2!==0) {
+          document.write("&nbsp");
+        } else {
+          document.write("*");
+        }
+      }
+      document.write("<br>");
+    }
+  </script>
+</body>
+</html>
