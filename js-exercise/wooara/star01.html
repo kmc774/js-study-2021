@@ -10,19 +10,18 @@
   <script>
     /*
         [ 별 찍기 01 ]
+        -> 입력받은 수만큼 피라미드 별 찍기 (증가)
+        
         *
         **
         ***
         ****
         *****
-        ******
-        *******
-        ********
-        *********
-        **********
     */
 
-    for(let starRow=1; starRow<=10; starRow++) {
+    const starNumber = prompt("수 입력:");
+
+    for(let starRow=1; starRow<=starNumber; starRow++) {
       for(let starCol=0; starCol<starRow; starCol++) {
         document.write("*");
       }

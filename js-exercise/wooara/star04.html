@@ -13,24 +13,26 @@
   <script>
     /*
         [ 별 찍기 04 ]
-        *****
-        ** **
-        * * *
-        ** **
-        *****
+        -> 입력받은 배열의 위치에 별찍기
+        var mtr = [3,2,3,4,1]
     */
 
-    for(let starRow=1; starRow<=5; starRow++) {
-      for(let starCol=1; starCol<=5; starCol++) {
-        if(starRow>1 && starRow<5 && starCol>1 && starCol<5 
-            && ((starRow%2===0 && starCol%2!==0) || (starRow%2!==0 && starCol%2===0))) {
-          document.write("<span style='display:inline-block;width:22px;'></span>");
-        } else {
-          document.write("*");
+    const mtr = [3, 2, 3, 4, 1];
+    const max = Math.max.apply(null, mtr);
+
+    for(let starRow=0; starRow<mtr.length; starRow++) {
+      for(let starCol=0; starCol<max; starCol++) {
+        for(let i=0; i<mtr.length; i++) {
+          if(starRow===i && starCol===mtr[i]) {
+            document.write("*");
+          } else {
+            document.write("%");
+          }
         }
+        document.write("<br>");
       }
-      document.write("<br>");
     }
+
   </script>
 </body>
 </html>

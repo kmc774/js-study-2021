@@ -13,17 +13,18 @@
   <script>
     /*
         [ 별 찍기 03 ]
-        *****
-        *   *
-        *   *
-        *   *
-        *****
+        -> 입력받은 수의 행만큼 지그재그 별 찍기
+        
+        * * * *
+         * * *
+        * * * *
+         * * *
     */
 
-    for(let starRow=1; starRow<=5; starRow++) {
-      for(let starCol=1; starCol<=5; starCol++) {
-        if(starRow>1 && starRow<5 && starCol>1 && starCol<5) {
-          document.write("<span style='display:inline-block;width:22px;'></span>");
+    for(let starRow=1; starRow<=4; starRow++) {
+      for(let starCol=1; starCol<=7; starCol++) {
+        if((starRow%2!==0 && starCol%2===0) || starRow%2===0 && starCol%2!==0) {
+          document.write("&nbsp");
         } else {
           document.write("*");
         }
