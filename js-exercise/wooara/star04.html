@@ -6,7 +6,13 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Star Print</title>
   <style>
-    body { letter-spacing: 15px; }
+    .blank-box {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      margin: 0 2px;
+      border: 1px solid #03a9f4;
+    }
   </style>
 </head>
 <body>
@@ -17,20 +23,21 @@
         var mtr = [3,2,3,4,1]
     */
 
-    const mtr = [3, 2, 3, 4, 1];
-    const max = Math.max.apply(null, mtr);
+    const starNumArr = prompt("위치 지정 숫자 입력:", "1,2,3");
+    // TODO: 입력 값에서 공백 제거하기
+    
+    const mtr = starNumArr.split(",").map(Number);
+    const maxValue = Math.max.apply(null, mtr);
 
     for(let starRow=0; starRow<mtr.length; starRow++) {
-      for(let starCol=0; starCol<max; starCol++) {
-        for(let i=0; i<mtr.length; i++) {
-          if(starRow===i && starCol===mtr[i]) {
-            document.write("*");
-          } else {
-            document.write("%");
-          }
+      for(let starCol=1; starCol<=maxValue; starCol++) {
+        if(starCol===mtr[starRow]) {
+          document.write("*");
+        } else {
+          document.write("<span class='blank-box'></span>");
         }
-        document.write("<br>");
       }
+      document.write("<br>");
     }
 
   </script>

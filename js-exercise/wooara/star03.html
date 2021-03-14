@@ -5,9 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Star Print</title>
-  <style>
-    body { letter-spacing: 15px; }
-  </style>
 </head>
 <body>
   <script>
@@ -21,8 +18,10 @@
          * * *
     */
 
-    for(let starRow=1; starRow<=4; starRow++) {
-      for(let starCol=1; starCol<=7; starCol++) {
+    const starNumber = prompt("수 입력:");
+
+    for(let starRow=1; starRow<=starNumber; starRow++) {
+      for(let starCol=1; starCol<=starNumber*2-1; starCol++) {
         if((starRow%2!==0 && starCol%2===0) || starRow%2===0 && starCol%2!==0) {
           document.write("&nbsp");
         } else {
