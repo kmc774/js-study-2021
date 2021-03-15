@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Star Print</title>
+  <style>
+    body { letter-spacing: 15px; }
+  </style>
+</head>
+<body>
+  <script>
+    /*
+        [ 별 찍기 08 ]
+        -> cycle, loop 두 수를 입력받고 cycle을 loop만큼 꺾어 별 찍기
+        cycle = 3, loop = 2
+
+        *
+          *
+            *
+          *
+        *
+          *
+            *
+          *
+        *
+    */
+
+    const cycle = prompt("꺾을 수 입력:");
+    const loop = prompt("반복할 수 입력:");
+
+    for(let starLoop=1; starLoop<=loop; starLoop++) {
+      for(let starRow=1; starRow<=cycle*2-1; starRow++) {
+        for(let starCol=1; starCol<=cycle; starCol++) {
+          if(starRow <= cycle) {
+            if(starCol === starRow) {
+              document.write("*");
+            } else {
+              document.write("<span style='display:inline-block;width:22px;'></span>");
+            }
+          } else {
+            if(starCol === cycle*2-starRow) {
+              document.write("*");
+            } else {
+              document.write("<span style='display:inline-block;width:22px;'></span>");
+            }
+          }
+        }
+        document.write("<br>");
+      }
+    }
+
+  </script>
+</body>
+</html>

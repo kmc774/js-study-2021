@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Star Print</title>
+</head>
+<body>
+  <script>
+    /*
+        [ 별 찍기 05 ]
+        -> 입력받은 수의 배열에서 해당 행의 개수만큼 별 찍기
+        var mtr = [1,5,4,2,1]
+    */
+
+    const starNumArr = prompt("개수 지정 숫자 입력:", "1,2,3");
+    // TODO: 입력 값에서 공백 제거하기
+
+    const mtr = starNumArr.split(",").map(Number);
+
+    for(let starRow=0; starRow<mtr.length; starRow++) {
+      for(let starCol=0; starCol<mtr[starRow]; starCol++) {
+        document.write("*");
+      }
+      document.write("<br>");
+    }
+
+  </script>
+</body>
+</html>
