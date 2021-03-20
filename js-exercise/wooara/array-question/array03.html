@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array Print</title>
+</head>
+<body>
+<script>
+    /*
+        [ 배열 세팅 03 ]
+        -> 0 ~ 100 숫자 중 5의 배수만 담는다.
+        결과 배열 : [5, 10, 15, 20, 25, ~ ,100]
+    */
+
+    const arr = [];
+
+    for(let i=0; i<=100; i++) {
+        if(i%5===0 && i!==0) {
+            arr.push(i);
+        }
+    }
+
+    console.log(arr)
+</script>
+</body>
+</html>
