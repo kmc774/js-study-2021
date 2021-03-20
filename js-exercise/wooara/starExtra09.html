@@ -5,16 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Star Print</title>
+    <style>
+        .blank-box {
+            display: inline-block;
+            width: 13px;
+            height: 13px;
+            margin: 0 2px;
+            border: 1px solid #03a9f4;
+        }
+    </style>
 </head>
 <body>
 <script>
     /*
-        [ 별 찍기 Extra09 ]
-        -> 입력받은 수의 배열에서 해당 행의 개수만큼 별 찍기
-        var mtr = [1,5,4,2,1]
+        [ 별 찍기 Extra09 ] - star04.html 문제 확장
+
+        -> 입력받은 배열의 위치에 별찍기
+        var mtr = [3,2,3,4,1]
         --> 좌우반전, 상하반전, 90도 회전
     */
 
+    const starNumArr = prompt("위치 지정 숫자 입력:", "1,2,3");
+    // TODO: 입력 값에서 공백 제거하기
+
+    const mtr = starNumArr.split(",").map(Number);
+    const maxValue = Math.max.apply(null, mtr);
+
+    // 1.기본출력
+    for(let starRow=0; starRow<mtr.length; starRow++) {
+        for(let starCol=1; starCol<=maxValue; starCol++) {
+            if(starCol===mtr[starRow]) {
+                document.write("*");
+            } else {
+                document.write("<span class='blank-box'></span>");
+            }
+        }
+        document.write("<br>");
+    }
+
+    document.write("<br>");
+    document.write("----------------------------------------------<br>");
+    document.write("<br>");
+
+    // 2.좌우반전
+    
 
 </script>
 </body>
