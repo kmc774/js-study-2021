@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array Print</title>
+    <style>
+        body { letter-spacing: 15px; }
+    </style>
+</head>
+<body>
+<script>
+	/*
+	    [ 배열 세팅 09 ] 빙고게임 응용
+        -> array08.html의 2차원 배열을 이용
+           3행3열 8개의 빙고패턴을 가지는 2차원 배열에서
+           각 패턴의 숫자들을 출력하기
+
+           0 1 2
+           3 4 5
+           6 7 8
+
+           1번패턴 : 0, 1, 2
+           2번패턴 : 3, 4, 5
+           3번패턴 : 6, 7, 8
+           4번패턴 : 0, 3, 6
+           5번패턴 : 1, 4, 7
+           6번패턴 : 2, 5, 8
+           7번패턴 : 0, 4, 8
+           8번패턴 : 2, 4, 6
+    */
+
+
+
+	const dimensionalArr = [[0, 1, 2],[3, 4, 5],[6, 7, 8]]; // 2차원 배열 하드코딩으로 생성
+	const patternArr = Array.from(Array(8), () => new Array(3));
+
+
+	/* 1번 패턴
+	patternArr[0][0] = dimensionalArr[0][0];
+	patternArr[0][1] = dimensionalArr[0][1];
+	patternArr[0][2] = dimensionalArr[0][2];
+	*/
+
+	/* 2번 패턴
+	patternArr[1][0] = dimensionalArr[1][0];
+	patternArr[1][1] = dimensionalArr[1][1];
+	patternArr[1][2] = dimensionalArr[1][2];
+	*/
+
+	/* 3번 패턴
+	patternArr[2][0] = dimensionalArr[2][0];
+	patternArr[2][1] = dimensionalArr[2][1];
+	patternArr[2][2] = dimensionalArr[2][2];
+	*/
+
+	/* 4번 패턴
+	patternArr[3][0] = dimensionalArr[0][0];
+	patternArr[3][1] = dimensionalArr[1][0];
+	patternArr[3][2] = dimensionalArr[2][0];
+	*/
+
+	/* 5번 패턴
+	patternArr[4][0] = dimensionalArr[0][1];
+	patternArr[4][1] = dimensionalArr[1][1];
+	patternArr[4][2] = dimensionalArr[2][1];
+	*/
+
+	/* 6번 패턴
+	patternArr[5][0] = dimensionalArr[0][2];
+	patternArr[5][1] = dimensionalArr[1][2];
+	patternArr[5][2] = dimensionalArr[2][2];
+	*/
+
+
+	console.log('pattern array', patternArr);
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
