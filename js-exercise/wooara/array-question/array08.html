@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array Print</title>
+    <style>
+        body { letter-spacing: 15px; }
+    </style>
+</head>
+<body>
+<script>
+	/*
+	    - 2차원 배열 (x, y)
+	    - 3차원 배열 (x, y, z)
+
+        [ 배열 세팅 08 ]
+        -> 2차원 배열 만들기
+           const arr = [3][3]
+           3행 3열의 배열에 숫자 채우기
+
+           0 1 2
+           3 4 5
+           6 7 8
+
+           바둑판 모양 화면에 출력하기
+    */
+
+    // 빈배열 만들기 ES6 문법 사용
+    //  -> 반복문을 사용하여 2차원 배열 만들기 array07.html 에 구현
+    const dimensionalArr = Array.from(Array(3), () => new Array(3));
+    console.log('before', dimensionalArr);
+
+    let addNum = 0;
+
+    for(let rowIdx=0; rowIdx<3; rowIdx++) {
+    	for(let colIdx=0; colIdx<3; colIdx++) {
+			dimensionalArr[rowIdx][colIdx] = addNum;
+			addNum++;
+			document.write(dimensionalArr[rowIdx][colIdx]);
+        }
+    	document.write("<br>");
+    }
+	console.log('after', dimensionalArr);
+
+</script>
+</body>
+</html>
