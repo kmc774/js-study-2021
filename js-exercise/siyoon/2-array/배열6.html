@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>배열</title>
+</head>
+<body>
+
+<script>
+
+    let randomArray = [2,5,7,9,10,22,97,72,33,34];
+    let evenNumber = 0;
+    let oddNumber = 0;
+
+    for( let i = 0; i < randomArray.length; i++ ){
+
+        if( randomArray[i]%2 === 0 ){
+
+            evenNumber += 1;
+        }
+    }
+
+    oddNumber = randomArray.length - evenNumber;
+
+    console.log('짝수는' + evenNumber +'개' + ' ' + '홀수는' + oddNumber + '개');
+</script>
+
+</body>
+</html>

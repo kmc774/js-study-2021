@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>배열</title>
+</head>
+<body>
+
+<script>
+
+    //TODO: for문 돌면서 리스트 만들 수 있는지?
+    let array = [];
+    let arr1 = [];
+    let arr2 = [];
+    let arr3 = [];
+    let arr4 = [];
+    let arr5 = [];
+    let arr6 = [];
+    let arr7 = [];
+    let arr8 = [];
+    let arr9 = [];
+    let arr10 = [];
+
+    for( let i = 1; i <= 100; i++ ) {
+        array.push(i);
+    }
+
+
+    for( let i = 0; i <= array.length; i++ ) {
+
+        if( i < 10){
+
+            arr1[i] = array[i] ;
+
+        } else if( i  < 20 ){
+
+            arr2[i - 10] = array[i] ;
+
+        } else if( i < 30 ){
+
+            arr3[i - 20] = array[i] ;
+
+        } else if( i < 40 ){
+
+            arr4[i - 30] = array[i] ;
+
+        } else if( i < 50 ){
+
+            arr5[i - 40] = array[i] ;
+
+        } else if( i < 60){
+
+            arr6[i - 50] = array[i] ;
+
+        } else if( i < 70){
+
+            arr7[i - 60] = array[i] ;
+
+        } else if( i < 80){
+
+            arr8[i - 70] = array[i] ;
+
+        } else if( i < 90){
+
+            arr9[i - 80] = array[i] ;
+
+        } else if( i < 100){
+
+            arr10[i - 90] = array[i] ;
+
+        }
+    }
+
+    console.log(arr1);
+    console.log(arr2);
+    console.log(arr3);
+    console.log(arr4);
+    console.log(arr5);
+    console.log(arr6);
+    console.log(arr7);
+    console.log(arr8);
+    console.log(arr9);
+    console.log(arr10);
+
+</script>
+
+</body>
+</html>

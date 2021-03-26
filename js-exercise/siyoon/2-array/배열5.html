@@ -11,18 +11,23 @@
 
 <script>
 
-    let arr = [];
-    let plusNumber = 0;
+    let zeroArray = [];
 
-    for ( let i = 1; i <= 10; i++ ) {
+    for( let i = 0; i < 100; i++ ){
 
-        plusNumber += i;
+        zeroArray[i] = 0;
 
-        arr.push(plusNumber);
+        for( let j = 0; j < zeroArray.length; j++){
+
+            if( j%2 === 0){
+
+                zeroArray[j] = 1;
+
+            }
+        }
     }
 
-    console.log(arr);
-
+    console.log(zeroArray);
 </script>
 
 </body>
