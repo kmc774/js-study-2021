@@ -8,17 +8,20 @@
 </head>
 <body>
     <script>
-        let xxx = [1,5,4,2,1];
+        let numbers = new Array();
+
+        for(let i=0; i<101; i++) {
+            if(i%2===0) {
+                numbers.push(i)
+            }
+        }
         
-        console.log("*")
+        document.write(numbers);
+
+        /*0부터 100까지 숫자 중에 짝수만 배열에 넣어라
+결과: [0.2,4,....,100]*/
     </script>
 </body>
 </html>
 
 
-
-*
-*****
-****
-**
-*

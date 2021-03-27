@@ -8,25 +8,17 @@
 </head>
 <body>
     <script>
-        let mtr = [3,2,3,4,1];
+        let numbers = new Array()
 
-        for(let i=0; i< mtr.length; i++) {
-            console.log()
-        }               
-        
-        
-        
-        
-        
-        
-        /*
-           *
-          *
-           *
-            *
-         *
-        */
+        for(let i=1; i<102; i++) {
+            if(i%5===0){
+                numbers.push(i)
+            }
+        }
+        document.write(numbers);
+
+/*배열에 5의 배수만 숫자에 담는다.
+결과: [5,10,....,100]*/
     </script>
 </body>
 </html>
-

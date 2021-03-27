@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numbers = new Array(10);
+        
+        for(let i=0; i<numbers.length; i++) {
+            if(i===0) {
+                numbers[0] = 0
+            } else {
+                numbers[i] = numbers[i-1] + i
+            }
+        }
+        console.log(numbers); 
+ 
+/*1부터 10까지의 배열을 돌린다. 그 배열은 자신의 앞을 돌았던 숫자를 배열에 넣는다. 
+[0,1,3,...]*/
+    </script>
+</body>
+</html>
+
