@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Stack {
+        constructor(capacity) {
+          this._data = [];
+          this._length = 0;
+          this._capacity = capacity;
+        }
+
+        push(item) {
+          if (this._length >= this._capacity) {
+            throw Error(
+              `push ERROR :: this stack is full. capacity is ${this._capacity}`
+            );
+          }
+
+          this._data = [...this._data, item];
+          this._length++;
+          console.log("✅ push. data ::", this._data);
+        }
+
+        pop() {
+          if (this._length <= 0) {
+            throw Error(`pop ERROR :: this stack is empty.`);
+          }
+
+          this._data = this._data.slice(0, this._data.length - 1);
+          this._length--;
+          console.log("❌ pop. data ::", this._data);
+        }
+
+        length() {
+          return this._length;
+        }
+
+        data() {
+          return this._data;
+        }
+      }
+
+      const stack = new Stack(4);
+      stack.push(1);
+      stack.push(2);
+      stack.push(3);
+      stack.push(4);
+      // stack.push(5);
+      stack.pop();
+      stack.pop();
+      stack.pop();
+      stack.pop();
+      // stack.pop();
+      // stack.pop();
+      // stack.pop();
+      // stack.pop();
+    </script>
+  </body>
+</html>
