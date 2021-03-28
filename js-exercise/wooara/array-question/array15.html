@@ -15,6 +15,22 @@
         [ [1,2,3], [4,5,6], [7,8,9] ]
         -> [ [1,4,7], [2,5,8], [3,6,9] ]
 	 */
+
+    const dimenArr = [ [1,2,3], [4,5,6], [7,8,9], [10, 11, 12] ];
+
+    // 행열이 바뀌어야 한다.
+    // ex) 4행 3열 -> 3행 4열
+    const resultArr = Array.from(Array(dimenArr[0].length), () => new Array(dimenArr.length));
+
+    for(let rowIdx=0; rowIdx<dimenArr.length; rowIdx++) {
+    	for(let colIdx=0; colIdx<dimenArr[rowIdx].length; colIdx++) {
+			resultArr[colIdx][rowIdx] = dimenArr[rowIdx][colIdx];
+        }
+    }
+
+    console.log("기본 2차원 배열",dimenArr);
+    console.log("종횡 변경 2차원 배열",resultArr);
+
 </script>
 </body>
 </html>
