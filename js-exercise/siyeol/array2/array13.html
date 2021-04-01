@@ -1,0 +1,47 @@
+<html>
+
+<!-- 
+    1차원 배열을 받아서 입력 받은 행,열로 2차원 배열을 만든다
+    1차원 배열
+    [.............]
+    칼럼 5사이즈의 그리드 데이터
+    getter
+    function get( x(행), y(열) ){
+        .
+        .
+    } 
+
+        0   1   2   3   4   5   6   7   8
+/(row)  0   0   0   1   1   1   2   2   2
+%(col)  0   1   2   0   1   2   0   1   2 
+-->
+
+<body>
+<script>
+    
+    const inputArray = [];
+    const columnIndex = 3;
+
+    //배열 초기값 채우기
+    for( let indexCount=0; indexCount<=8; indexCount++ ){
+        inputArray.push(indexCount);
+    }
+
+    //값 찾기
+    function getValue( row, column ){
+        
+        for( let index=0; index<inputArray.length; index++){
+            if( parseInt(inputArray[index]/columnIndex) === row && inputArray[index]%columnIndex === column){
+                return inputArray[index];
+                
+            }else if( (row*columnIndex+column) > inputArray[inputArray.length - 1] ){
+                return 'over size';
+            }
+        }    
+    }
+
+
+</script>
+</body>
+
+</html>
