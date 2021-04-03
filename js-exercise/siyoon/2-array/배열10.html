@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>배열</title>
+</head>
+<body>
+
+<script>
+
+    //es6 문법 사용하기
+    let arr = Array.from(Array(3), () => new Array(3)); //3행 3열 배열 만들기
+
+    let patternNum = 0;
+
+    for( let i=0; i < 3; i++ ){
+
+        for( let j=0; j < 3; j++ ){
+            arr[i][j] = patternNum;
+            patternNum++;
+            console.log(arr[i][j]);
+        }
+    }
+    console.log(arr);
+
+    let bingoSum = [
+        arr[0][0]+arr[0][1]+arr[0][2],
+        arr[1][0]+arr[1][1]+arr[1][2],
+        arr[2][0]+arr[2][1]+arr[2][2],
+
+        arr[0][0]+arr[1][0]+arr[2][0],
+        arr[0][1]+arr[1][1]+arr[2][1],
+        arr[0][2]+arr[1][2]+arr[2][2],
+
+        arr[0][0]+arr[1][1]+arr[2][2],
+        arr[0][2]+arr[1][1]+arr[2][0]
+    ];
+
+    console.log(bingoSum);
+
+
+</script>
+</body>
+</html>
