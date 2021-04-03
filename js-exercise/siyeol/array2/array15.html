@@ -1,0 +1,58 @@
+<html>
+
+<!-- 
+    2차원 배열을 받아서 종 횡을 바꿔서 출력
+    [
+        [1,2,3]
+        [4,5,6]
+        [7,8,9]
+    ]
+    [
+        [1,4,7]
+        [2,5,8]
+        [3,6,9]
+    ]
+
+
+        0   1   2   3   4   5   6   7   8
+/(row)  0   0   0   1   1   1   2   2   2
+%(col)  0   1   2   0   1   2   0   1   2 
+
+    //row와 col을 바꾸면 종, 횡이 바뀐다.
+        0   3   6   1   4   7   2   5   8
+/(row)  0   0   0   1   1   1   2   2   2
+%(col)  0   1   2   0   1   2   0   1   2 
+
+-->
+
+<body>
+<script>
+
+    const columnIndex = 3;
+    const inputArray = Array.from(Array(columnIndex), () => new Array(columnIndex));   
+
+    //2차원 배열 초기값 채우기
+    for( let index = 0; index <= (columnIndex * columnIndex - 1); index++ ){
+        inputArray[parseInt(index/columnIndex)][index%columnIndex] = index+1;
+    }
+
+    //종,횡 바꾸기
+    function arrayChange( array ){
+        
+        const outputArray = Array.from(Array(columnIndex), () => new Array(columnIndex)); 
+        //inputArray의 index 갯 수
+        const lastIndex = (inputArray.length) * (inputArray[inputArray.length-1].length) - 1; 
+
+        for( let index = 0; index <= lastIndex; index++ ){
+            outputArray[index%columnIndex][parseInt(index/columnIndex)] = 
+                                array[parseInt(index/columnIndex)][index%columnIndex];
+        }
+
+        return outputArray;
+    }
+
+
+</script>
+</body>
+
+</html>

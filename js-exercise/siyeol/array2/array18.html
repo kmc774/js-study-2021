@@ -1,0 +1,44 @@
+<html>
+
+<!-- 
+    배열 push 없이 stack 만들기
+-->
+
+<body>
+<script>
+
+    // const max = 10;
+    const arr = new Array(10).fill(null);
+
+    function length(array){
+        count = 0;
+        while(true){
+            if(array[count] === undefined || array[count] === null){
+                return count;
+            }
+            count++;
+        }        
+    }
+
+    function push(array, value){
+        if( array[length(array)] === undefined ){
+            return 'overflow';
+        } else {
+            array[length(array)] = value;
+        }
+        return array
+    }
+
+    function pop(array){
+        if( length(array) === 0 ){
+            return 'underflow';
+        } else{
+            arr[length(array)-1] = null;
+        }
+        return array;
+    }
+
+</script>
+</body>
+
+</html>
