@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array Print</title>
+</head>
+<body>
+<script>
+	/*
+        [ 배열 13 ]
+        : 1차원 배열이 있다. [ a, b, c, d ... ]
+        칼럼이 5사이즈인 그리드 데이터라고 가정한다.
+
+        getter 만들기 (x는 행, y는 열)
+        get(x, y) {
+    	    // 행열에 해당하는 숫자(값)를 리턴한다.
+    	    return
+        }
+	 */
+
+	const originArr = [1, 11, 21, 33, 5, 7, 17, 20, 3, 27];
+	const COLSIZE = 5;
+
+
+    // get 함수 테스트
+    const resultValue = get(1,1);
+    console.log(resultValue);
+
+
+    function get(x, y) {
+
+    	// 요소를 칼럼 사이즈만큼 잘라 2차원 배열을 만든다.
+		const customArr = Array.from(Array(parseInt(originArr.length/COLSIZE)), () => new Array(COLSIZE));
+
+		for(let i=0; i<originArr.length; i++) {
+			customArr[parseInt(i/COLSIZE)][i%COLSIZE] = originArr[i];
+		}
+
+    	return customArr[x][y];
+    }
+
+</script>
+</body>
+</html>

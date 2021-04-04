@@ -11,23 +11,15 @@
 
 <script>
 
-    let zeroArray = [];
+    let arr = [];
 
-    for( let i = 0; i < 100; i++ ){
+    for ( let i = 0; i <= 100; i++ ) {
 
-        zeroArray[i] = 0;
-
-        for( let j = 0; j < zeroArray.length; j++){
-
-            if( j%2 === 0){
-
-                zeroArray[j] = 1;
-
-            }
+        if ( i%5 === 0 && i != 0 ) {
+            arr.push(i);
         }
     }
-
-    console.log(zeroArray);
+    console.log(arr);
 </script>
 
 </body>

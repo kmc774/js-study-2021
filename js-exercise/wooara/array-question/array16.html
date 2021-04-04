@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array Print</title>
+</head>
+<body>
+<script>
+	/*
+        [ 배열 16 ]
+        : 2차원 배열 두개를 받아서 각각의 인덱스끼리 더한다.
+
+        [[1,2,3],[4,5,6],[7,8,9]] + [[10,11,12],[13,14,15],[16,17,18]]
+        = [[11,13,15],[17,19,21],[23,25,27]]
+
+        문제 변경: 두개의 2차원 배열의 사이즈가 다르다면?
+        ex) 3X3, 4X4 -> 4X4의 빈 공간의 수를 0으로 채운다.
+	 */
+
+	// TODO: 2차원 배열을 입력 받는다...?
+
+    const dimenArr1 = [ [1,2,3], [4,5,6], [7,8,9] ];
+    const dimenArr2 = [ [10,11,12], [13,14,15], [16,17,18] ];
+
+	const resultArr = Array.from(Array(dimenArr1.length), () => new Array(dimenArr1[0].length));
+
+	for(let rowIdx=0; rowIdx<dimenArr1.length; rowIdx++) {
+		for(let colIdx=0; colIdx<dimenArr1[rowIdx].length; colIdx++) {
+			resultArr[rowIdx][colIdx] = dimenArr1[rowIdx][colIdx] + dimenArr2[rowIdx][colIdx];
+        }
+    }
+
+	console.log(resultArr);
+
+</script>
+</body>
+</html>

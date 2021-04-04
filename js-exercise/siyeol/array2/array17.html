@@ -1,0 +1,83 @@
+<html>
+
+<!-- 
+    json이 들어있는 배열을 넘기면 같은 이름끼리 묶어서 총 금액 리턴(중복없이)
+-->
+
+<body>
+<script>
+
+    const jsonList =[
+        {
+            name:"팀장님",
+            paid: 300,
+        },
+        {
+            name:"과장님",
+            paid: 200,
+        },
+        {
+            name:"대리님",
+            paid: 100,
+        },
+        {
+            name:"팀장님",
+            paid: 30,
+        },
+        {
+            name:"과장님",
+            paid: 20,
+        },
+        {
+            name:"대리님",
+            paid: 10,
+        },
+        {
+            name:"팀장님",
+            paid: 3000,
+        },
+        {
+            name:"과장님",
+            paid: 2000,
+        },
+        {
+            name:"대리님",
+            paid: 1000,
+        }
+    ];
+    const resultList = [];
+    
+    jsonList.forEach(function(json, index){
+
+        // if( resultList.length <= 0 ){
+        //     resultList.push(json);
+        //     return;
+        // }
+
+        // resultList.forEach(function(result, index){
+        //     console.log(resultList.length);
+        //     if(json.name === result.name){
+        //         result.paid = result.paid + json.paid;
+        //     }else{
+        //         resultList.push(json);
+        //     }
+        // });
+
+        equalList = resultList.filter( v => (v.name === json.name));
+
+        if( equalList.length <= 0 ) {
+            resultList.push(json);
+        } else {
+            resultList
+                .filter( (v) => v.name === json.name )
+                .map( (v) => v.paid = v.paid + json.paid );
+        }
+    
+    });
+        
+    
+
+</script>
+</body>
+
+</html>
