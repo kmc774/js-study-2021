@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numbers = new Array();
+
+        for(let i=1; i<101; i++) {
+            numbers[i] = i;
+        }   
+        
+        let numbers1 = numbers.slice(0,11)
+        let numbers2 = numbers.slice(11,21)
+        let numbers3 = numbers.slice(21,31)
+        let numbers4 = numbers.slice(31,41)
+        let numbers5 = numbers.slice(41,51)
+        let numbers6 = numbers.slice(51,61)
+        let numbers7 = numbers.slice(61,71)
+        let numbers8 = numbers.slice(71,81)
+        let numbers9 = numbers.slice(81,91)
+        let numbers10 = numbers.slice(91,101)
+
+
+        console.log(numbers);
+        console.log(numbers1);
+        console.log(numbers2);
+        console.log(numbers3);
+        console.log(numbers4);
+        console.log(numbers5);
+        console.log(numbers6);
+        console.log(numbers7);
+        console.log(numbers8);
+        console.log(numbers9);
+        console.log(numbers10);
+
+// 1부터 100까지 배열 만들기(원래 배열)
+// 최종배열 선언(최종 10개로 분리된 배열)
+        
+// [1,2,3,...,100]
+// 이 배열을 10개로 찢어서 새로 만들어라.
+
+// [1,2,3,...,10]
+// [11,12,13,...,20]
+// ..... [91,92,93,....,100]
+
+    </script>
+</body>
+</html>
