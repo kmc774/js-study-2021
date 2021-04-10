@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let star = [1, 2, 3, 4, 3, 2, 1, 2, 3, 4, 3, 2, 1];
+        
+        for(let i=0; i<star.length; i++) {
+            let emty = ' ';
+            
+            for(let k=0; k<(star[i]-1); k++) {
+                emty += ' ';
+            }
+            for(let j=1; j<=star[i]; j++) {
+                if(j<star[i]) {
+                    continue;
+                }
+                emty += '*';
+            }
+        console.log(emty);
+        }
+        
+/* step 4 , loop 2
+.
+ .
+  .
+   .
+  .
+ .
+.
+ .
+  .
+   .
+  .
+ .
+.
+*/
+    </script>
+</body>
+</html>

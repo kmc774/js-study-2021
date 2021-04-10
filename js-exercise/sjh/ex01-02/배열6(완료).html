@@ -9,18 +9,20 @@
 <body>
     <script>
         
-        let numbers = new Array();
+        let numbers = [2, 4, 10, 22, 1, 81, 44, 34, 76, 9];
         
-        for(let i=0; i<10; i++) {
-            if((numbers[i]%2)===0) {
-                numbers.push("짝수");
+        let once = 0; //홀수 갯수
+        let twice = 0; // 짝수 갯수
+
+        for(let i=0; i<numbers.length; i++) {
+            if(numbers[i]%2 !== 0) {
+                once++;
             } else {
-                numbers.push("홀수");
+                twice++;
             }
-        } console.log(numbers);
-
-
-
+        }
+        console.log(once);
+        console.log(twice);
 
 /* 
 배열에 무작위 10가지 숫자가 들어가있다.

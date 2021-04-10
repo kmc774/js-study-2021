@@ -8,20 +8,15 @@
 </head>
 <body>
     <script>
-        let numbers = new Array();
-
-        for(let i=0; i<101; i++) {
-            if(i%2===0) {
-                numbers.push(i)
-            }
+        function multiply(a, b) {
+            return a * b;
         }
+
+        const result = multiply(10, 20);
         
-        document.write(numbers);
+        console.log(result);
         
-        /*0부터 100까지 숫자 중에 짝수만 배열에 넣어라
-결과: [0.2,4,....,100]*/
+        //숫자 2개를 받아서 곱을 리턴하는 함수
     </script>
 </body>
 </html>
-
-

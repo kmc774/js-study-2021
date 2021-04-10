@@ -8,7 +8,33 @@
 </head>
 <body>
     <script>   
-    
+        
+        let array = [[]];
+        let count = 0;
+
+        for(let i=0; i<9; i++) {
+            for(let k=0; k<9; k++) {
+                array[i][k] = count++;
+                if(k=2) {
+                    array[i][k] = count++ + '<br>' //수정할 것
+                }
+            }
+            document.write(array);
+        }
+
+
+
+        // array[0][0] = 0;
+        // array[0][1] = 1;
+        // array[0][2] = 2;
+        // array[1][0] = 3;
+        // array[1][1] = 4;
+        // array[1][2] = 5;
+        // array[2][0] = 6;
+        // array[2][1] = 7;
+        // array[2][2] = 8;
+
+
 /*
 2차원 배열
 x축 y축으로 접근하는 것.(x,y)
