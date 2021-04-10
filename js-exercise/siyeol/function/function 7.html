@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            array1 = [1,2,3,4,5];
+            array2 = [6,7,8,9,10];
+            function change ( array1, array2, index ){
+                let stemp = array1.splice(index, 1)[0]; //배열1에서 인덱스에 있는 값 제거 후 제거되고 제거된 값은 변수에 저장된다.
+                array1.splice(index, 0, array2.splice(index, 1)[0]);    //[0]<-splice은 배열 형태로 리턴해줘서 int타입으로 사용하려고
+                array2.splice(index, 0, stemp);
+            }  
+
+        </script>
+
+
+    </body>
+</html>
+

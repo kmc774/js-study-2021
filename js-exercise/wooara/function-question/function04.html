@@ -12,10 +12,24 @@
         [ 함수 만들기 04 ]
         -> 원의 둘레를 구하는 함수 만들기
            parameter : 반지름
+           : 반지름 X 2 X 3.14
 
            원의 면적을 구하는 함수
            parameter : 반지름
+           : 반지름 X 반지름 X 3.14
     */
+
+    const circleRound = function(radius) {
+    	return radius * 2 * Math.PI;
+    }
+
+    const circleArea = function(radius) {
+		return radius * radius * Math.PI;
+    }
+
+    const inputRadius = prompt("원의 반지름 값 입력: ");
+    console.log("원의 둘레는 " + circleRound(inputRadius).toFixed(2));
+    console.log("원의 넓이는 " + circleArea(inputRadius).toFixed(2));
 
 </script>
 </body>
