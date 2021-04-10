@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //밑변과 높이 변수 설정
+        const bottomLine = 2 //밑변
+        const height = 4 //높이
+        
+
+        //빗변 구하기(빗변 제곱 -> 빗변)
+        function diagonalDouble ( bottomLine, height ) {
+            return ( bottomLine * bottomLine ) * ( height * height );
+        }
+        
+        const daigonalDouble = diagonalDouble(bottomLine, height);
+        const daigonal = Math.sqrt(daigonalDouble); //Math.sqrt = 루트
+        console.log(daigonal);
+
+
+        //탄젠트 구하기
+        function tan (bottomLine, height) {
+            return (height/bottomLine);
+        }
+
+        const tanResult = tan(bottomLine, height);
+        console.log(tanResult);
+
+        
+        //사인 구하기
+        function sin (height, daigonal) {
+            return height/daigonal;
+        }
+
+        const sinResult = sin(height, daigonal);
+        console.log(sinResult);
+
+
+        //코사인 구하기
+        function cos (bottomLine, daigonal) {
+            return bottomLine/daigonal;
+        }
+        const cosResult = cos(bottomLine, daigonal);
+        console.log(cosResult);
+
+        
+        //사인, 코사인, 탄젠트, 빗변을 각각 구하는 함수(단 직각삼각형인 경우이며 밑변, 높이 값이 제공)
+        //sinA = 높이/빗변
+        //cosA = 밑변/빗변
+        //tanA = 높이/밑변
+        //빗변제곱 = 밑변제곱 * 높이제곱
+    </script>
+</body>
+</html>

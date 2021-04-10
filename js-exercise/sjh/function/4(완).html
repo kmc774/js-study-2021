@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //원의 반지름 변수 설정
+        const circleRadius = 5;      //반지름
+        const circlePi = Math.PI;    //원주율
+
+        //원의 둘레 구하기(2*원주율*반지름)
+        function circumference(circleRadius, circlePi) {
+            return 2 * circlePi * circleRadius;
+        }
+
+        const circumference_Result = circumference(circleRadius, circlePi);
+        console.log(circumference_Result);
+
+
+        //원의 면적 구하기(원주율*(반지름*제곱))
+        function area(circlePi, circleRadius) {
+            return circlePi * (circleRadius * circleRadius);
+        }
+
+        const areaResult = area(circlePi, circleRadius);
+        console.log(areaResult);
+
+        
+        //원의 둘레와 면적을 각각 구하는 함수(반지름이 파라미터로 들어감)
+    </script>
+</body>
+</html>
