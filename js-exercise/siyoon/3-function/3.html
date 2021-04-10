@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>function</title>
+    <style>
+        body {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            font-size: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    const firstSide = parseInt(prompt("직각 삼각형 밑 변을 입력해 주세요","0"));
+    const secondSide = parseInt(prompt("직각 삼각형 높이를 입력해 주세요","0"));
+
+    const cos = function(firstSide, secondSide){
+
+        //루트 값 구하는 식
+        let largestSide = Math.sqrt((firstSide * firstSide) + (secondSide * secondSide));
+
+        let result = firstSide / largestSide;
+
+        return result;
+    };
+
+    const sin = function(firstSide, secondSide){
+
+        let largestSide = Math.sqrt((firstSide * firstSide) + (secondSide * secondSide));
+
+        let result = secondSide / largestSide;
+
+        return result;
+    };
+
+    const tan = function(firstSide, secondSide){
+
+        largestSide();
+
+        let result = secondSide / firstSide;
+
+        return result;
+    };
+
+    const largestSide = function(firstSide, secondSide){
+
+        let largestSide = Math.sqrt((firstSide * firstSide) + (secondSide * secondSide));
+
+        return largestSide;
+    };
+
+    document.write("cos =" + cos(firstSide,secondSide) + "<br>" + "sin =" + sin(firstSide,secondSide) + "<br>" + "tan =" + tan(firstSide,secondSide) + "<br>" + "빗변 =" + largestSide(firstSide,secondSide));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+  <!-- 
+          0   1   2   3   4   5   6   7   8
+  /(row)  0   0   0   1   1   1   2   2   2
+  %(col)  0   1   2   0   1   2   0   1   2 
+  -->
+    <script>
+      
+      class slot{
+        constructor(){
+          this._columns = 0;
+          this._rows = 0;
+          this._matrix = Array.from( Array(3), () => new Array(3));
+          this._ShapeList = [
+                              {shape: 'star', score: 10}
+                              ,{shape: 'square', score: 5}
+                              ,{shape: 'circle', score: 3}
+                              ,{shape: 'triangle', score: 2}   
+                            ];
+          this._winline = [];                  
+          
+        }
+        
+        slotStart(){
+          for( let count=0; count<=8; count++ ){
+            this._matrix[this._columns][this._rows] = this._shapeList[ parseInt(Math.random()*4) ];
+            this._rows ++;
+            if( (count+1)%3 === 0 ){
+              this._columns ++;
+              this._rows = 0;
+            }
+          }
+        }
+
+
+        slotCheck(slotResult){
+          slotResult.forEach(function(item, idx){
+            const set = new Set();
+            item.map( element => set.add(element));
+            if( set.size <= 1 ){
+              this._winline.push(idx + 1);
+            }
+          });
+        }
+
+
+
+
+      }
+
+      
+      // const slot = Array.from( Array(3), () => new Array(3));
+      // const column = 3;
+
+      // const shapeList = [
+      //   {shape: 'star', score: 10}
+      //   ,{shape: 'square', score: 5}
+      //   ,{shape: 'circle', score: 3}
+      //   ,{shape: 'triangle', score: 2}   
+      // ]
+      
+      // let columns = 0;
+      // let rows = 0;
+
+      // let randomIndex = 0;
+
+      // for( let count=0; count<=8; count++ ){
+      //   randomIndex = parseInt(Math.random()*4)
+      //   slot[columns][rows] = shapeList[randomIndex];
+      //   rows ++;
+      //   if( (count+1)%3 === 0 ){
+      //     columns ++;
+      //     rows = 0;
+      //   }
+      // } 
+
+      
+      // const winList = [];
+      // slot.forEach(function(item, idx){
+      //   const set = new Set();
+      //   item.map( element => set.add(element));
+      //   if( set.size <= 1 ){
+      //     winList.push(idx + 1);
+      //   }
+      // });
+
+      // slot.forEach(function(item, idx){
+      //     slot[idx].forEach(function(item){
+      //       document.write(item.shape + ", ")
+      //     });
+      //     document.write("</br>")
+      //   });
+      
+      // if( winList.length <= 0 ){
+      //   document.write('fail');
+      // } else {
+      //   document.write(winList);
+      // }
+      
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>function</title>
+    <style>
+        body {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            font-size: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    const num1 = parseInt(prompt("숫자를 입력해 주세요","0"));
+    const num2 = parseInt(prompt("숫자를 입력해 주세요","0"));
+
+    const sum = function(num1, num2){
+
+        let result = num1 + num2;
+
+        return result;
+    }
+    document.write(sum(num1,num2));
+    // console.log(sum);
+
+</script>
+</body>
+</html>

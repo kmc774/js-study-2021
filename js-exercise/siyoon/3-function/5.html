@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>function</title>
+    <style>
+        body {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            font-size: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    const arr = [];
+
+    //숫자 입력 받기
+    for(let i = 0; i <= 9; i++){
+        arr[i] = parseInt(prompt((i+1) + '번째 숫자를 입력해주세요'));
+    }
+
+    const avg = function(array){
+
+        let avgValue = 0;
+
+        for( let i=0; i<arr.length; i++ ){
+
+            avgValue += arr[i];
+
+        }
+        return avgValue / arr.length
+    };
+
+    const max = function(array){
+
+        let maxValue = 0;
+
+        for( let i=0; i<arr.length; i++ ){
+
+            if( maxValue < arr[i] ){
+
+                maxValue = arr[i];
+            }
+        }
+        return maxValue
+    };
+
+    const min = function(){
+
+        let minValue = arr[0];
+
+        for( let i=0; i<arr.length; i++ ){
+
+
+            if( minValue > arr[i]){
+
+                minValue = arr[i]
+
+            }
+        }
+        return minValue
+    };
+
+    document.write('평균 = ' + avg(arr) + '<br>' + '최대값 = ' + max(arr) + '<br>' + '최소값 = ' + min(arr));
+    /*document.write(avg(arr));
+    console.log(avg(arr));
+    document.write(max(arr));
+    console.log(max(arr));
+    document.write(min(arr));
+    console.log(min(arr));*/
+</script>
+</body>
+</html>
