@@ -16,6 +16,24 @@
            reverse(arr);
     */
 
+    const inputArr = [1,3,7,8,11];
+    console.log('원본 배열: ' + inputArr);
+
+    const reverse = function(arr) {
+        const resultArr = [];
+
+        for(let i=arr.length-1; i>=0; i--) {
+            resultArr.push(arr[i]);
+        }
+
+        for(let i=0; i<resultArr.length; i++) {
+            arr[i] = resultArr[i];
+        }
+    }
+
+    reverse(inputArr);
+    console.log('바뀐 원본 배열: ' + inputArr);
+
 </script>
 </body>
 </html>
