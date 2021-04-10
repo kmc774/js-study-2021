@@ -11,7 +11,26 @@
 	/*
         [ 함수 만들기 01 ]
         -> 숫자 2개를 받아서 합을 리턴하는 함수 만들기
+
+        < 함수 선언 방법 >
+        1. Function 생성자
+            : const sum = new Function('a', 'b', 'return a + b');
+
+        2. 함수 표현식
+            : const getRectArea = function(width, height) {
+                  return width * height;
+              };
+
+        3. 화살표 함수 (화살표 함수는 항상 익명)
+            : var bar = () => console.log("bar");
     */
+
+    const sum = function(num1, num2) {
+    	return num1 + num2;
+    }
+
+    const result = sum(7, 2);
+    console.log(result);
 
 </script>
 </body>

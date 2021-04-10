@@ -19,6 +19,42 @@
            전제 : 직각 삼각형
     */
 
+    // 1. 빗변 구하는 함수
+    const hypotenuse = function(base, height) {
+		// 빗변 * 빗변 = (밑변 * 밑변) + (높이 * 높이)
+		// 빗변 = Math.sqrt((밑변 * 밑변) + (높이 * 높이))
+
+        return Math.sqrt((base*base) + (height*height)).toFixed(2);
+    }
+
+    // 2. cos 구하는 함수
+    const cosFunc = function(base, height) {
+    	// 밑변 / 빗변
+        const hypo = hypotenuse(base, height);
+        return (base/hypo).toFixed(2);
+    }
+
+    // 3. sin 구하는 함수
+    const sinFunc = function(base, height) {
+    	// 높이 / 빗변
+		const hypo = hypotenuse(base, height);
+		return (height/hypo).toFixed(2);
+    }
+
+    // 4. tan 구하는 함수
+    const tanFunc = function(base, height) {
+    	// 높이 / 밑변
+        return (height/base).toFixed(2);
+    }
+
+    const inputBase = prompt("밑변의 길이: ");
+    const inputHeight = prompt("높이의 길이: ");
+
+    console.log("빗변의 길이: " + hypotenuse(inputBase, inputHeight));
+    console.log("cos: " + cosFunc(inputBase, inputHeight));
+    console.log("sin: " + sinFunc(inputBase, inputHeight));
+    console.log("tan: " + tanFunc(inputBase, inputHeight));
+
 </script>
 </body>
 </html>
