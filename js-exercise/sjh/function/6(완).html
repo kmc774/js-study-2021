@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //[5,9,11,2,4,5] 배열이 있는데, 2보다 크거나 같고 7보다 작거나 같은 값을 배열로 표시([2,4,5])
+    
+        //function 함수이름(array, start, end) {}
+
+
+        //배열 생성
+        const array = [5, 9, 11, 2, 4, 5];
+
+        
+        //함수 생성
+        function numbers(array) {
+            
+            for(let i = 0; i < array.length; i++) {
+                
+                const count = new Array();
+
+                if(array[i] >= 2 && array[i] <= 7 ) {
+
+                    count = array[i];
+
+                }
+
+                return count
+
+            }
+            
+        }
+
+        const count_Result = numbers(array);
+        console.log(count_Result);
+
+    </script>
+</body>
+</html>

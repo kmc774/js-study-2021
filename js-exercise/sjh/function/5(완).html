@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //문제: 배열로 숫자를 받아서 평균, 최솟값, 최댓값을 각각 구하는 함수
+
+
+        //숫자로 구성된 배열 설정
+        const numbers = [4, 1, 56, 3, 234, 2];
+
+
+        //평균값 구하기
+        function avg(numbers) {
+            
+            let count = 0;
+            
+            for(let i=0; i<numbers.length; i++) {
+            
+                count += numbers[i];
+            
+            }
+            
+            return count / numbers.length;
+        
+        }
+        
+        const avgResult = avg(numbers);
+        console.log(avgResult);
+        
+
+        //최솟값 구하기
+        function min(numbers) {
+             
+            let first = numbers[0];
+            
+            for(let i=0; i<numbers.length; i++) {
+                
+                if(numbers[i] < first) {
+                
+                    first = numbers[i]; 
+                }
+
+            }
+            return first;
+        }
+
+        const min_Result = min(numbers);
+        console.log(min_Result);
+
+
+        //최댓값 구하기
+        function max(numbers) {
+
+            let final = numbers[0];
+
+            for(let i=0; i<numbers.length; i++) {
+
+                if(numbers[i] > final) {
+                    
+                    final = numbers[i]; 
+                }
+            }
+            return final;
+        }
+        
+        const final_Result = max(numbers);
+        console.log(final_Result);
+
+
+        
+
+    </script>
+</body>
+</html>
