@@ -24,7 +24,6 @@
     */
 
     const starNumArr = prompt("위치 지정 숫자 입력:", "1,2,3");
-    // TODO: 입력 값에서 공백 제거하기
     
     const mtr = starNumArr.split(",").map(Number);
     const maxValue = Math.max.apply(null, mtr);
