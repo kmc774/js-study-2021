@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>   
+        const array = new Array();
+
+        array[0] = new Array();
+        array[1] = new Array();
+        array[2] = new Array();
+
+        let count = 0;
+
+        for(let i=0; i<3; i++) {
+            
+            for(let j=0; j<3; j++) {
+                
+                array[i][j] = count++;
+            }
+        }
+
+        console.log(array);
+
+
+/*
+2차원 배열
+x축 y축으로 접근하는 것.(x,y)
+
+
+3행,3열의 빈 공간에 0부터 9까지의 수를 채워라(배열로 묶고)
+
+결과
+0,1,2
+3,4,5
+6,7,8
+
+*/    
+    </script>    
+</body>
+</html>
+
+
