@@ -15,8 +15,73 @@
 	    [ 배열 세팅 11 ] 빙고게임 응용
         -> [0, 1, 2, 3, 4, 5, 6, 7, 8]의 1차원 배열을 만들고
            1차원 배열로 각 패턴의 합을 추출 (2차원 배열처럼 사용)
+
+           1번패턴 : 0, 1, 2
+           2번패턴 : 3, 4, 5
+           3번패턴 : 6, 7, 8
+           4번패턴 : 0, 3, 6
+           5번패턴 : 1, 4, 7
+           6번패턴 : 2, 5, 8
+           7번패턴 : 0, 4, 8
+           8번패턴 : 2, 4, 6
     */
 
+    const array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const sumArr = [];
+
+    let pattern1 = 0;
+    let pattern2 = 0;
+    let pattern3 = 0;
+    let pattern4 = 0;
+    let pattern5 = 0;
+    let pattern6 = 0;
+    let pattern7 = 0;
+    let pattern8 = 0;
+
+    // 1번 패턴, 2번 패턴, 3번 패턴
+    for(let i=0; i<array.length; i++) {
+        if(i<=2) {
+            pattern1 += array[i];
+        } else if(i>=3 && i<=5) {
+            pattern2 += array[i];
+        } else if(i>=6 && i<=8) {
+            pattern3 += array[i];
+        }
+    }
+    // 4번 패턴, 5번 패턴, 6번 패턴
+    for(let i=0; i<array.length; i++) {
+        if(i%3===0 && i<=6) {
+            pattern4 += array[i];
+        } else if(i%3===1 && i<=7) {
+            pattern5 += array[i];
+        } else if(i%3===2) {
+            pattern6 += array[i];
+        }
+    }
+    // 7번 패턴
+    for(let i=0; i<array.length; i++) {
+        if(i%4===0) {
+            pattern7 += array[i];
+        }
+    }
+    // 8번 패턴
+    for(let i=0; i<array.length; i++) {
+        if(i%2===0 && i>0 && i<=6) {
+            pattern8 += array[i];
+        }
+    }
+
+    sumArr.push(pattern1);
+    sumArr.push(pattern2);
+    sumArr.push(pattern3);
+    sumArr.push(pattern4);
+    sumArr.push(pattern5);
+    sumArr.push(pattern6);
+    sumArr.push(pattern7);
+    sumArr.push(pattern8);
+
+
+    console.log(sumArr);
 
 </script>
 </body>
