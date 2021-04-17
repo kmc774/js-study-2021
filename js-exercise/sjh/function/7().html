@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //swap(arr1, arr2, 5);
+        //array1 = [1,2,3,4,5,6,7,8,9]  array1[5] = 6
+        //array2 = [3,7,6,9,5,4,8,10]   array2[5] = 4
+        //두개의 배열을 받고 인덱스가 5인 값을 서로 바꿔치기한다.
+
+        //잘 몰라서 다른 사람 것 참고했으니 다시 풀어보기
+
+        //각각 배열 선언
+        const array1 = [1,2,3,4,5,6,7,8,9];
+        const array2 = [3,7,6,9,5,4,8,10];
+
+
+        //함수 선언
+        const swap = function numbers(array1, array2) {
+            
+            for(let i=0; i<array1.length; i++) {
+            
+                for(let k=0; k<array2.length; k++) {
+            
+                    if(i===5 && k===5) {
+            
+                        const array1_change = array1[5];
+            
+                        const array2_change = array2[5];
+
+                        array1[5] = array2_change;
+            
+                        array2[5] = array1_change;
+            
+                    }
+            
+                }
+                
+            }
+        
+        }
+
+
+        //리턴값이 void일 때 함수 선언을 어떻게 하지?
+        swap (array1, array2);
+        
+        console.log(array1);
+        
+        console.log(array2);
+
+
+    </script>
+</body>
+</html>
