@@ -15,7 +15,8 @@
     <script>
       //슬롯 클래스
       class Slot {
-        constructor() {
+        constructor( inputAmount ) {
+          this._amount = inputAmount
           this._matrix = Array.from(Array(3), () => new Array(3))
           this._shapeList = [
             { shape: "star", score: 10 },
@@ -39,22 +40,45 @@
         } // start()
 
         winCheck() {
-          const set_check = new Set()
-          const result = []
+          
+          const result = {}
+          const resultList = []
           this._matrix.forEach(function (item, idx) {
+            let set_check = new Set()
             item.map((v) => set_check.add(v))
             if (set_check.size === 1) {
-              result.push(idx)
+              result.idx = idx
+              result.shapeInfo = item[0]
+              resultList.push(result)
             }
-            set_check.clear()
           })
-          return result
+          return resultList
         }
-      } // 클래스
 
-      const slot = new Slot()
+        output( winCheck, inputAmount ){
+          const winIdx = []
+          let winAmount = 0
+          const winList = winCheck
+          if( winList.length > 0){
+            winList.forEach( function(item, idx){
+              winAmount += item.shapeInfo.score * inputAmount
+              winIdx.push(item.idx)
+            })
+            console.log('win')
+            console.log(winIdx)
+            return winAmount + " coin return"
+          }else{
+            console.log('fail')
+            return "fail"
+          }
+          
+        }
+
+      } // 클래스
+      
+      const slot = new Slot(3)
       slot.start()
-      console.log(slot._matrix[slot.winCheck()[0]])
+      console.log( slot.output(slot.winCheck(), slot._amount) );
     </script>
   </body>
 </html>
