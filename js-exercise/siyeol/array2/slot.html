@@ -40,22 +40,58 @@
         } // start()
 
         winCheck() {
-          const set_check = new Set()
-          const result = []
+          const resultList = []
           this._matrix.forEach(function (item, idx) {
+            let set_check = new Set()
+            const result = {}
             item.map((v) => set_check.add(v))
             if (set_check.size === 1) {
-              result.push(idx)
+              result.idx = idx
+              result.shapeInfo = item[0]
+              resultList.push(result)
             }
-            set_check.clear()
           })
-          return result
+          return resultList
         }
-      } // 클래스
 
+        output( winCheck, inputAmount ){
+          const winIdx = []
+          let winAmount = 0
+          const winList = winCheck
+          if( winList.length > 0){
+            winList.forEach( function(item, idx){
+              winAmount += item.shapeInfo.score * inputAmount
+              winIdx.push(item.idx)
+            })
+            console.log('win')
+            console.log(winIdx)
+            return winAmount + " coin return"
+          }else{
+            console.log('fail')
+            return "fail"
+          }
+          
+        }
+
+      } // 클래스
+      
       const slot = new Slot(3)
       slot.start()
-      console.log(slot._matrix[slot.winCheck()[0]])
+      console.log(slot.output(slot.winCheck(), slot._amount))
     </script>
   </body>
 </html>
+
+<!-- 테스트용 데이터 
+slot._matrix[0][0] = slot._shapeList[0];
+slot._matrix[0][1] = slot._shapeList[0];
+slot._matrix[0][2] = slot._shapeList[0];
+
+slot._matrix[1][0] = slot._shapeList[1];
+slot._matrix[1][1] = slot._shapeList[1];
+slot._matrix[1][2] = slot._shapeList[1];
+
+slot._matrix[2][0] = slot._shapeList[2];
+slot._matrix[2][1] = slot._shapeList[2];
+slot._matrix[2][2] = slot._shapeList[2]; 
+-->
