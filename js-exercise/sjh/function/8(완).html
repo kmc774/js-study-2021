@@ -8,13 +8,29 @@
 </head>
 <body>
     <script>
-        
+        //반복문으로 풀 경우
         const array_1 = [1,2,3,4,5];
-        
         const array_2 = [];
 
+        let k = 0;
+
+        for(let i=array_1.length; i>0; i--) {
+            array_2[k] = array_1[i-1];
+            k++;
+        }
+        
+        console.log(array_1);
+        console.log(array_2);
         
         
+        //리버스 함수로 풀 경우
+        let array_3 = [1,2,3,4,5];
+        let array_4 = [1,2,3,4,5].reverse();
+
+        console.log(array_3);
+        console.log(array_4);
+
+
         //reverseClone(arr);
         //[1,2,3,4,5]
         //[5,4,3,2,1]
