@@ -25,17 +25,9 @@
 	console.log('before', array2);
 
     const swap = function(arr1, arr2) {
-    	for(let one=0; one<arr1.length; one++) {
-    		for(let two=0; two<arr2.length; two++) {
-    			if(one===5 && two===5) {
-    				const arr1Num = arr1[one];
-					const arr2Num = arr2[two];
-
-    				arr1[one] = arr2Num;
-    				arr2[two] = arr1Num;
-                }
-            }
-        }
+        const temp = arr1[5];
+        arr1[5] = arr2[5];
+        arr2[5] = temp;
     }
 
 	swap(array1, array2);

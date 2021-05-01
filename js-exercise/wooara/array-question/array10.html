@@ -18,6 +18,61 @@
            8개의 값 출력
     */
 
+    const dimensionalArr = [[0, 1, 2],[3, 4, 5],[6, 7, 8]]; // 2차원 배열 하드코딩으로 생성
+    const patternArr = Array.from(Array(8), () => new Array(3));
+
+
+    /* 1번 패턴 */
+    patternArr[0][0] = dimensionalArr[0][0];
+    patternArr[0][1] = dimensionalArr[0][1];
+    patternArr[0][2] = dimensionalArr[0][2];
+
+    /* 2번 패턴 */
+    patternArr[1][0] = dimensionalArr[1][0];
+    patternArr[1][1] = dimensionalArr[1][1];
+    patternArr[1][2] = dimensionalArr[1][2];
+
+    /* 3번 패턴 */
+    patternArr[2][0] = dimensionalArr[2][0];
+    patternArr[2][1] = dimensionalArr[2][1];
+    patternArr[2][2] = dimensionalArr[2][2];
+
+    /* 4번 패턴 */
+    patternArr[3][0] = dimensionalArr[0][0];
+    patternArr[3][1] = dimensionalArr[1][0];
+    patternArr[3][2] = dimensionalArr[2][0];
+
+    /* 5번 패턴 */
+    patternArr[4][0] = dimensionalArr[0][1];
+    patternArr[4][1] = dimensionalArr[1][1];
+    patternArr[4][2] = dimensionalArr[2][1];
+
+    /* 6번 패턴 */
+    patternArr[5][0] = dimensionalArr[0][2];
+    patternArr[5][1] = dimensionalArr[1][2];
+    patternArr[5][2] = dimensionalArr[2][2];
+
+    /* 7번 패턴 */
+    patternArr[6][0] = dimensionalArr[0][0];
+    patternArr[6][1] = dimensionalArr[1][1];
+    patternArr[6][2] = dimensionalArr[2][2];
+
+    /* 8번 패턴 */
+    patternArr[7][0] = dimensionalArr[0][2];
+    patternArr[7][1] = dimensionalArr[1][1];
+    patternArr[7][2] = dimensionalArr[2][0];
+
+    console.log('pattern array', patternArr);
+
+
+    for(let oneDepth=0; oneDepth<patternArr.length; oneDepth++) {
+
+        let sum = 0;
+        for(let twoDepth=0; twoDepth<patternArr[oneDepth].length; twoDepth++) {
+            sum += patternArr[oneDepth][twoDepth];
+        }
+        console.log('각 패턴의 숫자를 더한 값: ', sum);
+    }
 
 </script>
 </body>

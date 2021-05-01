@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>function</title>
+    <style>
+        body {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            font-size: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    arr1 = [1,2,3,4,5,6,7,8,9];
+    arr2 = [3,7,6,9,5,4,8,10];
+
+    console.log(arr1);
+    console.log(arr2);
+    const swap = function (arr1, arr2) {
+
+        for( let firstNum=0; firstNum < arr1.length; firstNum++ ){
+            for( let secondNum=0; secondNum < arr2.length; secondNum++ ){
+                if( firstNum === 5 && secondNum === 5 ){
+                    const arr1Num = firstNum;
+                    const arr2Num = secondNum;
+
+                    arr1[firstNum] = secondNum;
+                    arr2[secondNum] = firstNum;
+                }
+            }
+        }
+    }
+
+    swap(arr1, arr2);
+
+    console.log(arr1);
+    console.log(arr2);
+</script>
+</body>
+</html>

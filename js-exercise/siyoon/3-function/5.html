@@ -22,15 +22,15 @@
     const arr = [];
 
     //숫자 입력 받기
-    for(let i = 0; i <= 9; i++){
-        arr[i] = parseInt(prompt((i+1) + '번째 숫자를 입력해주세요'));
+    for (let i = 0; i <= 9; i++) {
+        arr[i] = parseInt(prompt((i + 1) + '번째 숫자를 입력해주세요'));
     }
 
-    const avg = function(array){
+    const avg = function (array) {
 
         let avgValue = 0;
 
-        for( let i=0; i<arr.length; i++ ){
+        for (let i = 0; i < arr.length; i++) {
 
             avgValue += arr[i];
 
@@ -38,13 +38,13 @@
         return avgValue / arr.length
     };
 
-    const max = function(array){
+    const max = function (array) {
 
         let maxValue = 0;
 
-        for( let i=0; i<arr.length; i++ ){
+        for (let i = 0; i < arr.length; i++) {
 
-            if( maxValue < arr[i] ){
+            if (maxValue < arr[i]) {
 
                 maxValue = arr[i];
             }
@@ -52,14 +52,14 @@
         return maxValue
     };
 
-    const min = function(){
+    const min = function () {
 
         let minValue = arr[0];
 
-        for( let i=0; i<arr.length; i++ ){
+        for (let i = 0; i < arr.length; i++) {
 
 
-            if( minValue > arr[i]){
+            if (minValue > arr[i]) {
 
                 minValue = arr[i]
 
