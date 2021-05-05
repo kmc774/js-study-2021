@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.windfall.cereal.mappers.boardMapper">
+
+	<select id="selectCount" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) FROM myBoard
+		<if test="searchType != null and searchValue != null">
+			WHERE
+				${ searchType} LIKE CONCAT( '%',#{ searchValue},'%' )
+		</if>
+		
+	</select>
+
+	<select id="selectBoard" resultType="boardVO" parameterType="hashmap">
+		SELECT 
+			*
+		FROM 
+			myBoard
+		<if test="searchType != null and searchValue != null">
+			WHERE
+				${ searchType} LIKE CONCAT( '%',#{ searchValue},'%' )
+		</if>	
+			
+		ORDER BY 
+			originSeq DESC, groupOrder ASC 
+		LIMIT ${ pageNum}, ${ contentNum}
+		
+	</select>
+	
+	<insert id="insertBoard" parameterType="boardVO" useGeneratedKeys="true" keyProperty="seq">
+		<selectKey resultType="long" keyProperty="seq" order="BEFORE">
+			SELECT MAX(seq)+1 FROM myboard
+		</selectKey>
+		
+		INSERT INTO
+			myBoard(title, contents, writer, createdDate, modifiedDate, lockCheck, category, originSeq, groupOrder, groupLayer, referenceSeq)
+		VALUES	
+			<choose>
+				<when test="groupOrder == 0 and groupLayer == 0">
+					(#{title}, #{contents}, #{writer}, NOW(), NOW(), #{lockCheck}, #{category}, #{seq}, 0, 0, NULL)	
+				</when>
+				<otherwise>
+					(#{title}, #{contents}, #{writer}, NOW(), NOW(), #{lockCheck}, #{category}, #{originSeq}, #{groupOrder}, #{groupLayer}, #{referenceSeq})
+				</otherwise>
+			</choose>
+		
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="long">
+		DELETE FROM myBoard WHERE seq = #{seq}
+	</delete>
+	
+	<select id="selectBoardOne" parameterType="long" resultType="boardVO">
+		SELECT * FROM myBoard WHERE seq = #{seq}
+	</select>
+	
+	<update id="updateBoard" parameterType="boardVO">
+		UPDATE 
+			myBoard 
+		SET 
+			title = #{title}, contents = #{contents}, 
+			modifiedDate = NOW(), lockCheck = #{lockCheck}, category = #{category}
+		WHERE 
+			seq = #{seq}
+	</update>
+	
+	<update id="incCount" parameterType="long">
+		UPDATE myboard SET COUNT = COUNT+1 WHERE seq = #{seq};
+	</update>
+	
+	<!-- 글 등록 시 새로운 답글이 원글의 groupOrder +1이 되기 때문에 새로 달린 답글보다 groupOrder가 높은 답글들 모두 +1을 해준다 -->
+	<update id="updateGroupOrder" parameterType="boardVO">
+		UPDATE
+			myboard
+		SET
+			groupOrder = groupOrder + 1
+		WHERE
+			originSeq = #{ originSeq}
+		AND
+			groupOrder >= #{ groupOrder}
+	</update>
+	
+	<!-- 글 삭제 시 답글이 있는지 체크를 하기위한 쿼리 -->
+	<select id="referencedCount" parameterType="long" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			myboard
+		WHERE
+			referenceSeq = #{seq}
+	</select>
+	
+
+
+	
+	<!-- ========= file Table ========= -->
+	<insert id="insertFile" parameterType="hashmap">
+		    INSERT INTO fileboard
+        (
+            BOARD_SEQ,
+            ORG_FILE_NAME,
+            SAVE_FILE_NAME,
+            FILE_SIZE,
+            CREA_DATE
+        )
+        VALUES
+        (
+            #{ BOARD_SEQ},
+            #{ ORG_FILE_NAME},
+            #{ SAVE_FILE_NAME},
+            #{ FILE_SIZE},
+            NOW()
+        )
+	</insert>
+	
+	<select id="selectFile" parameterType="long" resultType="hashmap">
+		SELECT 
+			SEQ, 
+			ORG_FILE_NAME, 
+			ROUND(file_size/1024,1) AS FILE_SIZE 
+		FROM 
+			fileboard 
+		WHERE 
+			board_seq = #{ board_seq}
+	</select>
+	
+	<select id="selectFileInfo" parameterType="long" resultType="hashMap">
+		SELECT
+			SAVE_FILE_NAME, 
+			ORG_FILE_NAME
+		FROM 
+			fileboard 
+		WHERE 
+			seq = #{seq};
+
+	</select>
+	
+	<delete id="deleteFile" parameterType="long">
+		DELETE 
+		FROM 
+			fileboard 
+		WHERE 
+			board_seq = #{ board_seq};
+	</delete>
+	
+	<delete id="modifyDelete" parameterType="hashMap">
+		DELETE FROM
+			fileboard 
+		WHERE
+			board_seq = #{ board_seq}
+		<if test="fileSeq != null">	
+		AND
+			seq NOT IN
+			<foreach collection="fileSeq" item="item" index="idex" separator="," open="(" close=")">
+				#{ item}
+			</foreach>
+		</if>	
+	</delete>
+	
+	
+</mapper>	

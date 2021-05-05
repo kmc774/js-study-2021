@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.windfall.cereal.mappers.commentMapper">
+
+	<select id="countComment" parameterType="long" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			comment
+		WHERE
+			board_seq = #{ board_seq}
+	</select>
+
+	<select id="selectCommentList" parameterType="hashmap" resultType="commentVO">
+		SELECT 
+			* 
+		FROM 
+			comment 
+		WHERE 
+			board_seq = ${ board_seq}
+		ORDER BY 
+			seq ASC 
+		LIMIT 0, #{ commentReadCount}
+	
+	</select>
+	
+	<insert id="insertComment" parameterType="commentVO">
+		INSERT INTO 
+			comment(writer, createdDate, modifiedDate, 
+					contents, board_seq)
+		VALUES
+			(#{ writer}, NOW(), NOW(), 
+			#{ contents}, #{ boardSeq});
+	
+	</insert>
+	
+	<update id="updateComment" parameterType="commentVO">
+		UPDATE 
+			comment 
+		SET 
+			contents = #{ contents}, 
+			modifiedDate = NOW() 
+		WHERE 
+			seq = #{ seq};
+	</update>
+	
+	<delete id="deleteComment" parameterType="long">
+		DELETE 
+		FROM
+			comment
+		WHERE
+			seq = #{ seq}; 
+	</delete>
+  
+</mapper>

@@ -1,0 +1,68 @@
+-문제 : ajax에서 post방식으로 데이터를 보냈을 때 데이터를 못 받는 에러가 발생
+
+- 해결 :
+ajax
+data : {seq : seq}
+	^-------네트워크에서 ex) seq = 127 찍힘
+data : JSON.stringify({seq : seq}) 
+	^-------네트워크에서 {seq: "127"} 찍힘
+contentType: 'application/json'	-서버에 데이터를 json으로 보내겠다는 뜻
+JSON.stringify()	-JavaScript 값이나 객체를 JSON 문자열로 변환합니다
+
+- contentType 을 json으로 따로 설정 하지않으면 controller에서도 @RequestBody를 사용해 Json 으로 받아줄 필요가 없다.
+이경우 ex) {seq : 127}을 보낸경우 controller단에서 seq 이름으로 맞춰 매핑된다. 타입은 상관없다().
+vo로 받을 경우 데이터 키 값과 필드 값이 동일하다면 자동 매핑이 된다.  
+-----------------------------------------------------------------------------------------------------------------
+controller
+@RequestBody Map<String, Long> params	
+^--------- @RequestBody가 파싱되는 데이터를 메소드의 매개변수 Map에 매핑시켜준다. 
+	서버에서 보낸 json데이터를 Map의 타입으로 맞춰준다
+
+
+
+
+=======================================================================================
+
+* 문제 : ajax를 사용해서 form 태그를 post 방식으로 보내주려고 했는데 에러 발생
+
+* 해결 : form 태그를 js의 serialize()라는 걸 사용해서 객체화 시켜줘야 한다.
+
+- form 데이터를 Object로 바꿔주는 것을 도와주는 Jquery serializeObject 플러그인 (https://blog.kingbbode.com/28)
+
+- 변환 값
+	$('.form').serialize();    =    title=aaa&contents=aaa
+	$('.form').serializeArray();    =    [ {name: "title", value: "aaa"}, {name: "contents", value: "aaa"} ]
+
+	@restController 에서 vo로 받을 때, 둘 다 대응되는 필드값 데이터가 담겨 객체가 생성된다.
+
+- 그외 특징
+	from 태그 안에 입력태그들의 name 이름을 key값으로, 들어있는 값을 value값으로 만든다.
+	
+	- serializeArry 일 때의 기능(serialize는 되는지 모름)
+	^--- push - 동일한 이름을 갖는 name은 array로 묶어준다.
+	<input name="foo" value="a">
+	<input name="foo" value="b">
+	결과: {foo: ["a", "b"]}
+
+	^--- fixed - 숫자인자를 갖는 []로 선언시 value는 array의 특정 index에 추가됩니다.
+	<input name="foo[2]" value="a">
+	<input name="foo[4]" value="b">
+	결과: {foo: [,"a", ,"b"]}
+
+	^--- named - 문자인자를 갖는 []로 선언시 인자를 key 값, value를 value로 한 object를 생성합니다.
+	<input name="foo[bar]" value="a"> 
+	결과: {foo: { bar : "a" } }
+
+- 단점
+name 값이 변경되었기 때문에, form의 기본 인터렉션은 사용이 어려울 것으로 보입니다. 비동기만을 위한 form 작성에 적합할 것 입니다.
+
+
+==========================================================================================
+
+
+* 문제 : 운영체제 별로 경로를 설정 할 때 각각 구분하는 문자가 다르다.
+
+* 해결 :
+(https://devbox.tistory.com/entry/Java-File-클래스 [장인개발자를 꿈꾸는 :: 기록하는 공간] 
+	static String pathSeparator - OS에서 사용하는 경로 구분자. 윈도우";", 유닉스":" 
+	 static String separator - OS에서 사용하는 이름 구분자. 윈도우"\", 유닉스"/"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+	<configuration>
+		<typeAliases>
+			<typeAlias type="com.windfall.cereal.dto.BoardVO" alias="boardVO"/>
+			<typeAlias type="com.windfall.cereal.page.PageMaker" alias="pageMaker"/>
+			<typeAlias type="com.windfall.cereal.dto.MemberVO" alias="memberVO"/>
+			<typeAlias type="com.windfall.cereal.dto.LikeVO" alias="likeVO"/>
+			<typeAlias type="com.windfall.cereal.dto.CommentVO" alias="commentVO"/>
+		</typeAliases>
+	</configuration>
+
