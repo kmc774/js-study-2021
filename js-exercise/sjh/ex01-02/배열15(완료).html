@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+    //첫번째 정배열 만들기
+        let array_1 = new Array();
+
+        array_1[0] = new Array();
+        array_1[1] = new Array();
+        array_1[2] = new Array();
+
+        let count = 1;
+
+        for(let i=0; i<array_1.length; i++) {
+            for(let j=0; j<array_1.length; j++) {
+                array_1[i][j] = count++;
+            }
+        }
+
+        console.log(array_1);
+
+        
+    //두번째 배열 만들기
+        let array_2 = new Array();
+        
+        array_2[0] = new Array();
+        array_2[1] = new Array();
+        array_2[2] = new Array();
+
+        for(let i=0; i<array_2.length; i++) {
+            for(let j=0; j<array_2.length; j++) {
+                array_2[i][j] = array_1[j][i]
+            }
+        }
+
+        console.log(array_2);
+        
+    </script>    
+</body>
+</html>

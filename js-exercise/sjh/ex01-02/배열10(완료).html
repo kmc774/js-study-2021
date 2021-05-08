@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //9번의 빙고패턴의 합(총 8개)를 출력.
+        
+        let array = new Array();
+
+        array[0] = new Array();
+        array[1] = new Array();
+        array[2] = new Array();
+
+        let count = 0;
+
+        for(let i=0; i<3; i++) {
+            for(let j=0; j<3; j++) {
+                array[i][j] = count ++;
+            }
+        }
+
+
+        console.log(array[0][0] + array[0][1] + array[0][2]);
+        console.log(array[1][0] + array[1][1] + array[1][2]);
+        console.log(array[2][0] + array[2][1] + array[2][2]);
+        
+        console.log(array[0][0] + array[1][0] + array[2][0]);
+        console.log(array[0][1] + array[1][1] + array[2][1]);
+        console.log(array[0][2] + array[1][2] + array[2][2]);
+        
+        console.log(array[0][0] + array[1][1] + array[2][2]);
+        console.log(array[0][2] + array[1][1] + array[2][0]);
+        
+
+    </script>
+</body>
+</html>
+
+
