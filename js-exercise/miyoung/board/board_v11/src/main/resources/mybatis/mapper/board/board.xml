@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.prac.spring.board.model.repository.BoardRepository">
+    
+    
+    
+    <select id="selectBoardList" resultType="board">
+    	SELECT *
+    	FROM ( 
+    		SELECT ROWNUM RNUM, b.* <!-- 별칭이 붙은 리스트에 rownum을 붙이고 rnum 별칭 붙여주기 -->
+		    FROM( 
+		    	  SELECT *
+		    	  FROM M_BOARD
+		    	  ORDER BY BD_IDX DESC) b <!-- bd_idx로 정렬된 데이터 값을 from으로 설정해주고 별칭 붙여줌 -->
+	    		 ) 
+	    WHERE RNUM BETWEEN ${startRow} and ${endRow}
+    </select>
+    
+    
+    <insert id ="insertFile">
+	   	insert into m_file(file_idx, type_idx, origin_file_name, rename_file_name, save_path)
+	   	values (sc_file_idx.nextval,
+ 				<choose><!-- typeIdx 있을 경우 해당 typeIdx 가져와서 수정할 수 있게 설정 -->
+ 					<when test="typeIdx != null">
+ 						#{typeIdx},
+ 					</when>
+ 					<otherwise><!-- 없을 경우 현재 파일의 시퀀스 새로 넣기 -->
+ 						'b'||sc_bd_idx.currval,
+ 					</otherwise>
+ 				</choose>
+	   				#{originFileName}, #{renameFileName},#{savePath} )
+    </insert>
+    
+   
+    
+    
+    
+    
+    
+    </mapper>

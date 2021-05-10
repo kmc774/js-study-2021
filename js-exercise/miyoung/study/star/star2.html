@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	// 별찍기 2문제 (별찍기 1개부터 10까지 찍고 다시 1개까지 줄어들게 별찍기)
+	
+	
+	
+	for(let i = 0; i < 20; i++){
+		
+		if(i < 10){
+			for(let j = 0; j <= i; j++){
+				document.write("*");
+			}
+			document.write("</br>");
+		}else{
+			for(let j = 19; j > i; j--){
+				document.write("*");
+			}
+			document.write("</br>");
+		}
+	}
+	
+
+
+</script>
+</body>
+</html>

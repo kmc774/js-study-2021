@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	// 별찍기 3 문제(공백)
+	
+	
+	let num = 4;
+	let emp = "&nbsp";
+	
+	for(let i = 0; i < num; i++){
+		if(i%2 == 0){
+			for(let j=0; j < num; j++){
+				document.write("*");
+				document.write(emp);
+			}
+		}else{
+			for(let j=0; j < num-1; j++){
+				document.write(emp);
+				document.write("*");
+			}
+			
+		}
+		
+		
+		
+		
+		
+		document.write('<br>');
+	}
+	
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	// 별찍기 4 문제(배열에 따라)
+	
+	
+	var mtr = [3,2,3,4,1];
+	let emp = "&nbsp";
+	
+	for(let i = 0; i < mtr.length; i++){
+		for(let j = 0; j <= mtr[i]; j++){
+			if(j == mtr[i]){
+				document.write("*");
+			}else{
+				document.write(emp);
+			}
+		}
+		document.write("<br>");
+	}
+  
+</script>
+</body>
+</html>

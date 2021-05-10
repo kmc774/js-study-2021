@@ -1,0 +1,27 @@
+package com.prac.spring.member.model.repository;
+
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import com.prac.spring.member.model.vo.MemberVO;
+
+
+@Mapper
+public interface MemberRepository {
+
+	
+	@Insert("INSERT INTO M_MEMBER (user_idx, user_id, password) values(sc_user_idx.nextval, #{userId}, #{password})")
+	int InsertMember(MemberVO member);
+	
+	@Select("SELECT * FROM M_MEMBER WHERE USER_ID = #{userId}")
+	MemberVO loginMember(@Param("userId")String userId);
+	
+	
+	
+	
+	
+	
+}
