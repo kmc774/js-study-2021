@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	// 별찍기 8 문제(step loop)
+	
+	var xxx = [1,5,4,1];
+	var emp = "&nbsp";
+	
+	
+	for(let i = 0; i < xxx.length; i++){
+		for(let j = 0; j < xxx[i]; j++){
+			document.write("*");
+		}
+		
+		for(let k=0; k < xxx.length - xxx[i]; k++){
+			document.write(emp);
+		}
+		
+		for(let j=0; j < xxx[i]; j++){
+			document.write("*");
+		}
+		
+		
+		document.write("<br>");
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

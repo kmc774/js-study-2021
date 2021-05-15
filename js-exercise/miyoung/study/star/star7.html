@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	// 별찍기 7 문제(빈 사각형 만들기)
+	
+	var emp = "&nbsp";
+	
+	for(let i = 0; i < 5; i ++){
+		
+		if(i == 0 || i == 4){ // 사각형 윗변, 아랫변
+		
+			for(let j=0; j < 9; j++){
+				if((j%2) == 0){ // 짝수인 경우 *
+					document.write("*");
+				}else{ // 아닌 경우 빈칸
+					document.write(emp);
+				}
+			}
+		}else{
+			for(let k = 0; k < 9; k++){
+				if(k == 0 || k == 8){
+					document.write("*");
+				}else{
+					document.write(emp);
+				}
+			}
+		}
+		document.write("</br>");
+	}
+	
+	
+</script>
+</body>
+</html>
