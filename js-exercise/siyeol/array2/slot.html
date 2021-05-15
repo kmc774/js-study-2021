@@ -52,37 +52,30 @@
         output() {
           this.start()
           this.winCheck()
+
+          this._matrix.forEach( (item) => {
+            item.forEach( (item) => {
+              document.writeln(item.shape + "<span class='tab'>&#9;</span>")
+            })
+            document.write('</br>')
+          })
+
           if (this._winInfo.length === 0) {
             document.writeln("실패")
           } else if (this._winInfo.length > 0) {
             document.writeln("성공")
-            console.log(this._winInfo)
-            this._winInfo.forEach((item) => {
-              this._returnCoin += item.shapeInfo.score
-              document.write("coin : ", this._returnCoin * this._amount)
+            this._winInfo.forEach((item) => { //this는 callback함수에서 사용은 지양하지 때문에 람다식 사용
+              this._returnCoin += item.shapeInfo.score * this._amount             
             })
+            document.writeln("coin : ", this._returnCoin )
+            
+
           }
         }
       } // 클래스
 
       const slot = new Slot(3)
       slot.output()
-      // slot.start()
-      // console.log(slot.output(slot.winCheck(), slot._amount))
     </script>
   </body>
 </html>
-
-<!-- 테스트용 데이터 
-slot._matrix[0][0] = slot._shapeList[0];
-slot._matrix[0][1] = slot._shapeList[0];
-slot._matrix[0][2] = slot._shapeList[0];
-
-slot._matrix[1][0] = slot._shapeList[1];
-slot._matrix[1][1] = slot._shapeList[1];
-slot._matrix[1][2] = slot._shapeList[1];
-
-slot._matrix[2][0] = slot._shapeList[2];
-slot._matrix[2][1] = slot._shapeList[2];
-slot._matrix[2][2] = slot._shapeList[2]; 
--->
