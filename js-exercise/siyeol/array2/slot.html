@@ -7,15 +7,12 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- 
-          0   1   2   3   4   5   6   7   8
-  /(row)  0   0   0   1   1   1   2   2   2
-  %(col)  0   1   2   0   1   2   0   1   2 
-  -->
     <script>
       //슬롯 클래스
       class Slot {
-        constructor( inputAmount ) {
+        constructor(inputAmount) {
+          this._returnCoin = 0
+          this._winInfo = new Array()
           this._amount = inputAmount
           this._matrix = Array.from(Array(3), () => new Array(3))
           this._shapeList = [
@@ -40,44 +37,38 @@
         } // start()
 
         winCheck() {
-          const resultList = []
-          this._matrix.forEach(function (item, idx) {
-            let set_check = new Set()
-            const result = {}
+          this._matrix.forEach((item, idx) => {
+            let set_check = new Set() //set을 이용한 중복체크로 당첨 여부 확인
+            const result = {} //당첨된 배열의 인덱스 번호를 저장후 반환할 변수
             item.map((v) => set_check.add(v))
             if (set_check.size === 1) {
               result.idx = idx
               result.shapeInfo = item[0]
-              resultList.push(result)
+              this._winInfo.push(result) //왜 푸시 안 됨?
             }
           })
-          return resultList
         }
 
-        output( winCheck, inputAmount ){
-          const winIdx = []
-          let winAmount = 0
-          const winList = winCheck
-          if( winList.length > 0){
-            winList.forEach( function(item, idx){
-              winAmount += item.shapeInfo.score * inputAmount
-              winIdx.push(item.idx)
+        output() {
+          this.start()
+          this.winCheck()
+          if (this._winInfo.length === 0) {
+            document.writeln("실패")
+          } else if (this._winInfo.length > 0) {
+            document.writeln("성공")
+            console.log(this._winInfo)
+            this._winInfo.forEach((item) => {
+              this._returnCoin += item.shapeInfo.score
+              document.write("coin : ", this._returnCoin * this._amount)
             })
-            console.log('win')
-            console.log(winIdx)
-            return winAmount + " coin return"
-          }else{
-            console.log('fail')
-            return "fail"
           }
-          
         }
-
       } // 클래스
-      
+
       const slot = new Slot(3)
-      slot.start()
-      console.log(slot.output(slot.winCheck(), slot._amount))
+      slot.output()
+      // slot.start()
+      // console.log(slot.output(slot.winCheck(), slot._amount))
     </script>
   </body>
 </html>
