@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      1. 좌우반전
+      2. 상하반전
+      3. 90도 회전
+       *          *
+       *****  *****
+       ****    ****
+       *          *
+       */
+
+      let starArr = [];
+      for (let i = 0; i < 4; i++) {
+        starArr[i] = parseInt(prompt('숫자를 입력해주세요.'));
+      }
+
+      console.log('기본모양');
+      let basicStar = '';
+      for (let i = 0; i < starArr.length; i++) {
+        for (let j = 0; j < starArr[i]; j++) {
+          basicStar += '*';
+        }
+        basicStar += '\n';
+      }
+      console.log(basicStar);
+
+      console.log('좌우반전');
+      let maxVal = starArr[0];
+      for (let i = 0; i < starArr.length; i++) {
+        if (maxVal < starArr[i]) maxVal = starArr[i];
+      }
+
+      let mirrorStar = '';
+      for (let i = 0; i < starArr.length; i++) {
+        for (let j = 0; j < maxVal; j++) {
+          if (maxVal - starArr[i] > j) {
+            mirrorStar += ' ';
+          } else mirrorStar += '*';
+        }
+        mirrorStar += '\n';
+      }
+      console.log(mirrorStar);
+
+      console.log('상하반전');
+      let reverseStar = '';
+      for (let i = 1; i <= starArr.length; i++) {
+        for (let j = 0; j < maxVal; j++) {
+          if (maxVal - starArr[starArr.length - i] > j) {
+            reverseStar += ' ';
+          } else reverseStar += '*';
+        }
+        reverseStar += '\n';
+      }
+      console.log(reverseStar);
+
+      console.log('90도회전');
+      let rightAngleStar = '';
+      for (let i = 0; i < maxVal; i++) {
+        for (let j = 0; j < starArr.length; j++) {
+          if (maxVal - i <= starArr[j]) {
+            rightAngleStar += '*';
+          } else rightAngleStar += ' ';
+        }
+        rightAngleStar += '\n';
+      }
+      console.log(rightAngleStar);
+    </script>
+  </body>
+</html>
