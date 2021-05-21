@@ -24,7 +24,6 @@
         }
 
         start() { //슬롯 랜덤 세팅
-          let maxIndex = Math.pow( this._matrix.length, 2 )                 //행, 열의 마지막 인덱스
           let randomVal = 0                                                 //랜덤 값이 저장될 변수
           for ( let column = 0; column < this._matrix.length; column++ ) {
             for( let row = 0; row < this._matrix[column].length; row++ ) {
@@ -34,8 +33,9 @@
           }
         } // start[end]
 
+
         winCheck() {
-          this._matrix.forEach( (item, idx) => {  //(callback 함수 안에서는 this를 사용할 수 없기 때문에 람다식 사용)
+          this._matrix.forEach( (item, idx) => {  //(callback 함수 안에서는 this 사용을 지양하기 때문에 람다식 사용)
             let set_check = new Set(item)         //중복체크로 Set 객체 사용
             const result = {}                     //당첨된 matrix 인덱스 번호와 shape 정보를 저장 후 반환할 변수
             if ( set_check.size === 1 ) {
@@ -46,10 +46,10 @@
           })
         } // winCheck[end]
 
+
         output() {
           this.start()
           this.winCheck()
-          
           // print
           this._matrix.forEach( (item, idx) => { 
             document.writeln('<div id="idx'+idx+'">')
@@ -58,18 +58,16 @@
             })
             document.write('</div>')
           })
-          //paint
+          // paint
           this._winInfos.forEach( (item) => { 
-            let taget = document.getElementById('idx'+item.idx)
-            taget.style.color = "blue"
+            document.getElementById('idx'+item.idx).style.color = "blue"
           })
-
           // result
           if (this._winInfos.length === 0) {
             document.writeln("실패")
           } else if (this._winInfos.length > 0) {
             document.writeln("성공")
-            this._winInfos.forEach((item) => { //this는 callback함수에서 사용은 지양하지 때문에 람다식 사용
+            this._winInfos.forEach((item) => {   //this는 callback함수에서 사용은 지양하기 때문에 람다식 사용
               this._returnCoin += item.shapeInfo.score * this._amount             
             })
             document.writeln("coin : ", this._returnCoin )
