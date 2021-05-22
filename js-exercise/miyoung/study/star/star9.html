@@ -11,23 +11,25 @@
 	
 	var xxx = [1,5,4,1];
 	var emp = "&nbsp";
+
 	
-	
-	for(let i = 0; i < xxx.length; i++){
-		for(let j = 0; j < xxx[i]; j++){
-			document.write("*");
+	for(let i = 0; i < xxx.length; i ++){
+		for(let j = 0; j < 5; j++){
+			if(j < xxx[i]){
+				document.write("*");
+			}else{
+				document.write(emp);
+			}
 		}
 		
-		for(let k=0; k < xxx.length - xxx[i]; k++){
+		for(let k = 0; k < xxx.length - xxx[i]; k++){
 			document.write(emp);
 		}
-		
-		for(let j=0; j < xxx[i]; j++){
+		for(let z = 0; z < xxx[i]; z++){
 			document.write("*");
 		}
 		
-		
-		document.write("<br>");
+		document.write('</br>');
 	}
 	
 	

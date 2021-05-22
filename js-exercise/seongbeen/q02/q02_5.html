@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<!-- 배열의 값이 모두 0으로 이루어진 100칸의 배열에서 
+        인덱스 값이 짝수인 요소만 1로 변경 -->
+		<script>
+			let arr = new Array(100); //길이 100 배열 생성
+			arr.fill(0); //0으로 채우기 (하나의 값으로만)
+			for (let i = 0; i < 100; i++) {
+				if (i % 2 == 0) arr[i] = 1;
+			}
+			console.log(arr);
+		</script>
+	</body>
+</html>

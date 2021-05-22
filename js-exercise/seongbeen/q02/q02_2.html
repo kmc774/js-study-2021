@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        0~100까지 숫자 중에 짝수만 배열에 담기
+        [0, 2, 4, 6, ,,,100]
+     -->
+    <script>
+      let evenArr = [];
+      for (let i = 0; i < 101; i++) {
+        if (i % 2 == 0) evenArr.push(i);
+        //evenArr하면 홀수의 경우 인덱스를 따로 처리해주어야 함.
+      }
+      console.log(evenArr);
+    </script>
+  </body>
+</html>

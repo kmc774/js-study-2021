@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<!-- 
+        콘솔 창에 이대로 출력하기
+        0 1 2 enter
+        3 4 5 enter
+        6 7 8 enter
+     -->
+		<script>
+			let matrix = Array(Array(), Array(), Array());
+
+			let counter = 0;
+			for (let i = 0; i < 3; i++) {
+				for (let j = 0; j < 3; j++) {
+					matrix[i][j] = counter++;
+				}
+			}
+			console.log(matrix);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    원하는 인덱스에 별 찍기
+    <script>
+      let ary = [];
+      let star = '';
+
+      for (let i = 0; i < 5; i++) {
+        ary[i] = parseInt(prompt('숫자 5개 입력'));
+      }
+
+      for (let i = 0; i < 5; i++) {
+        for (let j = 1; j <= ary[i]; j++) {
+          if (j != ary[i]) {
+            star += ' ';
+          } else {
+            star += '*\n';
+          }
+        }
+      }
+      console.log(star);
+    </script>
+  </body>
+</html>

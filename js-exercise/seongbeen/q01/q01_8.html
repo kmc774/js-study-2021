@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 패턴 = 2번(=i)
+      // 패턴 내에서 행의 개수 = 7개(=j)
+      // 패턴 내에서 열의 개수 = 4개(=k)
+      let step = '';
+
+      for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 7; j++) {
+          // 첫 번째 패턴 출력후 두 번째 패턴부터는 첫 행을 스킵해야
+          // 같은 위치에 점이 두 개 찍히지 않게 됨.
+          // 첫 번째 패턴의 마지막 행, 두 번재 패턴의 첫 행
+          if (i > 0) {
+            if (j == 0) continue;
+          }
+          for (let k = 0; k < 4; k++) {
+            if (j < 4) {
+              if (k == j) step += '.';
+              else step += ' ';
+            } else {
+              if (k == 6 - j) step += '.';
+              else step += ' ';
+            }
+          }
+          step += '\n';
+        }
+      }
+      console.log(step);
+    </script>
+  </body>
+</html>
