@@ -7,91 +7,77 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- 
-          0   1   2   3   4   5   6   7   8
-  /(row)  0   0   0   1   1   1   2   2   2
-  %(col)  0   1   2   0   1   2   0   1   2 
-  -->
     <script>
       //슬롯 클래스
       class Slot {
-        constructor( inputAmount ) {
-          this._amount = inputAmount
-          this._matrix = Array.from(Array(3), () => new Array(3))
-          this._shapeList = [
-            { shape: "star", score: 10 },
-            { shape: "square", score: 5 },
-            { shape: "circle", score: 3 },
-            { shape: "triangle", score: 2 },
+        constructor(inputAmount) {
+          this._returnCoin = 0                                    // 당첨 금액
+          this._winInfos = new Array()                             // 당첨된 슬롯 라인의 정보
+          this._amount = inputAmount                              // 투입 금액
+          this._matrix = Array.from(Array(3), () => new Array(3)) // 세팅된 슬롯
+          this._shapeList = [                                     // 슬롯 모양 정보
+            { shape: "star", score: 10 }
+            , { shape: "square", score: 5 }
+            , { shape: "circle", score: 3 }
+            , { shape: "triangle", score: 2 }
           ]
         }
 
-        start() {
-          let rows = 0
-          let columns = 0
-          for (let count = 0; count < Math.pow(this._matrix.length, 2); count++) {
-            this._matrix[columns][rows] = this._shapeList[parseInt(Math.random() * 4)]
-            rows++
-            if ((count + 1) % 3 === 0) {
-              columns++
-              rows = 0
+        start() { //슬롯 랜덤 세팅
+          let randomVal = 0                                                 //랜덤 값이 저장될 변수
+          for ( let column = 0; column < this._matrix.length; column++ ) {
+            for( let row = 0; row < this._matrix[column].length; row++ ) {
+              randomVal = this._shapeList[ parseInt(Math.random() * 4) ]    //0~3 랜덤값 생성
+              this._matrix[column][row] = randomVal
             }
           }
-        } // start()
+        } // start[end]
+
 
         winCheck() {
-          const resultList = []
-          this._matrix.forEach(function (item, idx) {
-            let set_check = new Set()
-            const result = {}
-            item.map((v) => set_check.add(v))
-            if (set_check.size === 1) {
+          this._matrix.forEach( (item, idx) => {  //(callback 함수 안에서는 this 사용을 지양하기 때문에 람다식 사용)
+            let set_check = new Set(item)         //중복체크로 Set 객체 사용
+            const result = {}                     //당첨된 matrix 인덱스 번호와 shape 정보를 저장 후 반환할 변수
+            if ( set_check.size === 1 ) {
               result.idx = idx
               result.shapeInfo = item[0]
-              resultList.push(result)
+              this._winInfos.push(result)
             }
           })
-          return resultList
-        }
+        } // winCheck[end]
 
-        output( winCheck, inputAmount ){
-          const winIdx = []
-          let winAmount = 0
-          const winList = winCheck
-          if( winList.length > 0){
-            winList.forEach( function(item, idx){
-              winAmount += item.shapeInfo.score * inputAmount
-              winIdx.push(item.idx)
+
+        output() {
+          this.start()
+          this.winCheck()
+          // print
+          this._matrix.forEach( (item, idx) => { 
+            document.writeln('<div id="idx'+idx+'">')
+            item.forEach( (item) => {
+              document.writeln('<span>' + item.shape + '</span>')
             })
-            console.log('win')
-            console.log(winIdx)
-            return winAmount + " coin return"
-          }else{
-            console.log('fail')
-            return "fail"
+            document.write('</div>')
+          })
+          // paint
+          this._winInfos.forEach( (item) => { 
+            document.getElementById('idx'+item.idx).style.color = "blue"
+          })
+          // result
+          if (this._winInfos.length === 0) {
+            document.writeln("실패")
+          } else if (this._winInfos.length > 0) {
+            document.writeln("성공")
+            this._winInfos.forEach((item) => {   //this는 callback함수에서 사용은 지양하기 때문에 람다식 사용
+              this._returnCoin += item.shapeInfo.score * this._amount             
+            })
+            document.writeln("coin : ", this._returnCoin )
           }
-          
-        }
+        }// output[end]
 
       } // 클래스
-      
+
       const slot = new Slot(3)
-      slot.start()
-      console.log(slot.output(slot.winCheck(), slot._amount))
+      slot.output()
     </script>
   </body>
 </html>
-
-<!-- 테스트용 데이터 
-slot._matrix[0][0] = slot._shapeList[0];
-slot._matrix[0][1] = slot._shapeList[0];
-slot._matrix[0][2] = slot._shapeList[0];
-
-slot._matrix[1][0] = slot._shapeList[1];
-slot._matrix[1][1] = slot._shapeList[1];
-slot._matrix[1][2] = slot._shapeList[1];
-
-slot._matrix[2][0] = slot._shapeList[2];
-slot._matrix[2][1] = slot._shapeList[2];
-slot._matrix[2][2] = slot._shapeList[2]; 
--->
