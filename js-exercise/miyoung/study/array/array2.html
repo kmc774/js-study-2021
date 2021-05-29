@@ -9,22 +9,17 @@
 
 
 	// 짝수 배열 담기
-
-	var array = new Array(100);
-	var evenArr = new Array(50);
+	const array = [];
 	
-	
-	document.write('[');
-		for(let i = 0; i <= 100; i++){
-			array[i] = i; // 배열값 초기화
-			if(i%2 === 0){ // 짝수 배열 담기
-				evenArr[i] = [i];
-				document.write(evenArr[i]+' '); // 배열값 확인용
-			}
+	for(let i = 0; i <= 100; i++){
+		
+		if(i%2 === 0){ // 짝수 배열 담기
+			array.push(i);
+			
 		}
-	document.write(']');
+	}
 
-	
+	document.write(array); // 배열값 확인용
 	
 	
 	

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	
+
+	// 배열 무작위 숫자 10개 중 짝수, 홀수 몇 개인지 구하기
+	const array = [3,7,6,5,2,8,9,1,4,20];
+	let evenCount = 0;
+	let oddCount = 0;
+	
+	for(var i=0; i < array.length; i++){
+		if(array[i]%2 === 0){
+			evenCount++;
+		}else if(array[i]%2 !== 0){
+			oddCount++;
+		}
+	}
+
+	document.write("짝수 : " + evenCount + " 홀수 : " + oddCount);
+	
+	
+	
+	
+
+</script>
+</body>
+</html>
