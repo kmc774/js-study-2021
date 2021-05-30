@@ -9,9 +9,9 @@ public class Proxy implements Service{
 		
 		StringBuffer sb = new StringBuffer();
 		
-		sb.append("before 추가!!  \n");
+		sb.append("before !!  \n");
 		sb.append(serviceImpl.runSomething());
-		sb.append("\nafter 추가!!");
+		sb.append("\nafter !!");
 		
 		return sb.toString();
 	}

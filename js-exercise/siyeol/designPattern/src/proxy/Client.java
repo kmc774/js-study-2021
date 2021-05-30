@@ -1,7 +1,6 @@
 package proxy;
 /*
- * ÇÁ·Ï½Ã °´Ã¼´Â ¿ø·¡ °´Ã¼¸¦ °¨½Î°í ÀÖ´Â °´Ã¼
- * Á¢±ÙÀ» Á¦¾îÇÏ°í ½Í°Å³ª, ºÎ°¡ ±â´ÉÀ» Ãß°¡ÇÏ°í ½ÍÀ» ¶§ »ç¿ë (±ÇÇÑ¿¡ µû¸¥ Á¢±ÙÁ¦¾î µî..)
+ * í”„ë¡ì‹œ íŒ¨í„´
 */
 
 public class Client {
