@@ -1,4 +1,4 @@
-package proxy;
+package structural.proxy;
 /*
  * 프록시 패턴
 */

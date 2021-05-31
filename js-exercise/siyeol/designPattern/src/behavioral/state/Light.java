@@ -1,4 +1,4 @@
-package state;
+package behavioral.state;
 
 
 
@@ -23,25 +23,25 @@ public class Light {
 	}
 	
 /*	
- * »óÅÂ ÆĞÅÏÀÌ ¾Æ´Ñ Á¶°Ç¹®À¸·Î Ã³¸® ÇßÀ» °æ¿ì
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	
 	public void onButton() {
 		if( "on".equals(state) ) {
-			System.out.println("¹İÀÀ ¾øÀ½");
+			System.out.println("ë°˜ì‘ ì—†ìŒ");
 			
 		} else if("off".equals(state)) {
-			System.out.println("Àü¿ø off");
+			System.out.println("ì „ì› off");
 			state = "on";
 		}
 	}
 	
 	public void offButton() {
 		if( "on".equals(state) ) {
-			System.out.println("Àü¿ø on");
+			System.out.println("ì „ì› on");
 			state = "on";
 			
 		} else if("off".equals(state)) {
-			System.out.println("¹İÀÀ ¾øÀ½");
+			System.out.println("ë°˜ì‘ ì—†ìŒ");
 	}
 */	
 	

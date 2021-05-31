@@ -1,4 +1,4 @@
-package state;
+package behavioral.state;
 
 public class On implements State {
 	
@@ -14,14 +14,14 @@ public class On implements State {
 
 	@Override
 	public void lightOn(Light light) {
-		System.out.println("¹İÀÀ ¾øÀ½");
+		System.out.println("ë°˜ì‘ ì—†ìŒ");
 		
 	}
 
 	@Override
 	public void lightOff(Light light) {
 		light.setState(Off.getInstance());
-		System.out.println("Àü¿ø off");
+		System.out.println("ì „ì› off");
 	}
 
 	

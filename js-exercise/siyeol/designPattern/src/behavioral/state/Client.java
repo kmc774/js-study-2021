@@ -1,4 +1,4 @@
-package state;
+package behavioral.state;
 
 /* 상태 패턴(state)
  * 동일한 동작을 객체의 상태에 따라 다르게 처리할 때 사용 ( 상태 : 전원 객체의 경우 ON, OFF 가 상태가 될 수 있다 )
