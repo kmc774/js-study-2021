@@ -14,19 +14,19 @@ import java.util.List;
 public class PrototypeTest {
 
 	public static void main(String[] args) throws CloneNotSupportedException {
-		Customer originCustomer = new Customer();
-		originCustomer.dataLoad();
+		Pokemon originPokemon = new Pokemon();
+		originPokemon.dataLoad();
 		
-		Customer customerClone1 = (Customer) originCustomer.clone();	
-		Customer customerClone2 = (Customer) originCustomer.clone();
+		Pokemon pokemonClone1 = (Pokemon) originPokemon.clone();	
+		Pokemon pokemonClone2 = (Pokemon) originPokemon.clone();
 		
-		List<String> cloneList1 = customerClone1.getcustomerList();
+		List<String> cloneList1 = pokemonClone1.getcustomerList();
 		cloneList1.add("버터풀");
-		List<String> cloneList2 = customerClone2.getcustomerList();
+		List<String> cloneList2 = pokemonClone2.getcustomerList();
 		cloneList2.remove("피카츄");
 		
 		
-		System.out.println(originCustomer.getcustomerList().toString());
+		System.out.println(originPokemon.getcustomerList().toString());
 		System.out.println(cloneList1.toString());
 		System.out.println(cloneList2.toString());
 	}

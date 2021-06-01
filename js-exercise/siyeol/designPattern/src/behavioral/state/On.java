@@ -7,14 +7,15 @@ public class On implements State {
 	static {
 		on = new On();
 	}
-	
+	// 싱글톤으로 생성
 	public static On getInstance() {
 		return on;
 	}
 
 	@Override
 	public void lightOn(Light light) {
-		System.out.println("반응 없음");
+		light.setState( SleepMode.getinstance() );
+		System.out.println("수면 모드 on");
 		
 	}
 

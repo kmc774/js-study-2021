@@ -3,15 +3,15 @@ package creational.prototype;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer implements Cloneable{
+public class Pokemon implements Cloneable{
 
 	private List<String> customerList;
 	
-	public Customer() {
+	public Pokemon() {
 		customerList = new ArrayList();
 	}
 	
-	public Customer( List<String> temp ) {
+	public Pokemon( List<String> temp ) {
 		customerList = temp;
 	}
 	
@@ -36,7 +36,7 @@ public class Customer implements Cloneable{
 			temp.add( customer );
 		}
 
-		return new Customer( temp );
+		return new Pokemon( temp );
 		
 		/* 얕은 복사
 		return super.clone();

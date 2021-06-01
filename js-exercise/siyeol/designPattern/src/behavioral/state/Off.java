@@ -9,7 +9,7 @@ public class Off implements State{
 		off = new Off();
 	}
 	
-	// �̱��� ����
+	// 싱글톤으로 생성
 	public static Off getInstance() {
 		return off;
 	}

@@ -22,7 +22,8 @@ public class Client {
 		Light light = new Light();
 		
 		light.onButton();	//off -> on '전원 on' 
-		light.onButton();	//on -> on '반응 없음'  
+		light.onButton();	//on -> sleep '슬립모드'  
+		light.onButton();	//
 		light.offButton();	//on -> off '전원 off' 
 		
 		
