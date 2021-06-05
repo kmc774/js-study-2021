@@ -51,6 +51,7 @@
           return result;
         }
 
+        //슬롯의 크기를 정하는 기능과 값을 세팅하는 기능을 나눈다.
         _spin() { //슬롯 랜덤 세팅
           const matrixSize = 3;                                                       // 세팅된 슬롯
           let matrix = [];                                                            // 심볼들이 저장될 배열
@@ -65,10 +66,10 @@
           return matrix;
         } // spin[end]
 
-
+        //당첨 패턴을 정할 수 있게한다
+        // 그럼 당첨된 라인이 패턴에 따라 달라져야 한다
         _winCheck(resultSlot) { //당첨 확인
           const winInfos = []
-
           resultSlot.forEach( (item, idx) => {    //(callback 함수 안에서는 this 사용을 지양하기 때문에 람다식 사용)
             let set_check = new Set( item )         //중복체크로 Set 객체 사용
             let result = {};
@@ -78,9 +79,9 @@
               winInfos.push( result )
             }
           })
-
           return winInfos;
         } // winCheck[end]
+
 
         _prize(winInfos, inputCoin){  //당첨 금액 계산
           let prizeCoin = 0;  
@@ -90,7 +91,8 @@
           return prizeCoin;
         }
 
-      } // 클래스
+      } // 클래스[end]
+
 
       function output( result ) {
           // print
@@ -117,12 +119,12 @@
 
 
 
-        const symbolProvider = new JoldoSymbolProvider();
-        const winChecker = new LineWinChecker();
-        const scatterCheker = new ScatterWinCheker();
-        const payoutCalculator = new PayoutCalculatorNewVersion();
+      const symbolProvider = new JoldoSymbolProvider();
+      const winChecker = new LineWinChecker();
+      const scatterCheker = new ScatterWinCheker();
+      const payoutCalculator = new PayoutCalculatorNewVersion();
 
-        const slot = new Slot( symbolProvider, winChecker, scatterCheker, payoutCalculator );
+      const slot = new Slot( symbolProvider, winChecker, scatterCheker, payoutCalculator );
       output( slot.start(3) );
 
       
