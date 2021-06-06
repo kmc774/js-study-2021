@@ -37,34 +37,56 @@
             , { shape: "circle", score: 3 }
             , { shape: "triangle", score: 2 }
           ]
+          this._winPattern = [
+            []
+            ,[]
+            ,[]
+          ]
         }
 
-        start( inputCoin ){
-          const resultSlot = this._spin();
-          const winInfos = this._winCheck( resultSlot );
-          const prizeCoin = this._prize( winInfos, inputCoin )
-          const result = {
-            'resultSlot' : resultSlot
-            , 'winInfos' : winInfos
-            , 'prizeCoin' : prizeCoin
-          };
-          return result;
-        }
-
-        //슬롯의 크기를 정하는 기능과 값을 세팅하는 기능을 나눈다.
-        _spin() { //슬롯 랜덤 세팅
-          const matrixSize = 3;                                                       // 세팅된 슬롯
-          let matrix = [];                                                            // 심볼들이 저장될 배열
-          
-          for ( let column = 0; column < matrixSize; column++ ) {
+        //슬롯 크기 설정
+        _setSlotSize( columnSize, rowSize ){
+          let matrix = [];
+          for ( let column = 0; column < columnSize; column++ ) {
             matrix[column] = [];
-            for( let row = 0; row < matrixSize; row++ ) {
-              matrix[column][row] = this._shapeList[ parseInt(Math.random() * 4) ]    //랜텀한 심볼 정보롤 matrix에 담는다
-              // 이렇게 심볼에 정보 모두를 담는게 맞는지, 심볼만 담고 심볼에 정보가 필요할 때는 필드에서 가져오는 것이 맞는지...알려주세요...
+            for( let row = 0; row < rowSize; row++ ) {
+              matrix[column][row] = { shape: "undefine", score: 0 }
             }
           }
           return matrix;
-        } // spin[end]
+        }
+
+        //심볼 랜덤 값을 모두 담을 리스트
+        _setSlotSymbol( matrix ){
+          const totalSize = ( matrix.length * matrix[0].length );
+          let symbolList = [];
+          let randomSymbol = {};
+          let randomInt = -1; //배열 인덱스에 없는 초기값을 넣어줘야할거 같아서 -1을 넣음
+
+          for( let i = 0; i < totalSize; i++ ){
+            randomInt = parseInt(Math.random() * this._shapeList.length);
+            symbolList.push( randomInt );
+            // randomSymbol = this._shapeList[ randomInt ];
+            // symbolList.push( randomSymbol.shape ); 
+          }
+          return symbolList; 
+        }
+
+        //크기가 세팅된 슬롯에 심볼 리스트를 받아 채움
+        _setSolt( matrix, symbolList ){
+          let column = 0;
+          let row = 0;
+          for( var idx in symbolList ){
+            if( row >= matrix[0].length ){
+              row = 0;
+              column ++;
+            }
+            matrix[column][row] = symbolList[idx];
+            row ++;
+          }
+          return matrix;
+        }
+
 
         //당첨 패턴을 정할 수 있게한다
         // 그럼 당첨된 라인이 패턴에 따라 달라져야 한다
@@ -82,50 +104,26 @@
           return winInfos;
         } // winCheck[end]
 
-
-        _prize(winInfos, inputCoin){  //당첨 금액 계산
-          let prizeCoin = 0;  
-          winInfos.forEach( (item) => {
-            prizeCoin += item.score * inputCoin;
-          });
-          return prizeCoin;
-        }
-
       } // 클래스[end]
 
 
-      function output( result ) {
-          // print
-          result.resultSlot.forEach( (item, idx) => { 
-            document.writeln('<div id="idx'+idx+'">')
-            item.forEach( (item) => {
-              document.writeln('<span>' + item.shape + '</span>')
-            })
-            document.write('</div>')
-          })
-          // paint
-          result.winInfos.forEach( (item) => { 
-            document.getElementById('idx'+item.index).style.color = "blue"
-          })
-          // result
-          if ( result.winInfos.length === 0 ) {
-            document.writeln("실패")
-          } else if ( result.winInfos.length > 0 ) {
-            document.writeln("성공")
-            document.writeln("coin : ", result.prizeCoin )
-          }
-        }// output[end]
+ 
 
 
+        const slot = new Slot();
+        const matrix = slot._setSlotSize(3, 3);
+        const symbolList = slot._setSlotSymbol( matrix );
+        const resultSlot = slot._setSolt( matrix, symbolList ); 
+        console.log( resultSlot );
+        
 
+      // const symbolProvider = new JoldoSymbolProvider();
+      // const winChecker = new LineWinChecker();
+      // const scatterCheker = new ScatterWinCheker();
+      // const payoutCalculator = new PayoutCalculatorNewVersion();
 
-      const symbolProvider = new JoldoSymbolProvider();
-      const winChecker = new LineWinChecker();
-      const scatterCheker = new ScatterWinCheker();
-      const payoutCalculator = new PayoutCalculatorNewVersion();
-
-      const slot = new Slot( symbolProvider, winChecker, scatterCheker, payoutCalculator );
-      output( slot.start(3) );
+      // const slot = new Slot( symbolProvider, winChecker, scatterCheker, payoutCalculator );
+      // output( slot.start(3) );
 
       
 
