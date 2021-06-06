@@ -30,18 +30,19 @@
       
       //슬롯 클래스
       class Slot {
-        constructor(inputAmount) {
+        constructor(inputCoin) {
+          this._inpuCoin = inputCoin;
           this._shapeList = [                                     // 슬롯 모양 정보
             { shape: "star", score: 10 }
             , { shape: "square", score: 5 }
             , { shape: "circle", score: 3 }
             , { shape: "triangle", score: 2 }
-          ]
-          this._winPattern = [
-            []
-            ,[]
-            ,[]
-          ]
+          ];
+          this._winPatternList = [
+            [ {column: 0, row: 0}, {column: 0, row: 1}, {column: 0, row: 2} ]
+            , [ {column: 1, row: 0}, {column: 1, row: 1}, {column: 1, row: 2} ]
+            , [ {column: 2, row: 0}, {column: 2, row: 1}, {column: 2, row: 2} ]
+          ];
         }
 
         //슬롯 크기 설정
@@ -65,9 +66,8 @@
 
           for( let i = 0; i < totalSize; i++ ){
             randomInt = parseInt(Math.random() * this._shapeList.length);
-            symbolList.push( randomInt );
-            // randomSymbol = this._shapeList[ randomInt ];
-            // symbolList.push( randomSymbol.shape ); 
+            randomSymbol = this._shapeList[ randomInt ];
+            symbolList.push( randomSymbol ); 
           }
           return symbolList; 
         }
@@ -87,22 +87,33 @@
           return matrix;
         }
 
-
-        //당첨 패턴을 정할 수 있게한다
-        // 그럼 당첨된 라인이 패턴에 따라 달라져야 한다
-        _winCheck(resultSlot) { //당첨 확인
-          const winInfos = []
-          resultSlot.forEach( (item, idx) => {    //(callback 함수 안에서는 this 사용을 지양하기 때문에 람다식 사용)
-            let set_check = new Set( item )         //중복체크로 Set 객체 사용
-            let result = {};
-            if ( set_check.size === 1 ) {         //해당 행의 모든 모양이 같으면 result에 저장
-              result.index = idx;
-              result.score = item[0].score;
-              winInfos.push( result )
+        _winChecker( slot ){
+          const winPatterns = [];
+          this._winPatternList.forEach( (pattern, idx) => {
+            let set = new Set();
+            let winMap = {};
+            pattern.forEach( (item) => {              
+              set.add( slot[item.column][item.row] );    
+            })
+            if(set.size === 1){
+              winPatterns.push( idx )
             }
-          })
-          return winInfos;
-        } // winCheck[end]
+          });
+          return winPatterns; //당첨된 패턴 Index 반환
+        }
+
+        _payoutCalculator( slot, winPatterns ){  //당첨 금액 계산
+          let payout = 0;
+          let column = 0;
+          let row = 0;
+          const inputCoin = this._inpuCoin;  
+          winPatterns.forEach( (winIndex) => {
+            column = this._winPatternList[winIndex][0].column;
+            row = this._winPatternList[winIndex][0].row;
+            payout += slot[column][row].score * inputCoin;
+          });
+          return payout;
+        }
 
       } // 클래스[end]
 
@@ -110,11 +121,15 @@
  
 
 
-        const slot = new Slot();
+        const slot = new Slot(100);
         const matrix = slot._setSlotSize(3, 3);
         const symbolList = slot._setSlotSymbol( matrix );
         const resultSlot = slot._setSolt( matrix, symbolList ); 
-        console.log( resultSlot );
+        console.log(resultSlot);
+        const winPatterns = slot._winChecker(resultSlot);
+        console.log(winPatterns);
+        const payout = slot._payoutCalculator( resultSlot, winPatterns );
+        console.log(payout)
         
 
       // const symbolProvider = new JoldoSymbolProvider();
