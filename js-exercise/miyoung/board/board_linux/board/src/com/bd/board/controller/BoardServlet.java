@@ -52,8 +52,6 @@ public class BoardServlet extends HttpServlet {
 				break;
 			}
 		
-		
-		
 	}
 
 	/**
