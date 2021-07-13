@@ -25,8 +25,6 @@ public class main {
 	 다른 패턴에 비해 다소 복잡한것 같기도하고 Double dispatch 기법을 통해 하다보니 한번에 딱 와닫지가 않았는데 처음부터 문제를 해결해 나가는 과정을 보면서 왜 이렇게 써야하는지
 	 , 주는 이점이 무엇인지 더 잘 알 수 있게 된 계기가 된것 같다.
 	 이 글을 보는분도 모두 비지터 패턴에 대한 원리를 더 이해를 잘 할 수 있었으면 좋겠다.
-	 
-	 
 	 */
 
 	public static void main(String[] args) {
@@ -34,7 +32,7 @@ public class main {
 		Member vipMember = new VipMember();
 		Benefit pointBenefit = new PointBenefit();
 		Benefit discountBenefit = new DiscountBenefit();
-		//-------------------
+		//-------------------혜택 추가
 		Benefit freeRentBenefit = new FreeRentBenefit();
 		
 		goldMember.getBenefit(pointBenefit);
@@ -44,6 +42,19 @@ public class main {
 		//---------------------
 		goldMember.getBenefit(freeRentBenefit);
 		vipMember.getBenefit(freeRentBenefit);
+		
+		
+		/*bad example-1
+		 * 1. 명시적으로 혜택을 주기위한 메소드를 호출해야 한다( .point() )
+		 * 2. 혜택이 늘어났을 때 모든 멤버들에게 그 혜택을 구현했다는 보장이 없다 (혜택을 누락하는 실수를 할수 있다)
+        Member goldMember = new GoldMember();
+        Member vipMember = new VipMember();
+
+        goldMember.point();
+        vipMember.point();
+        goldMember.discount();
+        vipMember.discount();
+		*/
 	}
 
 }

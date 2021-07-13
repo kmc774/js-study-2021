@@ -10,4 +10,8 @@ public class VipMember implements Member{
 		benefit.getBenefit(this);
 	}
 
+	/*bad example-1
+	public void point() { System.out.println("Point for  Member"); }
+	public void discount() { System.out.println("Discount for Gold Member"); }
+	*/
 }
