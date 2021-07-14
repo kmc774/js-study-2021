@@ -8,25 +8,6 @@
   </head>
   <body>
     <script>
-
-      /*
-       * 수정 사항
-       * _spin()에서 배열을 생성해줄 때 new Array를 쓰지말고
-       * 반복문 사이에 배열에 배열을 담는 형식으로 만들어서 크기를 유동적으로 만들 수 있고 직관적으로 바꾼다
-       * ex)
-       * for( x, , ){
-       *  for( y, , ){
-       *   array2 = [...array2, y];
-       *  }
-       *  array1 = [...array1, array2]
-       * }
-       
-      
-       * _winCheck()에서 winInfo에 { 당첨된 idx, {모양, 점수} } 담겨져 있는데 
-       * 필요한 정보만 담에서 보내도록 수정
-       * 
-       * 
-      */
       
       //슬롯 클래스
       class Slot {
@@ -91,7 +72,6 @@
           const winPatterns = [];
           this._winPatternList.forEach( (pattern, idx) => {
             let set = new Set();
-            let winMap = {};
             pattern.forEach( (item) => {              
               set.add( slot[item.column][item.row] );    
             })
@@ -130,15 +110,7 @@
         console.log(winPatterns);
         const payout = slot._payoutCalculator( resultSlot, winPatterns );
         console.log(payout)
-        
 
-      // const symbolProvider = new JoldoSymbolProvider();
-      // const winChecker = new LineWinChecker();
-      // const scatterCheker = new ScatterWinCheker();
-      // const payoutCalculator = new PayoutCalculatorNewVersion();
-
-      // const slot = new Slot( symbolProvider, winChecker, scatterCheker, payoutCalculator );
-      // output( slot.start(3) );
 
       
 

@@ -45,7 +45,7 @@ public class main {
 		
 		
 		/*bad example-1
-		 * 1. 명시적으로 혜택을 주기위한 메소드를 호출해야 한다( .point() )
+		 * 1. 혜택을 주기위헤 명시적으로 메소드를 호출해야 한다( .point() )
 		 * 2. 혜택이 늘어났을 때 모든 멤버들에게 그 혜택을 구현했다는 보장이 없다 (혜택을 누락하는 실수를 할수 있다)
         Member goldMember = new GoldMember();
         Member vipMember = new VipMember();
