@@ -8,23 +8,35 @@ import java.util.Map;
 import java.util.Scanner;
 
 import calculator.command.Command;
+import calculator.command.Input;
+import calculator.concreteCommand.InputCancel;
+import calculator.concreteCommand.InputConsole;
 import calculator.concreteCommand.DivisionCommand;
+import calculator.concreteCommand.InputFile;
 import calculator.concreteCommand.MultiplyCommand;
 import calculator.concreteCommand.PlusCommand;
 import calculator.concreteCommand.SubtractCommand;
 
 public class RemoteControl {
 	
-	Map<String, Command> constMap;	//RemoteControl 객체가 생성될 때 같이 연산 객체들도 같이 생성된다 
+	Map<String, Command> operatorMap;	//RemoteControl 객체가 생성될 때 같이 연산 객체들도 같이 생성된다 
+	Map<String, Input> inputMap;
 	
 	static List<String> operaters = new ArrayList<>( Arrays.asList("+", "-", "*", "/") );
 	
 	public RemoteControl() {
-		constMap = new HashMap<>();
-		constMap.put("+", new PlusCommand());
-		constMap.put("-", new SubtractCommand());
-		constMap.put("*", new MultiplyCommand());
-		constMap.put("/", new DivisionCommand());
+		//연산자
+		operatorMap = new HashMap<>();
+		operatorMap.put("+", new PlusCommand());
+		operatorMap.put("-", new SubtractCommand());
+		operatorMap.put("*", new MultiplyCommand());
+		operatorMap.put("/", new DivisionCommand());
+		//입력 방식
+		inputMap = new HashMap<>();
+		inputMap.put("1", new InputConsole());
+		inputMap.put("2", new InputFile());
+		inputMap.put("3", new InputCancel());
+		
 	}
 	
 	public void startCalculator() {
@@ -34,7 +46,7 @@ public class RemoteControl {
 				System.out.println("== 계산기 종료! ==");
 				break;
 			}
-			System.out.println(result);
+			System.out.println("= "+result);
 			System.out.println("");
 		}
 	}
@@ -48,29 +60,18 @@ public class RemoteControl {
 		System.out.print("-> ");
 		String input = scan.nextLine().replaceAll("\\p{Z}+|\\p{Z}+$", "");
 		
-		if( "1".equals(input) ) {
-			//콘솔
-			String formula = scan.nextLine().replaceAll("\\p{Z}+|\\p{Z}+$", "");
-			Map<String, String> split = split(formula);
-			result = doCompute( split.get("sign")
-							  , Integer.parseInt(split.get("x"))
-							  , Integer.parseInt(split.get("y")) 
-							  );
-			
-		} else if( "2".equals(input) ) {
-			//파일 선택
-			String formula = ReadFile.readFile();
-			Map<String, String> split = split(formula);
-			result = doCompute( split.get("sign")
-							  , Integer.parseInt(split.get("x"))
-							  , Integer.parseInt(split.get("y")) 
-							  );
-			
-		} else if("3".equals(input)) {
-			//계산기 종료
-			return "C";
+		String formula = inputMap.get(input).input();
+		Map<String, String> split = split(formula);
+		//연산자가 없는 경우
+		if( split.containsKey("error") ) {
+			return split.get("error");
 		}
-		
+		//정상적으로 계산
+		result = doCompute( split.get("sign")
+						  , Integer.parseInt(split.get("x"))
+						  , Integer.parseInt(split.get("y")) 
+						  );
+			
 		return String.valueOf( result );
 		
 	}
@@ -85,12 +86,20 @@ public class RemoteControl {
 				resultMap.put("sign", sign);
 				resultMap.put("x", x);
 				resultMap.put("y", y);
+				
+				if( "".equals(x) || "".equals(y) ) {
+					resultMap.put("error", "null number");
+				}
+				
+				return resultMap;
+			} else {
+				resultMap.put("error", "undefine operatort");
 			}
 		}
 		return resultMap;
 	}
 	
 	private int doCompute(String operater, int x, int y) {	//command 패턴을 이용한 계산 메서드
-		return constMap.get(operater).compute(x, y);
+		return operatorMap.get(operater).compute(x, y);
 	}
 }
