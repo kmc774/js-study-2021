@@ -5,10 +5,11 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		RemoteControl remoteControl = new RemoteControl();
-		
-		remoteControl.startCalculator();
-		
+		Calculator calculator = new Calculator();
+
+		while(true) {
+			calculator.startCalculator();
+		}
 		
 	}
 	

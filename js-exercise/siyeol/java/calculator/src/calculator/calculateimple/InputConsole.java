@@ -1,4 +1,4 @@
-package calculator.concreteCommand;
+package calculator.calculateimple;
 
 import java.util.Scanner;
 

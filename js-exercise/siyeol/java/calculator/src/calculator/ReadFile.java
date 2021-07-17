@@ -15,7 +15,7 @@ public class ReadFile {
 		try{
 	        //파일 객체 생성
 			//C:\Users\tlduf\windfall\weekend-study\js-exercise\siyeol\java\calculator\example_cal.txt
-	        File file = new File("C:\\Users\\tlduf\\windfall\\weekend-study\\js-exercise\\siyeol\\java\\calculator\\example_cal.txt");
+	        File file = new File("C:\\Users\\tlduf\\workspace\\weekend-study\\js-exercise\\siyeol\\java\\calculator\\example_cal.txt");
 	        //입력 스트림 생성
 	        FileReader filereader = new FileReader(file);
 	      //입력 버퍼 생성
