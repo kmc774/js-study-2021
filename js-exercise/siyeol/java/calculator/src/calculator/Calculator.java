@@ -2,37 +2,31 @@ package calculator;
 
 import java.util.*;
 
-import calculator.command.CalculateCommand;
+import calculator.inputimple.ConsoleInput;
+import calculator.inputimple.FileInput;
+import calculator.operatorimple.*;
+import calculator.command.Operator;
 import calculator.command.Input;
-import calculator.calculateimple.InputCancel;
-import calculator.calculateimple.InputConsole;
-import calculator.calculateimple.DivisionCalculateCommand;
-import calculator.calculateimple.InputFile;
-import calculator.calculateimple.MultiplyCalculateCommand;
-import calculator.calculateimple.PlusCalculateCommand;
-import calculator.calculateimple.SubtractCalculateCommand;
+import calculator.operatorimple.DivisionOperator;
 import calculator.exception.OperandException;
 import calculator.exception.OperatorException;
-import org.jetbrains.annotations.NotNull;
 
 public class Calculator {
 	
-	Map<String, CalculateCommand> operatorMap;	//RemoteControl 객체가 생성될 때 같이 연산 객체들도 같이 생성된다
+	Map<String, Operator> operatorMap;	//RemoteControl 객체가 생성될 때 같이 연산 객체들도 같이 생성된다
 	Map<String, Input> inputMap;
-	
-
 	
 	public Calculator() {
 		//연산자
 		operatorMap = new HashMap<>();
-		operatorMap.put("+", new PlusCalculateCommand());
-		operatorMap.put("-", new SubtractCalculateCommand());
-		operatorMap.put("*", new MultiplyCalculateCommand());
-		operatorMap.put("/", new DivisionCalculateCommand());
+		operatorMap.put("+", new PlusOperator());
+		operatorMap.put("-", new SubtractOperator());
+		operatorMap.put("*", new MultiplyOperator());
+		operatorMap.put("/", new DivisionOperator());
 		//입력 방식
 		inputMap = new HashMap<>();
-		inputMap.put("1", new InputConsole());
-		inputMap.put("2", new InputFile());
+		inputMap.put("1", new ConsoleInput());
+		inputMap.put("2", new FileInput());
 	}
 	
 	public void startCalculator() {
@@ -132,8 +126,8 @@ public class Calculator {
 	 * return 계산의 결과 값
 	 */
 	private int doCompute(ParsedExpression parsedExpression) {	//command 패턴을 이용한 계산 메서드
-		CalculateCommand command = operatorMap.get(parsedExpression.operator);
-		return command.compute(parsedExpression.operands[0], parsedExpression.operands[1]);
+		Operator operator = operatorMap.get(parsedExpression.operator);
+		return operator.compute(parsedExpression.operands[0], parsedExpression.operands[1]);
 	}
 
 	/**

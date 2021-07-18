@@ -1,10 +1,10 @@
-package calculator.calculateimple;
+package calculator.inputimple;
 
 import java.util.Scanner;
 
 import calculator.command.Input;
 
-public class InputConsole implements Input{
+public class ConsoleInput implements Input{
 
 	@Override
 	public String input() {

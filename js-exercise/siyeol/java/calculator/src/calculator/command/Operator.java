@@ -1,5 +1,5 @@
 package calculator.command;
 
-public interface CalculateCommand {
+public interface Operator {
 	public int compute(int x, int y);
 }

@@ -1,9 +1,9 @@
-package calculator.calculateimple;
+package calculator.inputimple;
 
 import calculator.ReadFile;
 import calculator.command.Input;
 
-public class InputFile implements Input {
+public class FileInput implements Input {
 
 	@Override
 	public String input() {

@@ -2,15 +2,15 @@ package calculator;
 
 import java.util.*;
 
-import calculator.command.CalculateCommand;
+import calculator.command.Operator;
 import calculator.command.Input;
-import calculator.calculateimple.InputCancel;
-import calculator.calculateimple.InputConsole;
-import calculator.calculateimple.DivisionCalculateCommand;
-import calculator.calculateimple.InputFile;
-import calculator.calculateimple.MultiplyCalculateCommand;
-import calculator.calculateimple.PlusCalculateCommand;
-import calculator.calculateimple.SubtractCalculateCommand;
+import calculator.inputimple.CancelInput;
+import calculator.inputimple.ConsoleInput;
+import calculator.operatorimple.DivisionOperator;
+import calculator.inputimple.FileInput;
+import calculator.operatorimple.MultiplyOperator;
+import calculator.operatorimple.PlusOperator;
+import calculator.operatorimple.SubtractOperator;
 import calculator.exception.OperandException;
 import calculator.exception.OperatorException;
 import org.jetbrains.annotations.NotNull;

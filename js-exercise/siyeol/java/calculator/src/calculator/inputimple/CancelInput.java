@@ -1,8 +1,8 @@
-package calculator.calculateimple;
+package calculator.inputimple;
 
 import calculator.command.Input;
 
-public class InputCancel implements Input{
+public class CancelInput implements Input{
 
 	@Override
 	public String input() {
