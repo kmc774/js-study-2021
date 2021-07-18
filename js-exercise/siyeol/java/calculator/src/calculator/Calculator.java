@@ -33,29 +33,39 @@ public class Calculator {
 		inputMap = new HashMap<>();
 		inputMap.put("1", new InputConsole());
 		inputMap.put("2", new InputFile());
-		inputMap.put("3", new InputCancel());
-		
 	}
 	
 	public void startCalculator() {
-		// 커맨드 입력받기
-//		waitForUserInput();
-		String command = commandInput();
+		while(true) {
+			// 커맨드 입력받기
+			String command = readUserCommand();
 
-		// 입력식 입력받기
-		//TODO: 콘솔 혹은 파일로부터 입력
-		String expression = expressionInput(command);
+			// 입력식 입력받기
+			//TODO: 콘솔 혹은 파일로부터 입력
+			String expression = readExpression(command);
 
-		// 계산하기.
-		//TODO: 위에서 입력받은 표현식으로 계산.
-		int result = calculate(expression);
-
-		//출력(기능이 추가되면 메서드로 생성)
-		System.out.println("result = " +  result);
+			// 계산하기.
+			//TODO: 위에서 입력받은 표현식으로 계산.
+			try {
+				int result = calculate(expression);
+				System.out.println("result = " + result); //출력(기능이 추가되면 메서드로 생성)
+			} catch (OperatorException | OperandException e) {
+				System.out.println(e.getMessage() + "\n");
+			}
+		}
 	}
 
-	private String commandInput(){
-		String userCommand = readUserCommand();
+	/**
+	 * 계산식 입력 방식 선택 메소드
+	 * 1 : 콘솔
+	 * 2 : 파일선택
+	 * 3 : 종료
+	 */
+	String readUserCommand(){
+		System.out.println("1: 콘솔, 2: 파일선택, q: 종료");
+		System.out.print("-> ");
+		Scanner scan = new Scanner(System.in);
+		String userCommand = scan.nextLine().replaceAll("\\p{Z}+|\\p{Z}+$", "");
 
 		if( "q".equals(userCommand) ) {
 			System.out.println("== 계산기 종료! ==");
@@ -65,44 +75,11 @@ public class Calculator {
 		return userCommand;
 	}
 
-	private String expressionInput(String commandType){
-		return readExpression(commandType);
-	}
-
-/*
-	private void waitForUserInput(){
-		while(true) {
-			String userCommand = readUserCommand();
-
-			if( "q".equals(userCommand) ) {
-				System.out.println("== 계산기 종료! ==");
-				System.exit(-1);
-			}
-
-			String expression = readExpression(userCommand);
-
-			int result = calculate(expression);
-			System.out.println("result = " +  result);
-
-		}
-	}
-*/
-
 	/**
-	 * 1 : 콘솔
-	 * 2 : 파일선택
-	 * 3 : 종료
+	 * 계산식 입력 메소드
+	 * param 사용자에게 입력 받은 계산식 입력 방법 ("1", "2")
+	 * return 선택한 입력 방법을 통해 입력 받은 계산식
 	 */
-	String readUserCommand(){
-
-		System.out.println("1: 콘솔, 2: 파일선택, q: 종료");
-		System.out.print("-> ");
-		Scanner scan = new Scanner(System.in);
-		String userCommand = scan.nextLine().replaceAll("\\p{Z}+|\\p{Z}+$", "");
-
-		return userCommand;
-	}
-
 	private String readExpression(String inputSourceType){
 		//1 이라면, 콘솔에서 입력
 		//2 라면, 파일에서 입력.
@@ -110,17 +87,22 @@ public class Calculator {
 		return formula;
 	}
 
-	private int calculate(String expression){
-		try {
+	/**
+	 * 계산식을 받아 다른 메소드들을 사용해 결과값을 반환하는 메소드
+	 * param 문자열 형태인 계산식
+	 * return 정수형 형태인 계산식의 결과 값
+	 */
+	private int calculate(String expression) throws OperatorException, OperandException{
 			ParsedExpression parsedExpression = parse(expression);
 			return doCompute( parsedExpression );
-		}catch (OperatorException | OperandException e){
-			throw new RuntimeException(e);
-		}
 	}
 
 
-
+	/**
+	 * 계산식을 입력받아 피연산자, 연산자로 나누는 메서드
+	 * param 문자열 형태의 계산식
+	 * return 피연산자와 연산자를 나눈 후 ParsedExpression 내부 클래스에 담아서 반환
+	 */
 	private ParsedExpression parse(String formula) {	//연산자와 피연사자를 분리해 Map으로 반환
 
 		Iterator<String> it =  operatorMap.keySet().iterator();
@@ -128,31 +110,35 @@ public class Calculator {
 			String operater = it.next();
 			if (formula.indexOf(operater) > -1) {    //나중에 에러로 처리 (연산자가 있는지 확인)
 				String operator = formula.substring(formula.indexOf(operater), formula.indexOf(operater) + 1);
-				int operand1 = Integer.parseInt(formula.substring(0, formula.indexOf(operater)));
-				int operand2 = Integer.parseInt(formula.substring(formula.indexOf(operater) + 1));
+				try {
+					int operand1 = Integer.parseInt( formula.substring(0, formula.indexOf(operater)) );
+					int operand2 = Integer.parseInt( formula.substring(formula.indexOf(operater) + 1) );
 
-				ParsedExpression parsedExpression = new ParsedExpression(operator, operand1, operand2);
-				return parsedExpression;
+					ParsedExpression parsedExpression = new ParsedExpression( operator, operand1, operand2 );
+					return parsedExpression;
+				}catch( NumberFormatException e ){
+					throw new OperandException("계산될 수들을 정확히 입력해 주세요.");
+				}
 			}
 		}
 
-
 		throw new OperatorException("연산자를 입력하지 않았거나 정의된 연산자가 아닙니다.");
 
-//		if( resultMap.get("x").equals("") || resultMap.get("y").equals("") ){
-//			throw new OperandException("계산될 수들을 정확히 입력해 주세요.");
-//		}
-//		if( resultMap.get("sign").equals("") ) {
-//			throw new OperatorException("연산자를 입력하지 않았거나 정의된 연산자가 아닙니다.");
-//		}
-
 	}
-	
+
+	/**
+	 * 피연산자와 연산자로 나눠진 식을 입력받아 계산값을 반환하는 메소드
+	 * param 피연산자와 연산자가 담긴 ParsedExpression 내부 클래스
+	 * return 계산의 결과 값
+	 */
 	private int doCompute(ParsedExpression parsedExpression) {	//command 패턴을 이용한 계산 메서드
 		CalculateCommand command = operatorMap.get(parsedExpression.operator);
 		return command.compute(parsedExpression.operands[0], parsedExpression.operands[1]);
 	}
 
+	/**
+	 * 피연산자와 연산자가 담길 내부 클래스
+	 */
 	class ParsedExpression {
 		String operator;
 		int[] operands;

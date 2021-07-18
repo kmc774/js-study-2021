@@ -7,10 +7,8 @@ public class MainClass {
 
 		Calculator calculator = new Calculator();
 
-		while(true) {
-			calculator.startCalculator();
-		}
-		
+		calculator.startCalculator();
+
 	}
 	
 
