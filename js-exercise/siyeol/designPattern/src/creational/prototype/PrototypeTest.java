@@ -8,7 +8,7 @@ import java.util.List;
  * 생성 패턴을 이용하면 무엇이 생성되고, 누가 이것을 생성하며, 이것이 어떻게 생성되는지, 언제 생성할 것인지 결정하는 데 유연성을 확보할 수 있게 됩니다.
  
  * 객체를 복사해서 새로운 객체를 생성하는 패턴
- * 
+ * https://lee1535.tistory.com/76
 */
 
 public class PrototypeTest {

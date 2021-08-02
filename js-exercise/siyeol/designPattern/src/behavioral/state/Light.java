@@ -23,7 +23,7 @@ public class Light {
 	}
 	
 /*	
- * ���� ������ �ƴ� ���ǹ����� ó�� ���� ���
+ * 상태 패턴을 적용하지 않은 경우 아래처럼 조건문을 사용해 객체의 모든 상태를 검사해줘야 한다.
 	
 	public void onButton() {
 		if( "on".equals(state) ) {

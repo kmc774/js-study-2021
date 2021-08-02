@@ -26,7 +26,6 @@ public class Client {
 		light.onButton();	//
 		light.offButton();	//on -> off '전원 off' 
 		
-		
 	}
 	
 	
