@@ -3,9 +3,14 @@ package com.mi.board.controller;
 
 import com.mi.board.model.dto.Board;
 import com.mi.board.model.service.BoardService;
+import com.mi.util.paging.Criteria;
+import com.mi.util.paging.Paging;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -22,27 +27,34 @@ public class boardController {
 
     /**
      * 리스트 불러오기 + 페이징
-     * @param page
+     * @param criteria
      * @param model
      * @return
      */
     @GetMapping("/list")
-    public String listBoard (@RequestParam(defaultValue= "1") int page , Model model) {
-        model.addAllAttributes(boardService.selectBoardList(page));
+    public String listBoard (  @ModelAttribute Criteria criteria
+                              , Model model) {
+
+        // 페이징 객체와 게시판 객체 model에 저장
+        model.addAllAttributes(boardService.selectBoardList(criteria));
         return "/board/board_list";
     }
 
 
     /**
-     * 게시글 내용 보기
+     * 게시글 게시글 보기
+     * 주제별 게시글 보기
      * @param bdIdx
      * @param model
      * @return
      */
     @GetMapping("/view")
-    public String detailBoard (int bdIdx, Model model) {
+    public String detailBoard (@ModelAttribute Criteria criteria
+                                , int bdIdx
+                                , Model model) {
         Board board = boardService.selectBoardDetail(bdIdx);
         model.addAttribute("board", board);
+        model.addAttribute("paging", criteria);
         return "/board/board_detail";
     }
 
@@ -76,27 +88,61 @@ public class boardController {
         return result == false ? "fail" : "success";
     }
 
-
-
-
-
-
-
     /**
-     * 주제별 검색하기
-     * @param type
-     * @param keyword
-     * @param model
+     * 게시글 수정페이지 이동
+     * @param bdIdx
      * @return
      */
-    @GetMapping("/search")
-    public String searchBoard ( String type
-                              , String keyword
-                              , Model model) {
-
-        model.addAllAttributes(boardService.selectSearchList(type , keyword));
-
-        return "/board/board_list";
+    @GetMapping("/goUpdate")
+    public String goModifyBoard (int bdIdx ,
+                                 String page,
+                                 String type,
+                                 String keyword,
+                                 @RequestParam(defaultValue= "10") int cntPerPage,
+                                 @RequestParam(defaultValue = "desc") String filter,
+                                 Model model){
+        Board board = boardService.selectBoardDetail(bdIdx);
+        if( page != null  && type != null && keyword != null){
+            Map<String, Object> infoMap = new HashMap<>();
+            infoMap.put("page", page);
+            infoMap.put("type", type);
+            infoMap.put("keyword", keyword);
+            infoMap.put("cntPerPage", cntPerPage);
+            infoMap.put("filter" , filter);
+            model.addAttribute("infoMap", infoMap);
+        }
+        model.addAttribute("board", board);
+        model.addAttribute("cntPerPage", cntPerPage);
+        model.addAttribute("filter" , filter);
+        return "/board/board_modify";
     }
+
+    /**
+     * 게시글 수정하기
+     * @param board
+     * @return
+     */
+    @PutMapping("/update")
+    public @ResponseBody String updateBoard(@RequestBody Board board){
+        String title   = board.getTitle();
+        String content = board.getContent();
+        if (title == null || title.isEmpty()){     return "title"; }
+        if (content == null || content.isEmpty()){ return "content";}
+
+        int result = boardService.updateBoard(board);
+        return  result > 0 ? "success" : "fail";
+    }
+
+
+    @DeleteMapping("/delete")
+    public @ResponseBody String deleteBoard(@RequestBody int bdIdx){
+        int result = boardService.deleteBoard(bdIdx);
+        return result > 0 ? "success" : "fail";
+    }
+
+
+
+
+
 
 }

@@ -2,6 +2,8 @@ package com.mi.board.model.service;
 
 import com.mi.board.model.dto.Board;
 import com.mi.board.model.repository.BoardRepository;
+import com.mi.util.paging.Criteria;
+import com.mi.util.paging.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +13,17 @@ import java.util.Map;
 
 public interface BoardService {
 
+    int selectBoardCnt(String type, String keyword);
 
-        public boolean insertBoard(Board board);
+    Map<String, Object> selectBoardList(Criteria criteria);
 
-        public int selectBoardCnt();
+    boolean insertBoard(Board board);
 
-        public Map<String, Object> selectBoardList(int currentPage);
+    Board selectBoardDetail(int seq);
 
-        public Board selectBoardDetail(int seq);
+    int updateBoard(Board board);
 
-        public Map<String, Object> selectSearchList( String type , String keyword );
-
+    int deleteBoard(int bdIdx);
 
 
 }

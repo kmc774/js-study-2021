@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper
 public interface BoardRepository {
 
-     int insertBoard(Board board);
-     int selectBoardCnt();
-     int selectSearchBoardCnt(String type, String keyword);
+     int selectBoardCnt(String type , String keyword);
      List<Board> selectBoardList(Paging page);
+     int insertBoard(Board board);
      Board selectBoardDetail(int bdIdx);
-     List<Board> selectSearchList(String type, String keyword);
+     int updateBoard(Board board);
+     int deleteBoard(int bdIdx);
 
 }

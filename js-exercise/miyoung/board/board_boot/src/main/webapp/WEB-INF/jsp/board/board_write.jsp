@@ -8,36 +8,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>게시판 작성</title>
+    <title>게시글 작성</title>
 </head>
 <link rel="stylesheet" href="../../../../resources/css/style.css"/>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 <body>
 
-    <section class="write_section">
-        <h2 id="board" >게시글 쓰기</h2>
-        <div class="board_form">
-            <div>
-                <span>제목</span><span class="valid_title" style="display: none">제목을 입력하세요.</span>
-                <input type="text" class="w_title" name="title" placeholder="제목을 입력하세요.">
-                <span>내용</span><span class="valid_content" style="display: none">내용을 입력하세요.</span>
-                <textarea class ="w_content " name="content" placeholder="내용을 입력하세요."></textarea></br>
-                <span>작성자</span>
-                <input type="text" class="w_userId" name="userId" placeholder="작성자를 입력하세요."><span class="valid_userId" style="display: none">작성자를 입력하세요.</span>
-               <div class="btn_section">
-                   <button class="search_btn" onclick="addBoard()">등록하기</button>
-                   <button class="search_btn" onclick="goList()">목록가기</button>
-               </div>
+<section class="write_section">
+    <h1 id="board" >게시글 쓰기</h1>
+    <div class="board_form">
+        <div>
+            <span>제목</span><span class="valid_title" style="display: none">제목을 입력하세요.</span>
+            <input type="text" class="w_title" name="title" placeholder="제목을 입력하세요.">
+            <span>내용</span><span class="valid_content" style="display: none">내용을 입력하세요.</span>
+            <textarea class ="w_content " name="content" placeholder="내용을 입력하세요."></textarea>
+            <span>작성자</span>
+            <input type="text" class="w_userId" name="userId" placeholder="작성자를 입력하세요."><span class="valid_userId" style="display: none">작성자를 입력하세요.</span>
+            <div class="btn_section">
+                <button class="search_btn" onclick="addBoard()">등록하기</button></br>
+                <button class="search_btn" onclick="goList()">목록가기</button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     function addBoard() {
-
         if ($('.w_title').val() == '') {
             $('.valid_title').css("display", "inline");
             return;
@@ -50,38 +48,32 @@
             $('.valid_userId').css("display", "inline");
             return;
         }
-
         if (confirm('게시글을 등록하시겠습니까 ?')) {
             var title = $('.w_title').val();
             var content = $('.w_content').val();
             var userId = $('.w_userId').val();
-
-            const url = '/board/writeBoard';
+            const url = '/board/write';
             const paramObj = { 'title' : title, 'content' : content, 'userId' : userId};
 
-            fetch("write", {
+            fetch( url , {
                 method:"POST",
                 headers:{"content-type" : "application/json"},
                 body:JSON.stringify(paramObj) //JSON으로 넘기기
-            }).then( response => {
-                if (response.ok) {
-                    return response.text();
-                }
-            }).then( text => {
-
-                if( text == 'success' ){
+            }).then( async response => { // fetch는 프로미스를 반환한다.
+                var text = await response.text(); // 프로미스의 result값을 텍스트로 변환
+                if (text == 'success') {
                     alert('게시글이 등록되었습니다.');
                     location.href = '/board/list';
-                } else if(text == 'ttle'){
+                } else if (text == 'ttle') {
                     alert('제목을 입력해주세요.');
                     return;
-                } else if(text == 'content'){
+                } else if (text == 'content') {
                     alert('내용을 입력해주세요.');
                     return;
-                } else if(text == 'userId'){
+                } else if (text == 'userId') {
                     alert('작성자를 입력해주세요.');
                     return;
-                } else if( text == 'fail'){
+                } else if (text == 'fail') {
                     alert('게시글 등록에 실패했습니다.');
                     return;
                 }
@@ -89,9 +81,7 @@
                 alert('시스템 오류가 발생했습니다.');
             });
         } return;
-
     }
-
     function goList(){
         location.href = '/board/list';
     }
