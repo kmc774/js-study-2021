@@ -13,8 +13,8 @@ public interface BoardRepository {
      int selectBoardCnt(String type , String keyword);
      List<Board> selectBoardList(Paging page);
      int insertBoard(Board board);
-     Board selectBoardDetail(int bdIdx);
+     Board selectBoardDetail(String bdIdx);
      int updateBoard(Board board);
-     int deleteBoard(int bdIdx);
+     int deleteBoard(String bdIdx);
 
 }

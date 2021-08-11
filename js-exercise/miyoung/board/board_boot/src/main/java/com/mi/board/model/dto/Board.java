@@ -8,7 +8,7 @@ import java.sql.Date;
 @Data
 public class Board {
 
-    public int bdIdx;
+    public String bdIdx;
 
     public String title;
 

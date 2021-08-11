@@ -32,7 +32,10 @@
 
         <div class="btn_section">
             <button type="button" class="search_btn" onclick="modifyBoard()">수정하기</button>
-            <button type="button" class="search_btn" onclick="location.href='/board/view?bdIdx=${board.bdIdx}'">게시글보기</button>
+            <button type="button" class="search_btn"
+                    onclick="location.href='/board/view?bdIdx=${board.bdIdx}'
+                                          +'&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}'
+                                          +'&keyword=${paging.keyword}&filter=${paging.filter}'">게시글보기</button>
         </div>
     </div>
 </section>
@@ -57,12 +60,9 @@
                 var text = await response.text(); // 프로미스의 result값을 텍스트로 변환
                 if (text == 'success') {
                     alert('게시글이 수정되었습니다.');
-                    if(${infoMap != null}){
-                        location.href = '/board/view?bdIdx=${board.bdIdx}&page=${infoMap.page}&cntPerPage=${infoMap.cntPerPage}'
-                                                 + '&type=${infoMap.type}&keyword=${infoMap.keyword}&filter=${infoMap.filter}';
-                    } else {
-                        location.href = '/board/view?bdIdx=${board.bdIdx}&cntPerPage=${cntPerPage}&filter=${filter}';
-                    }
+                     location.href = '/board/view?bdIdx=${board.bdIdx}&page=${paging.page}&cntPerPage=${paging.cntPerPage}'
+                                   + '&type=${paging.type}&keyword=${paging.keyword}&filter=${paging.filter}';
+
                 } else if (text == 'ttle') {
                     alert('제목을 입력해주세요.');
                 } else if (text == 'content') {

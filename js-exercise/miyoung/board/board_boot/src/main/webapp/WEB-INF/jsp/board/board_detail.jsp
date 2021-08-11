@@ -59,20 +59,20 @@
 <script>
     function deleteBd(){
         if(confirm('게시글을 정말 삭제하시겠습니까 ?')){
-            const bdIdx = ${board.bdIdx};
+            const bdIdx = '${board.bdIdx}';
             const url ='/board/delete';
             $.ajax({
                 type:"DELETE",
                 url:url,
-                contentType: "application/json; charset=UTF-8",
-                data: JSON.stringify(bdIdx),
+                contentType:"application/json; charset=UTF-8",
+                data:bdIdx,
                 success : function(response){
                     if(response == 'success'){
                         alert('게시글이 삭제되었습니다.');
                         location.href='/board/list?page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}&keyword=${paging.keyword}&filter=${paging.filter}';
                     } else if (response == 'fail'){
                         alert('게시글 삭제에 실패했습니다.');
-                        location.href='/board/view?bdIdx=${paging.bdIdx}&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}&keyword=${paging.keyword}&filter=${paging.filter}';
+                        location.href='/board/view?bdIdx=${board.bdIdx}&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}&keyword=${paging.keyword}&filter=${paging.filter}';
                     }
                 },
                 error:function(request, status, error){

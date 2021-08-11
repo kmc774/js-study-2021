@@ -28,11 +28,11 @@
             <c:forEach items="${boardList}" var="board">
                 <tr>
                     <td id="resTitle" >${board.bdIdx}</td>
-                    <td class="title" id="title"
-                        onclick="location.href='/board/view?bdIdx=${board.bdIdx}'
-                                +'&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}'
-                                +'&keyword=${paging.keyword}&filter=${paging.filter}'">${board.title}</td>
-                    <td class="user" id="userId">${board.userId}</td>
+                        <td class="title" id="title"
+                            onclick="location.href='/board/view?bdIdx=${board.bdIdx}'
+                                                  +'&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}'
+                                                  +'&keyword=${paging.keyword}&filter=${paging.filter}'">${board.title}</td>
+                        <td class="user" id="userId">${board.userId}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -79,6 +79,8 @@
         </div>
         <!-- [e] section pagination -->
     </c:if>
+
+
     <c:if test="${ boardList.size() == 0 || boardList.size() == null }">
         <h2> 게시판 리스트가 존재하지 않습니다.</h2>
         <button class="search_btn" onclick="location.href='/board/list'" style="margin:auto">목록보기</button>
@@ -91,7 +93,6 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-
     <%-- option 버튼 미리 선택 --%>
     $(document).ready(function(){
         $('#filter').val('${paging.filter}').prop("selected",true);
@@ -103,9 +104,8 @@
     function checkFilterEvent(){
         var filter = $('#filter').val();
         var checkNum =  $('#checkNum').val();
-
         location.href="/board/list?cntPerPage="+checkNum+"&filter="+filter
-                                 + '&page=${paging.page}&type=${paging.type}&keyword=${paging.keyword}';
+                    + '&page=${paging.page}&type=${paging.type}&keyword=${paging.keyword}';
     }
 
 
@@ -117,6 +117,7 @@
         }
         $('.search_section').submit();
     })
+
 
 
 

@@ -19,11 +19,11 @@ public interface BoardService {
 
     boolean insertBoard(Board board);
 
-    Board selectBoardDetail(int seq);
+    Board selectBoardDetail(String bdIdx);
 
     int updateBoard(Board board);
 
-    int deleteBoard(int bdIdx);
+    int deleteBoard(String bdIdx);
 
 
 }

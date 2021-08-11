@@ -43,14 +43,13 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public boolean insertBoard(Board board) {
-        boolean result = false;
         int num = boardRepository.insertBoard(board);
-        result = num > 0 ? true : false;
+        boolean result = num > 0 ? true : false;
         return result;
     }
 
     @Override
-    public Board selectBoardDetail(int bdIdx) {
+    public Board selectBoardDetail(String bdIdx) {
         return boardRepository.selectBoardDetail(bdIdx);
     }
 
@@ -60,10 +59,9 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.updateBoard(board);
     }
 
+
     @Override
-    public int deleteBoard(int bdIdx) {
-        return boardRepository.deleteBoard(bdIdx);
-    }
+    public int deleteBoard(String bdIdx) { return boardRepository.deleteBoard(bdIdx); }
 
 
 }

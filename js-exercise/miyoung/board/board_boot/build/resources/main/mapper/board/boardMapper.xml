@@ -70,7 +70,7 @@
                    )
     </insert>
 
-    <select id="selectBoardDetail" parameterType="Integer" resultType="Board">
+    <select id="selectBoardDetail" parameterType="String" resultType="Board">
         SELECT BD_IDX , TITLE, CONTENT, USER_ID, REG_DT, CRTN_DT
         FROM BOARD
         WHERE BD_IDX = #{bdIdx};
@@ -87,7 +87,7 @@
 
 
 
-    <delete id="deleteBoard" parameterType="Integer">
+    <delete id="deleteBoard" parameterType="String">
         DELETE
           FROM BOARD
          WHERE BD_IDX = #{bdIdx};
