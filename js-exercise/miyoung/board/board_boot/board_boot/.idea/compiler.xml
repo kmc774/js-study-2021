@@ -10,13 +10,6 @@
         <module name="board_boot.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
-      <module name="board_boot.board_boot" target="11" />
-      <module name="board_boot.board_boot.main" target="11" />
-      <module name="board_boot.board_boot.test" target="11" />
-      <module name="board_boot2" target="11" />
-      <module name="board_boot2.main" target="11" />
-      <module name="board_boot2.test" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

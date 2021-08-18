@@ -1,0 +1,102 @@
+@Component
+: 지정된 패키지 내에서 @Component 어노테이션이 등록된 클래스의 경우 자동으로 클래스의 인스턴스가 bean으로 등록된다.
+
+
+
+@Autowired
+: ApplicationContext에 등록된 Bean 중에서 @Autowired 어노테이션이 적용된 변수와 같은 타입의 bean이 있는지 찾아서 의존성을 주입하게 된다.
+  예를들어, 우리가 Job이라는 클래스에 @Componenet 어노테이션을 달아 해당 클래스의 인스턴스를 applicationContext에 넣어두게 되면 User라는 클래스 내에서,
+  @Autowired
+  private Job job;
+  이런식으로 Job타입의 bean을 가져올 수 있게 되는 것이다.
+  직접 빈을 등록해야 했을 때는 applicationContext.에서 해당 클래스에서 불러오고 싶은 해당 bean의 id 값을 
+  <property name = "code" ref ="codeBean"/> 이렇게 등록해야하는 번거로움이 있었다.
+  그리고 만약 applicationContext에 해당되는 bean이 없다면 예외를 발생시키게 된다.
+
+  하지만 Autowired사용시 주의할 점이 있는데 Job이라는 추상클래스를 상속받아서 생성된 인스턴스가 두개이상 ApplicationContext에 등록된 경우
+  (Job을 '상속'받았기 때문에 Job타입의 인스턴스가 두개 이상이 되는 것)사용자가 어떤 Job 타입의 인스턴스를 필드로 가져오고 싶은지 모르기 때문에
+  @Qualifier 어노테이션을 사용해서 원하는 bean을 알려줘야 한다.
+
+
+
+@Qualifier : Autowired를 적용한 변수 타입의 bean이 두 개 이상 ApplocaionContext에 등록된 경우 어떤 bean을 사용할 지 bean의 id로 지정하는 어노테이션,
+	    @Component어노테이션에 value값을 지정하지 않은 클래스인 경우엔 해당 클래스명으로 인스턴스를 가져올 수 있고 value값을 지정한
+	    경우엔 해당 value 값으로 인스턴스를 매핑할 수 있다.
+
+
+
+******************** Config ********************
+스프링부트로 넘어가게 되면 xml파일이 아니라 bean을 설정할 수 있는 클래스를 만들 수가 있다.
+@Configuration: 해당 클래스를 bean 설정용 클래스로 사용하겠다는 의미. @Bean 어노테이션이 사용가능하다.
+
+
+
+@Bean : 인스턴스를 반환하는 메서드 위에 작성한다. 해당 메소드에 반환되는 인스턴스를 자동으로 applicationContext에 등록해준다.
+	@Component는 해당 클래스의 인스턴스를 applicationContext에 등록하려면 해당 클래스위에 어노테이션을 사용해주어야 하지만
+ 	@Bean의 경우엔 클래스의 인스턴스를 반환하는 메소드의 위에 사용해주면 반환되는 인스턴스를 applicationContext로 등록해주게 된다.
+	이렇게 된 경우엔 우리가 JSon , JavaMailSender 등등 다양한 libraries의 인스턴스를 등록해줄 수 있다.
+
+
+
+******************* AOP ********************
+@Aspect : 해당 클래스를 Advisor(Advice[공통관심사] + Pointcuts[Advice가 적용될 joinpoints])로 만들어주는 annotation
+  -> 해당되는 메소드는 마커가 붙게된다 : AOP가 관리하는 메소드라는 뜻
+
+@Before : target 클래스의 메소드가 실행되기 전 호출될 메소드를 지정
+@After : target 클래스의 메소드가 실행되고나서 호출될 메소드를 지정
+
+<@After 어노테이션을 조금 더 디테일하게 사용할 수 있도록 도와주는 어노테이션>
+@AfterThrowing : 예외가 발생한 상황에서 동작하는데 이때, 발생한 Exception을 가져올 수 있다.(joinpoints , exception)
+@AfterReturning : 리턴값이 있는 메소드가 호출될 때는 @AfterReturning 이 붙은 메소드가 호출된다.(joinpoints , return타입)
+	
+
+
+******************* WEB ********************
+
+@RequestMapping : 요청할 url을 지정하고 어떤 종류의 Http 메소드를 받을지(GET/POST)지정,
+                  하지만 아무것도 지정 안하면 모든 요청을 다 받게된다.
+
+@Controller : 해당 클래스를 Controller로 쓰겠다고 선언 하는 어노테이션, 자동으로 빈에 등록되고 스프링에 의해 관리된다.
+	      해당 클래스를 bean으로 등록
+	      Controller와 관련된 annotation을 해당 클래스 내에서 사용할 수 있게 해준다.
+
+@RequestMapping : 메서드와 메핑시킬 url 및 http method를 지정(예전에는 많이 사용했지만 요즘은 GetMapping/PostMapping 많이 씀)
+
+@GetMapping : 메서드와 매핑시킬 url 지정, get 방식 요청만 매핑된다.
+
+@PostMapping : 메서드와 매핑시킬 url 지정, post 방식 요청만 매핑된다.
+
+@RequestParam :  @RequestParam 어노테이션을 사용해서 파라미터를 전달 받을 수 있다.
+		@RequestParam 어노테이션을 사용해서 파라미터를 바인드 해주는 친구는
+		FormHttpMessageConverter가 동작
+		FormHttpMessageConverter: application/x-www-form-urlencoded 컨텐츠 타입의
+		http 메시지를 파싱해서 객체에 바인드 해주는 역할을 수행하는 인터페이스
+
+@RequestBody : MappingJacksonHttpMessageConverter가 동작 application/json 컨텐츠 타입의 메시지를
+	       파싱해서 객체에 바인드 해주는 역할을 수행
+
+@ModelAttribute : 요청 파라미터를 VO에 바인드, model객체의 attribute에 VO를 담는다.
+
+@ResponseBody : 어노테이션이 작성된 메서드가 반환되는 값을 응답 body에 넣어 응답한다. 
+
+@RequestHeader : 요청 헤더를 컨트롤러 헤더에 바인드, 
+
+@SessionAttribute : 원하는 Session의 attribute를 컨트롤러 메서드 파라미터에 바인드
+
+@PathVariable : url 템플릿에 담긴 파라미터값을 컨트롤러 메서드 파라미터에 바인드
+
+@CookieValue : Cookie값을 컨트롤러 메서드 매개변수에 바인드
+
+
+
+
+******************** MyBatis ********************
+
+@Mapper : 해당 인터페이스(Repository)를 Mapper로 등록할 수 있다.
+
+
+
+
+
+
+

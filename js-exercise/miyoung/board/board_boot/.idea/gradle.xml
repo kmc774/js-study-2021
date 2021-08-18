@@ -5,10 +5,19 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/board_boot" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/board_boot" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/board_vue" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/board_vue" />
           </set>
         </option>
       </GradleProjectSettings>
