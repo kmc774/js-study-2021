@@ -80,8 +80,7 @@ public class Calculator {
 	private String readExpression(String inputSourceType){
 		//1 이라면, 콘솔에서 입력
 		//2 라면, 파일에서 입력.
-		String formula = inputMap.get(inputSourceType).input();
-		return formula;
+		return inputMap.get(inputSourceType).input();
 	}
 
 	/**
@@ -90,8 +89,8 @@ public class Calculator {
 	 * return 정수형 형태인 계산식의 결과 값
 	 */
 	private int calculate(String expression) throws OperatorException, OperandException{
-			ParsedExpression parsedExpression = parse(expression);
-			return doCompute( parsedExpression );
+		ParsedExpression parsedExpression = parse(expression);
+		return doCompute( parsedExpression );
 	}
 
 
@@ -100,16 +99,16 @@ public class Calculator {
 	 * param 문자열 형태의 계산식
 	 * return 피연산자와 연산자를 나눈 후 ParsedExpression 내부 클래스에 담아서 반환
 	 */
-	private ParsedExpression parse(String formula) {	//연산자와 피연사자를 분리해 Map으로 반환
-
+	private ParsedExpression parse(String expression) {	//연산자와 피연사자를 분리해 Map으로 반환
 		Iterator<String> it =  operatorMap.keySet().iterator();
 		while(it.hasNext()){
+
 			String operater = it.next();
-			if (formula.indexOf(operater) > -1) {    //나중에 에러로 처리 (연산자가 있는지 확인)
-				String operator = formula.substring(formula.indexOf(operater), formula.indexOf(operater) + 1);
+			if (expression.indexOf(operater) > -1) {    //나중에 에러로 처리 (연산자가 있는지 확인)
+				String operator = expression.substring(expression.indexOf(operater), expression.indexOf(operater) + 1);
 				try {
-					int operand1 = Integer.parseInt( formula.substring(0, formula.indexOf(operater)) );
-					int operand2 = Integer.parseInt( formula.substring(formula.indexOf(operater) + 1) );
+					int operand1 = Integer.parseInt( expression.substring(0, expression.indexOf(operater)) );
+					int operand2 = Integer.parseInt( expression.substring(expression.indexOf(operater) + 1) );
 
 					ParsedExpression parsedExpression = new ParsedExpression( operator, operand1, operand2 );
 					return parsedExpression;
@@ -117,6 +116,7 @@ public class Calculator {
 					throw new OperandException("계산될 수들을 정확히 입력해 주세요.");
 				}
 			}
+
 		}
 
 		throw new OperatorException("연산자를 입력하지 않았거나 정의된 연산자가 아닙니다.");
@@ -143,7 +143,6 @@ public class Calculator {
 		public ParsedExpression(String operator, int operand1,int operand2 ){
 			this.operator = operator;
 			this.operands = new int[]{operand1, operand2};
-
 		}
 	}
 }
