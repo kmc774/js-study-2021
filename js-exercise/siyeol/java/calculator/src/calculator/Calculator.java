@@ -1,15 +1,18 @@
 package calculator;
 
-import java.util.*;
-
-import calculator.inputimple.ConsoleInput;
-import calculator.inputimple.FileInput;
-import calculator.operatorimple.*;
-import calculator.command.Operator;
 import calculator.command.Input;
-import calculator.operatorimple.DivisionOperator;
+import calculator.command.Operator;
 import calculator.exception.OperandException;
 import calculator.exception.OperatorException;
+import calculator.operatorimple.DivisionOperator;
+import calculator.operatorimple.MultiplyOperator;
+import calculator.operatorimple.PlusOperator;
+import calculator.operatorimple.SubtractOperator;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Calculator {
 	
