@@ -1,0 +1,14 @@
+Mysql
+
+1. 계정로그인
+- server 켜고 $cd /usr/local/mysql/bin
+- bin$ ./mysql -u root -p (pw: 1*al2238520)
+or
+- bin$ ./mysql -u miyoung -p (pw: 1*al2238520)
+
+
+
+phpMyAdmin
+
+- 서버 켤 때 terminal 에서 $ sudo apachectl start
+- 서버 끌 때 terminal 에서 $ sudo apachectl stop

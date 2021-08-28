@@ -1,0 +1,123 @@
+#section {
+    height : 900px;
+}
+
+#userId{
+    width: 200px;
+    text-align: center;
+}
+
+#title {
+    width: 400px;
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+#bdIdx , #regDt , #crtnDt {
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+
+
+
+.board_table{
+    margin : auto;
+    margin-bottom: 30px;
+}
+.board_table *{
+    border: 1px solid;
+    font-size: 1vw;
+    cursor: pointer;
+
+}
+
+.board_table th{
+    background-color: rosybrown;
+    color: white;
+}
+
+td {
+    text-align : center;
+    height: 10px
+}
+
+tr {
+    height: 5vh;
+}
+
+
+button{
+    cursor: pointer;
+}
+
+.paging{
+    width: 30vw;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+
+.search {
+    border: none;
+    border-bottom: 1px solid;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 20vw;
+    height: 2.5vw;
+}
+.search_btn{
+    background-color: rosybrown;
+    color : white;
+    font-size: x-small;
+    font-weight : bold;
+    width: 5vw;
+    height: 2.5vw;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.search_type {
+    font-size: small;
+    font-weight: bold;
+    width: 7vw;
+    height: 2.5vw;
+    margin-top: 10px;
+}
+
+.check_box_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
+}
+.filter_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dtc_section {
+    display: flex;
+    justify-content: center;
+}
+
+.filter{
+    margin-bottom : 30px;
+}
+
+#content{
+    height: 30vh;
+}
+
+.card.bg-light{
+    margin: auto;
+    width: 50%;
+    margin-top: 30px;
+}

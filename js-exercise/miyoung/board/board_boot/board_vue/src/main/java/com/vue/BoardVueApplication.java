@@ -1,4 +1,4 @@
-package com.vue.board;
+package com.vue;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vue.board.model.repository.BoardRepository">
+
+    <select id="selectBoardCnt" parameterType="Object" resultType="Integer">
+        /* selectBoardCnt */
+        SELECT COUNT(*)
+        FROM BOARD
+        <choose>
+            <when test="type == 'all'">
+                WHERE TITLE   LIKE CONCAT('%', #{keyword}, '%')
+                   OR CONTENT LIKE CONCAT('%', #{keyword}, '%')
+                   OR USER_ID LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="type == 'title'">
+                WHERE TITLE   LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="type == 'content'">
+                WHERE CONTENT LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="type == 'userId'">
+                WHERE USER_ID LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+        </choose>
+    </select>
+
+
+    <select id="selectBoardList" parameterType = "Object" resultType="Board">
+        /* selectBoardList */
+        SELECT    BD_IDX
+                , TITLE
+                , CONTENT
+                , USER_ID
+                , REG_DT
+                , CRTN_DT
+         FROM BOARD
+        <choose>
+            <when test="type == 'all'">
+                WHERE TITLE   LIKE CONCAT('%', #{keyword}, '%')
+                   OR CONTENT LIKE CONCAT('%', #{keyword}, '%')
+                   OR USER_ID LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="type == 'title'">
+                WHERE TITLE   LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="type == 'content'">
+                WHERE CONTENT LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+            <when test="type == 'userId'">
+                WHERE USER_ID LIKE CONCAT('%', #{keyword}, '%')
+            </when>
+        </choose>
+        <choose>
+            <when test="orderBy != 'null'">
+                <if test="orderDir == 'desc'">
+                    ORDER BY BD_IDX DESC
+                </if>
+                <if test="orderDir == 'asc'">
+                    ORDER BY BD_IDX ASC
+                </if>
+            </when>
+            <when test="orderBy == 'title'">
+                <if test="orderDir == 'desc'">
+                    ORDER BY TITLE DESC
+                </if>
+                <if test="orderDir == 'asc'">
+                    ORDER BY TITLE ASC
+                </if>
+            </when>
+            <when test="orderBy == 'content'">
+                <if test="orderDir == 'desc'">
+                    ORDER BY CONTENT DESC
+                </if>
+                <if test="orderDir == 'asc'">
+                    ORDER BY CONTENT ASC
+                </if>
+            </when>
+            <when test="orderBy == 'userId'">
+                <if test="orderDir == 'desc'">
+                    ORDER BY USER_ID DESC
+                </if>
+                <if test="orderDir == 'asc'">
+                    ORDER BY USER_ID ASC
+                </if>
+            </when>
+            <when test="orderBy == 'regDt'">
+                <if test="orderDir == 'desc'">
+                    ORDER BY REG_DT DESC
+                </if>
+                <if test="orderDir == 'asc'">
+                    ORDER BY REG_DT ASC
+                </if>
+            </when>
+            <otherwise>
+                ORDER BY BD_IDX DESC
+            </otherwise>
+        </choose>
+
+        LIMIT ${queryStart} , ${cntPerPage};
+    </select>
+
+                                                          <!-- 결과적으로 bdIdx값이 객체에 담겨진다.-->
+    <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="bdIdx">
+        /* insertBoard */
+        INSERT INTO BOARD
+                     (
+                      TITLE
+                    , CONTENT
+                    , USER_ID
+                    , REG_DT
+                     )
+             VALUES (
+                     #{title}
+                   , #{content}
+                   , #{userId}
+                   , NOW()
+                   )
+    </insert>
+
+    <insert id="insertFile" parameterType="com.vue.util.file.FileVo">
+        /* insertFile */
+        INSERT INTO FILE_INFO
+                    (
+                      TYPE_IDX
+                    , ORIGIN_FILE_NAME
+                    , RENAME_FILE_NAME
+                    , SAVE_PATH
+                    , FULL_PATH
+                    , REG_DT
+                    )
+             VALUES (
+                     #{typeIdx}
+                   , #{originFileName}
+                   , #{renameFileName}
+                   , #{savePath}
+                   , #{fullPath}
+                   , NOW()
+                   )
+    </insert>
+
+    <select id="selectBoardDetail" parameterType="Integer" resultType="Board">
+        /* selectBoardDetail */
+        SELECT BD_IDX
+             , TITLE
+             , CONTENT
+             , USER_ID
+             , REG_DT
+             , CRTN_DT
+          FROM BOARD
+         WHERE BD_IDX = #{bdIdx};
+    </select>
+
+    <select id="selectFiles" parameterType="Integer" resultType="com.vue.util.file.FileVo">
+        /* selectFiles */
+        SELECT  FILE_IDX            AS fileIdx
+              , TYPE_IDX            AS typeIdx
+              , ORIGIN_FILE_NAME    AS originFileName
+              , RENAME_FILE_NAME    AS renameFileName
+              , SAVE_PATH           AS savePath
+              , FULL_PATH           AS fullPath
+          FROM FILE_INFO
+        <choose>
+            <when test="fileIdx != '0'">
+                WHERE FILE_IDX = #{fileIdx};
+            </when>
+            <when test="typeIdx != '0'">
+                WHERE TYPE_IDX = #{typeIdx};
+            </when>
+        </choose>
+
+    </select>
+
+
+    <update id="updateBoard" parameterType="Board">
+         /* updateBoard */
+         UPDATE BOARD
+            SET TITLE = #{title},
+                CONTENT = #{content},
+                CRTN_DT = NOW()
+          WHERE BD_IDX = #{bdIdx};
+    </update>
+
+
+
+    <delete id="deleteBoard" parameterType="Integer"> <!-- 게시글, 파일 따로 따로 삭제-->
+        /* deleteBoard */
+        DELETE
+          FROM BOARD
+         WHERE BD_IDX = #{bdIdx};
+    </delete>
+
+
+    <delete id="deleteFile" parameterType="Integer">
+        /* deleteFile */
+        DELETE
+          FROM FILE_INFO
+        <choose>
+            <when test="fileIdx > 0">
+                WHERE FILE_IDX = #{fileIdx};
+            </when>
+            <when test="bdIdx > 0">
+                WHERE TYPE_IDX = #{bdIdx};
+            </when>
+        </choose>
+    </delete>
+
+
+
+
+
+
+</mapper>
