@@ -41,16 +41,16 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean insertBoard(Board board , List<MultipartFile> files){ // void로 처리 --  exception으로 확인하는 방법
+    public boolean insertBoard(Board board, List<MultipartFile> files) { // void로 처리 --  exception으로 확인하는 방법
 
         // SQL문 결과로 bdIdx가 객체에 담겨진다.
         int resBoard = boardRepository.insertBoard(board);
         String res;
-        if(files != null){
+        if (files != null) {
             try {
                 List<FileVo> fileList = null;
                 fileList = FileUtil.filesUpload(files, board.getBdIdx());
-                for (FileVo fileVo : fileList ) { // 들어온 파일 내역만큼 for문 돌려주기
+                for (FileVo fileVo : fileList) { // 들어온 파일 내역만큼 for문 돌려주기
                     boardRepository.insertFile(fileVo);
                 }
             } catch (IOException e) {
@@ -89,7 +89,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int deleteFile(String fileIdx) {  return boardRepository.deleteFile(fileIdx);}
+    public int deleteFile(String fileIdx) {
+        return boardRepository.deleteFile(fileIdx);
+    }
 
 
 }

@@ -41,7 +41,7 @@ public class Paging {
         this.keyword = builder.criteria.keyword;
         this.filter = builder.criteria.filter == null ? "desc" : builder.criteria.filter;
         // 최대 페이지 수 이상일 경우 , 가장 마지막 페이지 보여주기
-        this.page = this.page > (int)Math.ceil((double)total/cntPerPage) ? (int)Math.ceil((double)total/cntPerPage): this.page;
+        this.page = this.page > (int) Math.ceil((double) total / cntPerPage) ? (int) Math.ceil((double) total / cntPerPage) : this.page;
 
         calLastPage();
         calBlockStartAndEnd();
@@ -51,14 +51,14 @@ public class Paging {
 
 
     private void calLastPage() {
-        lastPage = (int)Math.ceil((double)total/cntPerPage);
+        lastPage = (int) Math.ceil((double) total / cntPerPage);
     }
 
     private void calBlockStartAndEnd() {
-        blockStart = ((page-1)/blockCnt) * blockCnt + 1;
-        blockEnd = blockStart + blockCnt -1;
+        blockStart = ((page - 1) / blockCnt) * blockCnt + 1;
+        blockEnd = blockStart + blockCnt - 1;
 
-        blockStart = blockStart < 1? 1:blockStart;
+        blockStart = blockStart < 1 ? 1 : blockStart;
         blockEnd = blockEnd > lastPage ? lastPage : blockEnd;
     }
 
@@ -77,7 +77,7 @@ public class Paging {
         return new PagingBuilder();
     }
 
-    public static class PagingBuilder{
+    public static class PagingBuilder {
         //입력받을 값
         public Criteria criteria;
         public int total;
@@ -86,6 +86,7 @@ public class Paging {
             this.criteria = criteria;
             return this;
         }
+
         public PagingBuilder total(int val) {
             this.total = val;
             return this;
@@ -95,7 +96,6 @@ public class Paging {
             return new Paging(this);
         }
     }
-
 
 
 }

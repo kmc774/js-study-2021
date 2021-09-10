@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "Header" // Component의 이름 설정
+  name: "Header", // Component의 이름 설정
 }
 </script>
 

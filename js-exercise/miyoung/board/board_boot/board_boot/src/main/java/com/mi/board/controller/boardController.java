@@ -40,24 +40,25 @@ public class boardController {
 
     /**
      * 리스트 불러오기 + 페이징
+     *
      * @param criteria
      * @param model
      * @return
      */
     @GetMapping("/list")
-    public String listBoard (  @ModelAttribute Criteria criteria    // 파라미터로 가지고 다닐 값들 Criteria 객체로 저장
-                              , Model model) {
+    public String listBoard(@ModelAttribute Criteria criteria    // 파라미터로 가지고 다닐 값들 Criteria 객체로 저장
+            , Model model) {
 
         // 페이징 처리
-        Paging paging  = Paging.builder()
-                        .criteria(criteria)
-                        .total(boardService.selectBoardCnt(criteria.getType() , criteria.getKeyword()))
-                        .build();
+        Paging paging = Paging.builder()
+                .criteria(criteria)
+                .total(boardService.selectBoardCnt(criteria.getType(), criteria.getKeyword()))
+                .build();
         // 게시글 리스트 가져오기
         List<Board> boardList = boardService.selectBoardList(paging);
 
-        model.addAttribute("paging" , paging);
-        model.addAttribute("boardList" , boardList);
+        model.addAttribute("paging", paging);
+        model.addAttribute("boardList", boardList);
         return "/board/boardList";
     }
 
@@ -65,15 +66,16 @@ public class boardController {
     /**
      * 게시글 게시글 보기
      * 주제별 게시글 보기
+     *
      * @param
      * @param
      * @param model
      * @return
      */
     @GetMapping("/view")
-    public String detailBoard (   @RequestParam int bdIdx
-                                , @ModelAttribute Criteria criteria
-                                , Model model ) {
+    public String detailBoard(@RequestParam int bdIdx
+            , @ModelAttribute Criteria criteria
+            , Model model) {
         model.addAttribute(boardService.selectBoardDetail(bdIdx));
         List<FileVo> files = boardService.selectFiles(bdIdx);
         model.addAttribute("paging", criteria);
@@ -84,50 +86,67 @@ public class boardController {
 
     /**
      * 게시글 작성화면으로 이동하기
+     *
      * @return
      */
     @GetMapping("/go-write") // 소문자 + '-' 사용
-    public String goWriteBoard () { return "boardWrite"; } // camelCase로 작성
+    public String goWriteBoard() {
+        return "boardWrite";
+    } // camelCase로 작성
 
 
     /**
      * 게시글 등록하기
+     *
      * @param board
      * @return
      */
     @PostMapping("/write")
-    public @ResponseBody String WriteBoard (  @RequestParam(required = false) List<MultipartFile> files
-                                            , @ModelAttribute Board board) {
+    public @ResponseBody
+    String WriteBoard(@RequestParam(required = false) List<MultipartFile> files
+            , @ModelAttribute Board board) {
 
-        String[] extArr = { "hwp", "doc", "docx", "ppt", "pptx", "xls", "txt", "csv", "jpg", "jpeg", "gif", "png", "bmp", "pdf" }; // 파일 확장자
+        String[] extArr = {"hwp", "doc", "docx", "ppt", "pptx", "xls", "txt", "csv", "jpg", "jpeg", "gif", "png", "bmp", "pdf"}; // 파일 확장자
         int fileSumSize = 0;
         int maxSize = 1024 * 1024 * 10; // 10MB 거르기
         int maxSumSize = 1024 * 1024 * 100; //100MB 거르기
         boolean result = false;
-        String title  = board.getTitle();
+        String title = board.getTitle();
         String content = board.getContent();
         String userId = board.getUserId();
 
         // 1. Acceptable Extension , Size  --> private method로 분리
-        if(files != null) {
-            for(int i = 0 ; i < files.size(); i++){
-                    // Extension
+        if (files != null) {
+            for (int i = 0; i < files.size(); i++) {
+                // Extension
                 String[] strArr = files.get(i).getOriginalFilename().split("\\.");
-                for(int j = 0; j < extArr.length; j ++){
-                    if(strArr[strArr.length -1] == extArr[j]){  return "extension";  } // response : 등록할 수 없는 파일이 존재합니다.
+                for (int j = 0; j < extArr.length; j++) {
+                    if (strArr[strArr.length - 1] == extArr[j]) {
+                        return "extension";
+                    } // response : 등록할 수 없는 파일이 존재합니다.
                 }  // Size
-                if(files.get(i).getSize() > maxSize){  return "maxSize";  } // response : 파일은 개당 10MB이하만 업로드 가능합니다.
+                if (files.get(i).getSize() > maxSize) {
+                    return "maxSize";
+                } // response : 파일은 개당 10MB이하만 업로드 가능합니다.
                 fileSumSize += files.get(i).getSize(); // 파일의 총 사이즈 계산
             }
         }
 
         // 2. Acceptable SumMaxSize
-        if(fileSumSize  > maxSumSize){  return "SumMaxSize";  }  // response : 총 파일의 크기는 100MB를 넘을 수 없습니다.
+        if (fileSumSize > maxSumSize) {
+            return "SumMaxSize";
+        }  // response : 총 파일의 크기는 100MB를 넘을 수 없습니다.
 
         // 3. Check Null
-        if (title == null || title.isEmpty()){     return "title"; }
-        if (content == null || content.isEmpty()){ return "content";}
-        if (userId == null || userId.isEmpty()){   return "userId"; }
+        if (title == null || title.isEmpty()) {
+            return "title";
+        }
+        if (content == null || content.isEmpty()) {
+            return "content";
+        }
+        if (userId == null || userId.isEmpty()) {
+            return "userId";
+        }
 
         result = boardService.insertBoard(board, files);
 
@@ -137,29 +156,32 @@ public class boardController {
 
     /**
      * 게시글 수정페이지 이동
+     *
      * @param board
      * @param criteria
      * @param model
      * @return
      */
     @GetMapping("/go-update")
-    public String goModifyBoard (  @ModelAttribute Board board
-                                 , @ModelAttribute Criteria criteria
-                                 , Model model){
+    public String goModifyBoard(@ModelAttribute Board board
+            , @ModelAttribute Criteria criteria
+            , Model model) {
 
         model.addAttribute(boardService.selectBoardDetail(board.getBdIdx()));
-        model.addAttribute("paging" , criteria);
+        model.addAttribute("paging", criteria);
         return "/board/boardModify";
     }
 
     /**
      * 게시글 수정하기
+     *
      * @return
      */
     @PutMapping("/update")
-    public @ResponseBody String updateBoard( @RequestBody Map<String, Object> paramMap ){
+    public @ResponseBody
+    String updateBoard(@RequestBody Map<String, Object> paramMap) {
         int delNum = 0;
-        if( paramMap.get("files") != null) {
+        if (paramMap.get("files") != null) {
             List<String> fileList = (List<String>) paramMap.get("files");
             for (String fileIdx : fileList) {
                 boardService.deleteFile(fileIdx);
@@ -167,39 +189,42 @@ public class boardController {
             }
             logger.info(delNum + "개의 파일 삭제");
         }
-        int bdIdx = (int)paramMap.get("bdIdx");
-        String title  = (String)paramMap.get("title");
-        String content = (String)paramMap.get("content");
+        int bdIdx = (int) paramMap.get("bdIdx");
+        String title = (String) paramMap.get("title");
+        String content = (String) paramMap.get("content");
         Board board = new Board();
         board.setBdIdx(bdIdx);
         board.setTitle(title);
         board.setContent(content);
 
-        if (title == null   || title.isEmpty()){
+        if (title == null || title.isEmpty()) {
             return "title";
         }
-        if (content == null || content.isEmpty()){
+        if (content == null || content.isEmpty()) {
             return "content";
         }
 
         int result = boardService.updateBoard(board);
         logger.info("게시판 업데이트 완료");
-        return  result > 0 ? "success" : "fail";
+        return result > 0 ? "success" : "fail";
     }
 
     /**
      * 게시글 삭제하기
+     *
      * @param bdIdx
      * @return
      */
     @DeleteMapping("/delete/{bdIdx}")
-    public @ResponseBody String deleteBoard( @PathVariable("bdIdx") int bdIdx ) {
+    public @ResponseBody
+    String deleteBoard(@PathVariable("bdIdx") int bdIdx) {
         int result = boardService.deleteBoard(bdIdx); // 게시글과 파일 동시에 지워주기
         return result > 0 ? "success" : "fail";  //
     }
 
     /**
      * 파일 다운로드
+     *
      * @param fileVo
      * @return
      */
@@ -213,7 +238,7 @@ public class boardController {
          */
 
         // 해당 파일이 존재하지 않는 경우
-        if(boardService.selectFiles(fileVo.getTypeIdx()).isEmpty()){
+        if (boardService.selectFiles(fileVo.getTypeIdx()).isEmpty()) {
             return new ResponseEntity<>("<h1>다운로드할 파일을 찾을 수 없습니다.</h1>", HttpStatus.NOT_FOUND);
         }
 
@@ -222,9 +247,9 @@ public class boardController {
         // 헤더 설정
         HttpHeaders headers = new HttpHeaders();
         headers.setContentDisposition(ContentDisposition
-                                        .builder("attachment")
-                                        .filename(file.getOriginFileName(), Charset.forName("utf-8")) // 인코딩 해줘야 다운로드 파일에 파일 이름이 잘 찍힘
-                                        .build());
+                .builder("attachment")
+                .filename(file.getOriginFileName(), Charset.forName("utf-8")) // 인코딩 해줘야 다운로드 파일에 파일 이름이 잘 찍힘
+                .build());
         // 응답 바디 설정
         FileSystemResource resource = new FileSystemResource(file.getFullPath() + file.getRenameFileName());
 
@@ -235,18 +260,16 @@ public class boardController {
 
     /**
      * 파일 삭제하기
+     *
      * @param fileIdx
      * @return
      */
     @DeleteMapping("/deleteFile")
-    public @ResponseBody String deleteFile (@RequestBody String fileIdx){
+    public @ResponseBody
+    String deleteFile(@RequestBody String fileIdx) {
         int result = boardService.deleteFile(fileIdx);
         return result > 0 ? "success" : "fail";
     }
-
-
-
-
 
 
 }

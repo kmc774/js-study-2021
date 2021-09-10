@@ -29,11 +29,11 @@
             </tr>
             <c:forEach items="${boardList}" var="board">
                 <tr>
-                    <td id="resTitle" >${board.bdIdx}</td>
+                    <td id="resTitle">${board.bdIdx}</td>
                     <td class="title" id="title"
                         onclick="location.href='/board/view?bdIdx=${board.bdIdx}'
-                                              +'&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}'
-                                              +'&keyword=${paging.keyword}&filter=${paging.filter}'">${board.title}</td>
+                                +'&page=${paging.page}&cntPerPage=${paging.cntPerPage}&type=${paging.type}'
+                                +'&keyword=${paging.keyword}&filter=${paging.filter}'">${board.title}</td>
                     <td class="user" id="userId">${board.userId}</td>
                     <td>${board.regDt}</td>
                     <c:choose>
@@ -55,16 +55,16 @@
                 <option value="content">내용</option>
                 <option value="userId">작성자</option>
             </select>
-            <input class ="search" type="search" name="keyword" >
+            <input class="search" type="search" name="keyword">
             <input type="hidden" name="cntPerPage" value="${paging.cntPerPage}">
             <input type="hidden" name="filter" value="${paging.filter}">
-            <button class="search_btn" id="search_btn" type="button" >검색</button>
+            <button class="search_btn" id="search_btn" type="button">검색</button>
             <button class="search_btn" type="button" onclick="location.href='/board/go-write'">글쓰기</button>
         </form>
         <div class="dtc_section">
             <div class="check_box_section">
                 <a> [ 게시글 수 ] </a>
-                <select name = "checkNum" id="checkNum" onchange="checkFilterEvent()" >
+                <select name="checkNum" id="checkNum" onchange="checkFilterEvent()">
                     <option value="10">10개씩 보기
                     <option value="50">50개씩 보기
                 </select>
@@ -80,7 +80,8 @@
 
         <!-- [s] section pagination -->
         <div class="paging">
-            <a href="/board/list?type=${paging.type}&keyword=${paging.keyword}&cntPerPage=${paging.cntPerPage}&filter=${filter}" class="nav first">《</a>
+            <a href="/board/list?type=${paging.type}&keyword=${paging.keyword}&cntPerPage=${paging.cntPerPage}&filter=${filter}"
+               class="nav first">《</a>
             <a href="/board/list?page=${paging.prev}&type=${paging.type}&keyword=${paging.keyword}&cntPerPage=${paging.cntPerPage}&filter=${paging.filter}">〈</a>
             <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
                 <a href="/board/list?page=${page}&type=${paging.type}&keyword=${paging.keyword}&cntPerPage=${paging.cntPerPage}&filter=${paging.filter}"><span>${page}</span></a>
@@ -99,38 +100,32 @@
 </section>
 
 
-
-
-
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     <%-- option 버튼 미리 선택 --%>
-    $(document).ready(function(){
-        $('#filter').val('${paging.filter}').prop("selected",true);
-        $('#checkNum').val('${paging.cntPerPage}').prop("selected",true);
+    $(document).ready(function () {
+        $('#filter').val('${paging.filter}').prop("selected", true);
+        $('#checkNum').val('${paging.cntPerPage}').prop("selected", true);
     })
 
 
     // 어떤 옵션을 선택하는지에 따라 조건 설정
-    function checkFilterEvent(){
+    function checkFilterEvent() {
         var filter = $('#filter').val();
-        var checkNum =  $('#checkNum').val();
-        location.href="/board/list?cntPerPage="+checkNum+"&filter="+filter
-                    + '&page=${paging.page}&type=${paging.type}&keyword=${paging.keyword}';
+        var checkNum = $('#checkNum').val();
+        location.href = "/board/list?cntPerPage=" + checkNum + "&filter=" + filter
+            + '&page=${paging.page}&type=${paging.type}&keyword=${paging.keyword}';
     }
 
 
     var keyword = $('.search').val();
-    $('#search_btn').click(function(){
-        if($('.search').val() == ''){
+    $('#search_btn').click(function () {
+        if ($('.search').val() == '') {
             alert('검색할 내용을 입력해주세요.');
             return;
         }
         $('.search_section').submit();
     })
-
-
-
 
 
 </script>

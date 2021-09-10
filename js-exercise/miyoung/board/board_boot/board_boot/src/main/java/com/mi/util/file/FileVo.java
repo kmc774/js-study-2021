@@ -18,7 +18,7 @@ public class FileVo {
     String path = "/Users/miyoung/Desktop/wdfall_study/study/board_boot/resources/upload/";
 
 
-    public String getFullPath(){
+    public String getFullPath() {
         return path + savePath;
     }
 

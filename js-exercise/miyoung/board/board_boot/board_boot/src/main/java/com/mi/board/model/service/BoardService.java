@@ -15,7 +15,7 @@ import java.util.Map;
 
 public interface BoardService {
 
-    int selectBoardCnt(String type , String keyword);
+    int selectBoardCnt(String type, String keyword);
 
     List<Board> selectBoardList(Paging paging);
 

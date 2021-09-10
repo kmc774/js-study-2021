@@ -32,6 +32,9 @@
                 , TITLE
                 , CONTENT
                 , USER_ID
+                , USER_PW
+                , LIKE_COUNT
+                , VIEW_COUNT
                 , REG_DT
                 , CRTN_DT
          FROM BOARD
@@ -52,7 +55,7 @@
             </when>
         </choose>
         <choose>
-            <when test="orderBy != 'null'">
+            <when test="orderBy == 'bdIdx'">
                 <if test="orderDir == 'desc'">
                     ORDER BY BD_IDX DESC
                 </if>
@@ -96,7 +99,6 @@
                 ORDER BY BD_IDX DESC
             </otherwise>
         </choose>
-
         LIMIT ${queryStart} , ${cntPerPage};
     </select>
 
@@ -108,12 +110,14 @@
                       TITLE
                     , CONTENT
                     , USER_ID
+                    , USER_PW
                     , REG_DT
                      )
              VALUES (
                      #{title}
                    , #{content}
                    , #{userId}
+                   , #{userPw}
                    , NOW()
                    )
     </insert>
@@ -145,10 +149,25 @@
              , TITLE
              , CONTENT
              , USER_ID
+             , USER_PW
+             , LIKE_COUNT
+             , VIEW_COUNT
              , REG_DT
              , CRTN_DT
           FROM BOARD
          WHERE BD_IDX = #{bdIdx};
+    </select>
+
+    <select id="selectAttachedFiles" parameterType="Integer" resultType="com.vue.util.file.FileVo">
+        /* selectAttachedFiles */
+        SELECT  FILE_IDX            AS fileIdx
+              , TYPE_IDX            AS typeIdx
+              , ORIGIN_FILE_NAME    AS originFileName
+              , RENAME_FILE_NAME    AS renameFileName
+              , SAVE_PATH           AS savePath
+              , FULL_PATH           AS fullPath
+        FROM FILE_INFO
+       WHERE TYPE_IDX = #{typeIdx};
     </select>
 
     <select id="selectFiles" parameterType="Integer" resultType="com.vue.util.file.FileVo">
@@ -160,15 +179,7 @@
               , SAVE_PATH           AS savePath
               , FULL_PATH           AS fullPath
           FROM FILE_INFO
-        <choose>
-            <when test="fileIdx != '0'">
-                WHERE FILE_IDX = #{fileIdx};
-            </when>
-            <when test="typeIdx != '0'">
-                WHERE TYPE_IDX = #{typeIdx};
-            </when>
-        </choose>
-
+         WHERE FILE_IDX = #{fileIdx};
     </select>
 
 
@@ -178,7 +189,7 @@
             SET TITLE = #{title},
                 CONTENT = #{content},
                 CRTN_DT = NOW()
-          WHERE BD_IDX = #{bdIdx};
+          WHERE BD_IDX = #{bdIdx}
     </update>
 
 
@@ -187,23 +198,80 @@
         /* deleteBoard */
         DELETE
           FROM BOARD
-         WHERE BD_IDX = #{bdIdx};
+         WHERE BD_IDX = #{bdIdx}
+
     </delete>
 
+
+    <delete id="deleteAttachedFile" parameterType="Integer">
+        /* deleteAttachedFile */
+        DELETE
+          FROM FILE_INFO
+         WHERE TYPE_IDX = #{typeIdx};
+
+    </delete>
 
     <delete id="deleteFile" parameterType="Integer">
         /* deleteFile */
         DELETE
           FROM FILE_INFO
-        <choose>
-            <when test="fileIdx > 0">
-                WHERE FILE_IDX = #{fileIdx};
-            </when>
-            <when test="bdIdx > 0">
-                WHERE TYPE_IDX = #{bdIdx};
-            </when>
-        </choose>
+         WHERE FILE_IDX = #{fileIdx};
     </delete>
+
+
+    <insert id="addComment" parameterType="Object">
+        /* addComment */
+        INSERT INTO BOARD_COMMENT
+                (
+                  TYPE_IDX
+                , BD_COMMENT
+                , REG_DT
+                )
+        VALUES (
+                 #{bdIdx}
+               , #{bdComment}
+               , NOW()
+               )
+    </insert>
+
+    <update id="updateComment" parameterType="Object">
+        UPDATE BOARD_COMMENT
+           SET BD_COMMENT = #{bdComment}
+         WHERE COM_IDX = #{comIdx}
+    </update>
+
+    <select id="selectComment" parameterType="Object" resultType="BoardComment">
+            /* selectComment */
+        SELECT COM_IDX
+             , TYPE_IDX
+             , BD_COMMENT
+             , REG_DT
+             , CRTN_DT
+          FROM BOARD_COMMENT
+         WHERE TYPE_IDX = #{bdIdx}
+         ORDER BY COM_IDX ASC;
+    </select>
+
+    <delete id="deleteComment" parameterType="Integer">
+        /* deleteComment */
+        DELETE
+          FROM BOARD_COMMENT
+         WHERE COM_IDX = #{comIdx}
+    </delete>
+
+
+    <insert id="countLike" parameterType="Integer">
+        UPDATE BOARD
+           SET LIKE_COUNT = LIKE_COUNT + 1
+         WHERE BD_IDX = #{bdIdx}
+    </insert>
+
+
+    <insert id="countView" parameterType="Integer">
+        UPDATE BOARD
+        SET VIEW_COUNT = VIEW_COUNT + 1
+        WHERE BD_IDX = #{bdIdx}
+    </insert>
 
 
 

@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import BoardList from "@/views/board/boardList";
+import BoardList from "@/views/board/BoardList";
 import BoardDetail from "@/views/board/BoardDetail";
+import BoardUpdate from "@/views/board/BoardUpdate";
 import BoardWrite from "@/views/board/BoardWrite";
 
 Vue.use(VueRouter); // Vue 안에서 VueRouter를 사용하겠다는 뜻
@@ -20,25 +21,27 @@ const router = new VueRouter({
     mode: "history",
     routes: [ // Path를 어디로 넘길건지! --> <router-view>에 바인딩 된다.
         {
-            path:"/" ,  // 기본 패스일 경우 list로 보내기
+            path:"/" ,  // 기본 패스일 경우 list로 redirect
             redirect: '/list'
 
         },
         {
             path: "/list",
-            name: "list",
             component: BoardList,
             props: boardProps
         },
         {
             path: "/view/:bdIdx" ,
-            name: "view",
             component: BoardDetail,
             props: boardProps
         },
         {
+            path: "/update/:bdIdx" ,
+            component: BoardUpdate,
+            props: boardProps
+        },
+        {
             path: "/write" ,
-            name: "write",
             component: BoardWrite,
             props: boardProps
         }

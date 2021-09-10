@@ -3,6 +3,7 @@ package com.vue.board.model.service.impl;
 import com.vue.board.model.vo.Board;
 import com.vue.board.model.repository.BoardRepository;
 import com.vue.board.model.service.BoardService;
+import com.vue.board.model.vo.BoardComment;
 import com.vue.util.file.FileUtil;
 import com.vue.util.file.FileVo;
 import com.vue.util.paging.Paging;
@@ -74,8 +75,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<FileVo> selectFiles(int typeIdx , int fileIdx) {
-        return boardRepository.selectFiles(typeIdx, fileIdx);
+    public List<FileVo> selectAttachedFiles(int typeIdx) { return boardRepository.selectAttachedFiles(typeIdx); }
+
+    @Override
+    public List<FileVo> selectFiles(int fileIdx) {
+        return boardRepository.selectFiles(fileIdx);
     }
 
 
@@ -90,9 +94,30 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int deleteFile(int typeIdx , int fileIdx) {
-        return boardRepository.deleteFile(typeIdx, fileIdx);
+    public int deleteAttachedFile(int typeIdx) {  return boardRepository.deleteAttachedFile(typeIdx); }
+
+    @Override
+    public int deleteFile(int fileIdx) {
+        return boardRepository.deleteFile(fileIdx);
     }
+
+    @Override
+    public int addComment(int bdIdx , String bdComment) { return boardRepository.addComment(bdIdx , bdComment); }
+
+    @Override
+    public void updateComment(int comIdx, String bdComment) { boardRepository.updateComment(comIdx , bdComment ); }
+
+    @Override
+    public List<BoardComment> selectComment(int bdIdx) { return boardRepository.selectComment(bdIdx); }
+
+    @Override
+    public void deleteComment(int comIdx) { boardRepository.deleteComment(comIdx); }
+
+    @Override
+    public int countLike(int bdIdx) { return boardRepository.countLike(bdIdx); }
+
+    @Override
+    public void countView(int bdIdx) { boardRepository.countView(bdIdx);  }
 
 
 }

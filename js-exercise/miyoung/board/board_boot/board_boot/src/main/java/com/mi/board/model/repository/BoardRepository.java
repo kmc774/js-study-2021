@@ -12,14 +12,22 @@ import java.util.Map;
 @Mapper
 public interface BoardRepository {
 
-     int selectBoardCnt(String type , String keyword);
-     List<Board> selectBoardList(Paging page);
-     int insertBoard(Board board);
-     int insertFile(FileVo files);
-     Board selectBoardDetail(int bdIdx);
-     List<FileVo> selectFiles(int bdIdx);
-     int updateBoard(Board board);
-     int deleteBoard(int bdIdx);
-     int deleteFile(String fileIdx);
+    int selectBoardCnt(String type, String keyword);
+
+    List<Board> selectBoardList(Paging page);
+
+    int insertBoard(Board board);
+
+    int insertFile(FileVo files);
+
+    Board selectBoardDetail(int bdIdx);
+
+    List<FileVo> selectFiles(int bdIdx);
+
+    int updateBoard(Board board);
+
+    int deleteBoard(int bdIdx);
+
+    int deleteFile(String fileIdx);
 
 }

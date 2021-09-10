@@ -13,7 +13,8 @@ public class FileUtil {
 
     /**
      * files를 파라미터 값으로 받아 util처리 후 FileVo에 매핑하는 메소드
-     * @param files  @return
+     *
+     * @param files @return
      * @throws IOException
      * @throws IllegalStateException
      */
@@ -23,7 +24,7 @@ public class FileUtil {
         String savePath = getSavePath(); //savePath 설정
 
         // file이 있는 경우에만 file저장
-        if(files.size() >= 1 && !files.get(0).getOriginalFilename().equals("")) {
+        if (files.size() >= 1 && !files.get(0).getOriginalFilename().equals("")) {
             // 임시 저장소에 보관
             for (MultipartFile multipartFiles : files) {
 
@@ -41,18 +42,20 @@ public class FileUtil {
 
     /**
      * 파일 저장경로를 반환하는 메소드
+     *
      * @return
      */
     public static String getSavePath() {
         Calendar cal = Calendar.getInstance();
 
-        return  cal.get(Calendar.YEAR)+"/"
-                + (cal.get(Calendar.MONTH) + 1) +"/"
-                + cal.get(Calendar.DAY_OF_MONTH) +"/";
+        return cal.get(Calendar.YEAR) + "/"
+                + (cal.get(Calendar.MONTH) + 1) + "/"
+                + cal.get(Calendar.DAY_OF_MONTH) + "/";
     }
 
     /**
      * 파일을 저장하는 메소드(
+     *
      * @param fileVo
      * @param multipartFile
      * @throws IllegalStateException
@@ -62,7 +65,7 @@ public class FileUtil {
 
         File file = new File(fileVo.getFullPath() + fileVo.getRenameFileName());
 
-        if(!file.exists()) { // 예외처리 -- 폴더가 존재하지 않을 경우엔 새로 만들어주기
+        if (!file.exists()) { // 예외처리 -- 폴더가 존재하지 않을 경우엔 새로 만들어주기
             new File(fileVo.getFullPath()).mkdirs();
         }
 
